@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' blob:; worker-src 'self' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self' data: blob: https://api.github.com; media-src 'self' blob: data:; object-src 'none'; base-uri 'none'">
+<title>PdfEditor</title>
+<script>
+// Set the theme before the first paint so the window never flashes the wrong colours.
+(function () {
+  var t = "auto";
+  try { t = JSON.parse(localStorage.getItem("gpe.theme") || '"auto"'); } catch (e) {}
+  var dark = t === "dark" || (t === "auto" && matchMedia("(prefers-color-scheme: dark)").matches);
+  if (dark) document.documentElement.classList.add("dark");
+  if (window.Desktop) document.documentElement.classList.add("desktop");
+  else if (window.Android) document.documentElement.classList.add("android");
+})();
+</script>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- ============================== HOME -->
+<section id="home" class="screen active">
+  <div class="home-side">
+    <header class="brand">
+      <img src="logo.png" alt="" class="logo">
+      <div>
+        <h1>PdfEditor</h1>
+        <p class="muted">Everything for PDFs, offline.</p>
+      </div>
+      <button class="icon-btn" id="settingsBtn" aria-label="Settings" title="Settings"></button>
+      <button class="icon-btn" id="themeBtn" aria-label="Switch between light and dark"></button>
+    </header>
+
+    <button class="opener" id="openBtn">
+      <span class="opener-ic" id="openIc"></span>
+      <span class="opener-tx">
+        <b>Open a PDF</b>
+        <small id="openSub">Choose a file from this device</small>
+      </span>
+    </button>
+
+    <div class="recent hidden" id="recentBox">
+      <h2>Recent</h2>
+      <div id="recent"></div>
+    </div>
+
+    <footer class="home-foot">
+      <div class="appearance">
+        <span class="muted">Appearance</span>
+        <div class="seg" id="themeSeg" role="radiogroup" aria-label="Appearance">
+          <button data-val="auto" role="radio">System</button>
+          <button data-val="light" role="radio">Light</button>
+          <button data-val="dark" role="radio">Dark</button>
+        </div>
+      </div>
+      <p class="muted small" id="privacy">Your files never leave this device.</p>
+    </footer>
+  </div>
+  <div class="home-main" id="tiles"></div>
+</section>
+
+<!-- ============================== VIEWER -->
+<section id="viewer" class="screen">
+  <header class="bar" id="topbar">
+    <button class="icon-btn" id="backBtn" aria-label="Back" title="Close document"></button>
+    <div class="title" id="docTitle">Document</div>
+    <span class="bar-gap" id="barGap"></span>
+    <button class="icon-btn" id="undoBtn" aria-label="Undo" title="Undo"></button>
+    <button class="icon-btn" id="redoBtn" aria-label="Redo" title="Redo"></button>
+    <button class="icon-btn" id="searchBtn" aria-label="Search" title="Find in document"></button>
+    <button class="icon-btn desk-only" id="saveBtn" aria-label="Save" title="Save"></button>
+    <button class="icon-btn desk-only" id="themeBtn2" aria-label="Switch between light and dark" title="Light / dark"></button>
+    <button class="icon-btn" id="moreBtn" aria-label="More" title="More"></button>
+  </header>
+  <div class="tabbar hidden" id="tabbar" role="tablist" aria-label="Open documents"></div>
+  <div class="searchbar hidden" id="searchbar">
+    <input id="searchInput" type="search" placeholder="Find in document" enterkeyhint="search">
+    <span id="searchCount" class="muted small"></span>
+    <button class="icon-btn" id="searchPrev" aria-label="Previous result"></button>
+    <button class="icon-btn" id="searchNext" aria-label="Next result"></button>
+    <button class="icon-btn" id="searchClose" aria-label="Close search"></button>
+  </div>
+  <div class="banner hidden" id="banner"><span id="bannerText"></span><button id="bannerBtn"></button><button class="icon-btn" id="bannerClose" aria-label="Dismiss"></button></div>
+  <aside class="side" id="side" aria-label="Bookmarks">
+    <div class="side-head"><b>Bookmarks</b><button class="text-btn" id="sideAdd">Add</button><button class="icon-btn" id="sideClose" aria-label="Close"></button></div>
+    <div class="side-list" id="sideList"></div>
+  </aside>
+  <div id="scroller">
+    <div id="pages"></div>
+  </div>
+  <div class="pageind" id="pageInd">1 / 1</div>
+  <div class="zoomctl" id="zoomCtl">
+    <button id="zoomOut" aria-label="Zoom out" title="Zoom out"></button>
+    <button id="zoomLabel" title="Fit width">100%</button>
+    <button id="zoomIn" aria-label="Zoom in" title="Zoom in"></button>
+  </div>
+  <div class="hint hidden" id="hint"></div>
+  <div class="toolstrip" id="toolstrip"></div>
+  <nav class="modes" id="modes"></nav>
+</section>
+
+<!-- ============================== ORGANIZE -->
+<section id="organize" class="screen">
+  <header class="bar">
+    <button class="icon-btn" id="orgBack" aria-label="Back"></button>
+    <div class="title" id="orgTitle">Pages</div>
+    <button class="text-btn" id="orgAll">Select all</button>
+  </header>
+  <div id="grid"></div>
+  <div class="actionbar" id="orgActions"></div>
+</section>
+
+<!-- ============================== READING MODE -->
+<section id="reading" class="screen">
+  <header class="bar">
+    <button class="icon-btn" id="readBack" aria-label="Back"></button>
+    <div class="title">Reading mode</div>
+    <button class="text-btn" id="readSmaller">A−</button>
+    <button class="text-btn" id="readBigger">A+</button>
+  </header>
+  <article id="readText"></article>
+</section>
+
+<!-- ============================== COMPARE -->
+<section id="compare" class="screen">
+  <header class="bar">
+    <button class="icon-btn" id="cmpBack" aria-label="Back"></button>
+    <div class="title" id="cmpTitle">Compare</div>
+    <span class="bar-gap"></span>
+    <button class="text-btn" id="cmpNextChange">Next difference</button>
+    <button class="icon-btn" id="cmpPrev" aria-label="Previous page"></button>
+    <button class="icon-btn" id="cmpNext" aria-label="Next page"></button>
+  </header>
+  <p class="cmp-info muted small" id="cmpInfo"></p>
+  <div class="cmp-wrap">
+    <div class="cmp-col"><div class="cmp-label" id="cmpLabelA"></div><div class="cmp-side" id="cmpA"></div></div>
+    <div class="cmp-col"><div class="cmp-label" id="cmpLabelB"></div><div class="cmp-side" id="cmpB"></div></div>
+  </div>
+</section>
+
+<!-- ============================== OVERLAYS -->
+<div id="sheet" class="sheet hidden"><div class="sheet-card" id="sheetCard"></div></div>
+<div id="busy" class="busy hidden"><div class="busy-card"><div class="spinner"></div><div id="busyText">Working…</div><div class="progress"><div id="busyBar"></div></div><button class="text-btn" id="busyCancel">Cancel</button></div></div>
+<div id="toast" class="toast" role="status"></div>
+<div id="readbar" class="readbar hidden"></div>
+<div id="dropveil" class="dropveil"><div><b>Drop to open</b><span>PDF, pictures or Office files</span></div></div>
+
+<script src="lib/tesseract/tesseract.min.js" defer></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

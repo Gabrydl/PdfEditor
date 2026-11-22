@@ -1,0 +1,63 @@
+name: Release
+
+# Builds the portable Windows folder from the source and publishes it, together with the signed phone APK
+# (android/PdfEditor.apk), as release v<version in desktop/package.json>. Installed apps check this release when they open.
+on:
+  push:
+    branches: [main]
+    paths: ["www/**", "desktop/**", "android/**", "tools/**", ".github/workflows/release.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    env:
+      APP: PdfEditor
+      ELECTRON_VERSION: "45.3.0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Version
+        id: ver
+        run: echo "v=$(node -p "require('./desktop/package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Electron shell
+        run: |
+          curl -fL -o electron.zip "https://github.com/electron/electron/releases/download/v${ELECTRON_VERSION}/electron-v${ELECTRON_VERSION}-win32-x64.zip"
+          7z x electron.zip -o"out/$APP" -y > /dev/null
+          rm -f "out/$APP/resources/default_app.asar"
+          mkdir -p "out/$APP/resources/app"
+          cp -r desktop/. "out/$APP/resources/app/"
+          cp -r www "out/$APP/resources/app/www"
+          find "out/$APP/locales" -type f ! -name "en-US.pak" ! -name "it.pak" -delete
+          mv "out/$APP/electron.exe" "out/$APP/$APP.exe"
+
+      - name: Exe icon and properties
+        run: |
+          mkdir rc && cd rc && npm init -y > /dev/null && npm i resedit pe-library > /dev/null
+          cp ../tools/set_exe_info.js .
+          node set_exe_info.js "../out/$APP/$APP.exe" "../desktop/icon.ico" "$APP" "${{ steps.ver.outputs.v }}" "$APP"
+
+      - name: Zip
+        run: |
+          cd out && 7z a -tzip -mx=5 "../$APP-Windows.zip" "$APP" > /dev/null
+
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="v${{ steps.ver.outputs.v }}"
+          FILES=("$APP-Windows.zip")
+          [ -f "android/$APP.apk" ] && FILES+=("android/$APP.apk")
+          if gh release view "$TAG" > /dev/null 2>&1; then gh release delete "$TAG" --cleanup-tag --yes; fi
+          gh release create "$TAG" "${FILES[@]}" --title "$APP $TAG" --latest \
+            --notes "**$APP-Windows.zip**: unzip anywhere and run $APP.exe (portable). **$APP.apk**: phone app. Installed apps update themselves when opened."
