@@ -108,7 +108,7 @@ else {
     pendingFiles = filesFromArgs(process.argv);
     createWindow();
     // checks GitHub for a newer version as soon as the app opens
-    require("./updater").start({ repo: "Gabrydl/PdfEditor", asset: "PdfEditor-Windows.zip", exe: "PdfEditor.exe", name: "PdfEditor", getWin: () => win });
+    require("./updater").start({ repo: "Gabrydl/PdfEditor", asset: "PdfEditor-Setup.exe", name: "PdfEditor", getWin: () => win });
   });
   app.on("window-all-closed", () => app.quit());
 }

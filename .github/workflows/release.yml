@@ -1,11 +1,11 @@
 name: Release
 
-# Builds the portable Windows folder from the source and publishes it, together with the signed phone APK
+# Builds the Windows installer from the source and publishes it, together with the signed phone APK
 # (android/PdfEditor.apk), as release v<version in desktop/package.json>. Installed apps check this release when they open.
 on:
   push:
     branches: [main]
-    paths: ["www/**", "desktop/**", "android/**", "tools/**", ".github/workflows/release.yml"]
+    paths: ["www/**", "desktop/**", "android/**", "tools/**", "installer/**", ".github/workflows/release.yml"]
   workflow_dispatch:
 
 permissions:
@@ -47,17 +47,20 @@ jobs:
           cp ../tools/set_exe_info.js .
           node set_exe_info.js "../out/$APP/$APP.exe" "../desktop/icon.ico" "$APP" "${{ steps.ver.outputs.v }}" "$APP"
 
-      - name: Zip
+      - name: Installer
         run: |
-          cd out && 7z a -tzip -mx=5 "../$APP-Windows.zip" "$APP" > /dev/null
+          ISCC="/c/Program Files (x86)/Inno Setup 6/ISCC.exe"
+          [ -f "$ISCC" ] || choco install innosetup -y --no-progress
+          MSYS_NO_PATHCONV=1 "$ISCC" "/DMyAppVersion=${{ steps.ver.outputs.v }}" "installer/$APP.iss"
+          [ -f "dist-installer/$APP-Setup.exe" ] || exit 1
 
       - name: Publish release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           TAG="v${{ steps.ver.outputs.v }}"
-          FILES=("$APP-Windows.zip")
+          FILES=("dist-installer/$APP-Setup.exe")
           [ -f "android/$APP.apk" ] && FILES+=("android/$APP.apk")
           if gh release view "$TAG" > /dev/null 2>&1; then gh release delete "$TAG" --cleanup-tag --yes; fi
           gh release create "$TAG" "${FILES[@]}" --title "$APP $TAG" --latest \
-            --notes "**$APP-Windows.zip**: unzip anywhere and run $APP.exe (portable). **$APP.apk**: phone app. Installed apps update themselves when opened."
+            --notes "**$APP-Setup.exe**: Windows installer (no admin needed). **$APP.apk**: phone app. Installed apps update themselves when opened."
