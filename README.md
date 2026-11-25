@@ -2,8 +2,15 @@
 
 Everything for PDFs, offline: view, annotate, edit, organize pages, OCR, convert PDF ⇄ Word/Excel/PowerPoint/images, compare, protect.
 
-- **Windows**: `PdfEditor-Windows.zip` from the latest [Release](../../releases/latest). Unzip anywhere and run `PdfEditor.exe` (portable, settings stay in its `data` folder).
-- **Phone**: `PdfEditor.apk` from the same release (Android).
+## Download
+
+### [⬇ Download for Windows](https://github.com/Gabrydl/PdfEditor/releases/latest/download/PdfEditor-Setup.exe)
+Installer for Windows 10/11 (no admin needed).
+
+### [⬇ Download the APK for Android](https://github.com/Gabrydl/PdfEditor/releases/latest/download/PdfEditor.apk)
+Open the downloaded file on the phone to install it (allow installing from this source if asked).
+
+Older versions: [all releases](../../releases).
 
 ## Updates
 Both apps check the latest release every time they open. If a newer one exists they ask; on Windows **Update now** downloads it,
