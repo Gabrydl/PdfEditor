@@ -13,7 +13,7 @@ const vi = ResEdit.Resource.VersionInfo.fromEntries(res.entries)[0];
 const v = (version + ".0.0.0").split(".").slice(0, 4).map(Number);
 vi.setFileVersion(v[0], v[1], v[2], v[3], 1033);
 vi.setProductVersion(v[0], v[1], v[2], v[3], 1033);
-vi.setStringValues({ lang: 1033, codepage: 1200 }, { ProductName: name, FileDescription: name, CompanyName: "gabrydl99", LegalCopyright: "",
+vi.setStringValues({ lang: 1033, codepage: 1200 }, { ProductName: name, FileDescription: name, CompanyName: "Gabrydl", LegalCopyright: "",
   OriginalFilename: name + ".exe", InternalName: name, FileVersion: version, ProductVersion: version, Comments: desc || "" });
 vi.outputToResourceEntries(res.entries);
 res.outputResource(exe);

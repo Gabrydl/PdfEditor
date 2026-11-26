@@ -1,0 +1,40 @@
+name: Android APK
+
+# Builds the phone app from android-app/ (Kotlin shell + the www app). The APK is kept as a build artifact and
+# in the pre-release "android-build" (never "latest", so installed apps don't offer it as an update).
+# The APK is unsigned here: sign it with keys/pdfeditor (tools/apk_repack.py) so it installs over the app on the phone.
+on:
+  push:
+    paths: ["android-app/**", "www/**", ".github/workflows/android.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: Build the APK
+        working-directory: android-app
+        run: |
+          chmod +x gradlew
+          yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
+          ./gradlew --no-daemon assembleRelease
+          cp app/build/outputs/apk/release/*.apk ../PdfEditor-unsigned.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PdfEditor-unsigned
+          path: PdfEditor-unsigned.apk
+      - name: Keep it in the android-build pre-release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view android-build > /dev/null 2>&1 || gh release create android-build --prerelease --target "$GITHUB_SHA" \
+            --title "Phone app test build (unsigned)" --notes "Unsigned APK built from android-app/. Sign it with keys/pdfeditor before installing."
+          gh release upload android-build PdfEditor-unsigned.apk --clobber

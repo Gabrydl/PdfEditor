@@ -1,0 +1,7 @@
+<resources>
+    <style name="Theme.Pdf" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">#ffffff</item>
+        <item name="android:navigationBarColor">#ffffff</item>
+    </style>
+</resources>

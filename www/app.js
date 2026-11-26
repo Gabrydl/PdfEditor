@@ -9,7 +9,7 @@ import * as C from "./convert.js";
 
 // Update check (phone app): looks at the latest GitHub release when the app opens. The Windows app does the same in desktop/updater.js.
 const REPO = "Gabrydl/PdfEditor";
-const APP_VERSION = "1.5.0";   // phone app version; the release build keeps it equal to desktop/package.json
+const APP_VERSION = "1.6.0";   // phone app version; the release build keeps it equal to desktop/package.json
 
 // ================================================================== state
 const S = {
@@ -28,7 +28,7 @@ let PE = [];          // page elements: {el, canvas, ov, key, ver, cache:{}}
 
 // settings (Settings window, one section per topic); every feature can be switched off
 const PREF_DEFAULTS = {
-  tabs: true, lastPage: true, recentThumbs: true, openWith: false,
+  tabs: true, lastPage: true, recentThumbs: true, recentPhone: true, openWith: false,
   nightDefault: false, spreadDefault: false, readRate: 1,
   quickColors: true, shortcuts: true,
   autosave: true, autosaveMin: 2,
@@ -37,6 +37,33 @@ const PREF_DEFAULTS = {
 };
 const P = { ...PREF_DEFAULTS, ...storeGet("prefs", {}) };
 const savePrefs = () => storeSet("prefs", P);
+// every function can be switched off in Settings › Features: its buttons, menu entries and shortcuts disappear
+const FEATURES = [
+  { f: "search", label: "Find in document", sub: "Search button, Ctrl+F" },
+  { f: "bookmarks", label: "Bookmarks panel", sub: "Add, rename and move bookmarks" },
+  { f: "night", label: "Night mode", sub: "Dark pages for reading" },
+  { f: "spread", label: "Two pages side by side" },
+  { f: "reflow", label: "Reading mode", sub: "Text only, bigger letters" },
+  { f: "read", label: "Read aloud" },
+  { f: "compare", label: "Compare two versions" },
+  { f: "print", label: "Print", sub: "Chosen pages, several per sheet" },
+  { f: "exportnotes", label: "Export highlights and notes", sub: "As a text file" },
+  { f: "copyto", label: "Copy pages to another open PDF" },
+  { f: "dragpages", label: "Drag pages to reorder them", sub: "In the Pages view, and onto a tab to copy them", desk: true },
+  { f: "dropfiles", label: "Drop files on the window", sub: "Open, merge or add them to the open PDF", desk: true },
+  { f: "split", label: "Split", sub: "By page ranges or every N pages" },
+  { f: "compress", label: "Compress" },
+  { f: "protect", label: "Add or remove a password" },
+  { f: "ocr", label: "OCR", sub: "Make scans searchable" },
+  { f: "convert", label: "Convert", sub: "PDF to Word, Excel, PowerPoint, images, text" },
+];
+const on = (f) => !f || P["f_" + f] !== false;
+// which function each button belongs to
+const FEATURE_OF = { read: "read", reflow: "reflow", night: "night", toc: "bookmarks", spread: "spread", compare: "compare", print: "print",
+  exportnotes: "exportnotes", split: "split", compress: "compress", protect: "protect", unlock: "protect", ocr: "ocr",
+  toword: "convert", toexcel: "convert", toppt: "convert", toimg: "convert", totxt: "convert", copyto: "copyto" };
+const toolOn = (t) => on(FEATURE_OF[t.id]);
+for (const x of FEATURES) if (P["f_" + x.f] == null) P["f_" + x.f] = true;
 S.spread = false;
 // open documents (tabs): { key, doc, dirty, zoom, page, night, spread }
 let TABS = [];
@@ -100,54 +127,97 @@ const GROUPS = [
   { t: "Convert", tiles: [
     { icon: "image", t: "Photos to PDF", s: "Pictures or scans", run: () => imagesFlow() },
     { icon: "office", t: "Office to PDF", s: "Word, Excel, PowerPoint, text", run: () => officeFlow() },
-    { icon: "word", t: "PDF to Word", s: "Editable .docx", run: () => openThen(() => convertTool("word")) },
-    { icon: "excel", t: "PDF to Excel", s: "Tables as .xlsx", run: () => openThen(() => convertTool("excel")) },
-    { icon: "ppt", t: "PDF to PowerPoint", s: "One slide per page", run: () => openThen(() => convertTool("ppt")) },
-    { icon: "image", t: "PDF to images", s: "JPG or PNG", run: () => openThen(() => convertTool("images")) },
+    { f: "convert", icon: "word", t: "PDF to Word", s: "Editable .docx", run: () => openThen(() => convertTool("word")) },
+    { f: "convert", icon: "excel", t: "PDF to Excel", s: "Tables as .xlsx", run: () => openThen(() => convertTool("excel")) },
+    { f: "convert", icon: "ppt", t: "PDF to PowerPoint", s: "One slide per page", run: () => openThen(() => convertTool("ppt")) },
+    { f: "convert", icon: "image", t: "PDF to images", s: "JPG or PNG", run: () => openThen(() => convertTool("images")) },
   ] },
   { t: "Pages", tiles: [
     { icon: "merge", t: "Merge PDFs", s: "Join several files", run: () => mergeFlow() },
     { icon: "thumbs", t: "Organize pages", s: "Move, rotate, delete", run: () => openThen(() => openOrganize()) },
-    { icon: "split", t: "Split", s: "Into smaller PDFs", run: () => openThen(() => splitTool()) },
+    { f: "split", icon: "split", t: "Split", s: "Into smaller PDFs", run: () => openThen(() => splitTool()) },
   ] },
   { t: "Optimize and protect", tiles: [
-    { icon: "compress", t: "Compress", s: "Make the file smaller", run: () => openThen(() => compressTool()) },
-    { icon: "ocr", t: "OCR", s: "Make scans searchable", run: () => openThen(() => ocrTool()) },
-    { icon: "lock", t: "Protect", s: "Add a password", run: () => openThen(() => protectTool()) },
-    { icon: "unlock", t: "Unlock", s: "Remove the password", run: () => openThen(() => unlockTool()) },
-    { icon: "speaker", t: "Read aloud", s: "Listen to a PDF", run: () => openThen(() => startReading()) },
+    { f: "compress", icon: "compress", t: "Compress", s: "Make the file smaller", run: () => openThen(() => compressTool()) },
+    { f: "ocr", icon: "ocr", t: "OCR", s: "Make scans searchable", run: () => openThen(() => ocrTool()) },
+    { f: "protect", icon: "lock", t: "Protect", s: "Add a password", run: () => openThen(() => protectTool()) },
+    { f: "protect", icon: "unlock", t: "Unlock", s: "Remove the password", run: () => openThen(() => unlockTool()) },
+    { f: "read", icon: "speaker", t: "Read aloud", s: "Listen to a PDF", run: () => openThen(() => startReading()) },
   ] },
 ];
 const TILES = GROUPS.flatMap(g => g.tiles);
-$("tiles").innerHTML = '<div class="cols">' + GROUPS.map((g, gi) => `<section class="group" style="--k:${gi}"><h2>${esc(g.t)}</h2><div class="rows">` +
-  g.tiles.map(t => `<button class="tile" data-k="${TILES.indexOf(t)}"><span class="tic">${icon(t.icon)}</span>
-    <span class="tx"><b>${esc(t.t)}</b><small>${esc(t.s)}</small></span>${icon("right", "chev")}</button>`).join("") + "</div></section>").join("") + "</div>";
+function drawTiles() {
+  $("tiles").innerHTML = '<div class="cols">' + GROUPS.map(g => ({ ...g, tiles: g.tiles.filter(t => on(t.f)) })).filter(g => g.tiles.length).map((g, gi) => `<section class="group" style="--k:${gi}"><h2>${esc(g.t)}</h2><div class="rows">` +
+    g.tiles.map(t => `<button class="tile" data-k="${TILES.indexOf(t)}"><span class="tic">${icon(t.icon)}</span>
+      <span class="tx"><b>${esc(t.t)}</b><small>${esc(t.s)}</small></span>${icon("right", "chev")}</button>`).join("") + "</div></section>").join("") + "</div>";
+}
+drawTiles();
 $("tiles").onclick = (e) => { const b = e.target.closest(".tile"); if (b) TILES[+b.dataset.k].run(); };
 $("openBtn").onclick = () => openThen(null);
 
-// recent files: only where a file can be opened again by its path (the PC app)
+// recent files. PC: reopened from their path. Phone: the phone app can't open a file again later by itself,
+// so PdfEditor keeps its own copy of the last PDFs (in its storage) and opens that copy with one tap.
+const PHONE_RECENT_MAX = 8, PHONE_RECENT_BYTES = 60 * 1048576;
+const recentStore = (() => {
+  let dbp = null;
+  const db = () => dbp || (dbp = new Promise((res, rej) => {
+    const r = indexedDB.open("gpe-recent", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("files", { keyPath: "key" });
+    r.onsuccess = () => res(r.result);
+    r.onerror = () => rej(r.error);
+  }));
+  const tx = async (mode, fn) => { const d = await db(); return new Promise((res, rej) => { const t = d.transaction("files", mode); const out = fn(t.objectStore("files")); t.oncomplete = () => res(out && out.result); t.onerror = () => rej(t.error); }); };
+  return {
+    put: (rec) => tx("readwrite", st => st.put(rec)).catch(() => {}),
+    get: (key) => tx("readonly", st => st.get(key)).catch(() => null),
+    drop: (key) => tx("readwrite", st => st.delete(key)).catch(() => {}),
+    clear: () => tx("readwrite", st => st.clear()).catch(() => {}),
+  };
+})();
+const recentList = () => storeGet(D ? "recent" : "recentPhone", []);
+const recentSave = (list) => storeSet(D ? "recent" : "recentPhone", list);
+const recentOn = () => D ? true : P.recentPhone;
 function drawRecent() {
-  if (!D) return;
-  const list = storeGet("recent", []);
+  const list = recentOn() ? recentList() : [];
   const thumbs = P.recentThumbs && list.some(f => f.thumb);
   $("recentBox").classList.toggle("hidden", !list.length);
   $("recent").classList.toggle("thumbs", thumbs);
+  const where = (f) => f.path ? esc(f.path.replace(/[\\/][^\\/]*$/, "")) : (f.size ? fmtSize(f.size) : "");
   $("recent").innerHTML = list.slice(0, thumbs ? 12 : 8).map((f, k) => thumbs
-    ? `<button class="rec card" data-k="${k}" title="${esc(f.path)}"><span class="rt">${f.thumb ? `<img src="${f.thumb}" alt="">` : icon("pdf")}</span><b>${esc(f.name)}</b><small>${f.page ? "Page " + (f.page + 1) : esc(f.path.replace(/[\\/][^\\/]*$/, ""))}</small></button>`
-    : `<button class="rec" data-k="${k}" title="${esc(f.path)}">${icon("pdf")}<span><b>${esc(f.name)}</b><small>${esc(f.path.replace(/[\\/][^\\/]*$/, ""))}&lrm;</small></span></button>`).join("");
+    ? `<button class="rec card" data-k="${k}" title="${esc(f.path || f.name)}"><span class="rt">${f.thumb ? `<img src="${f.thumb}" alt="">` : icon("pdf")}</span><b>${esc(f.name)}</b><small class="${f.path && !f.page ? "" : "ltr"}">${f.page ? "Page " + (f.page + 1) : where(f)}</small></button>`
+    : `<button class="rec" data-k="${k}" title="${esc(f.path || f.name)}">${icon("pdf")}<span><b>${esc(f.name)}</b><small class="${f.path && !f.page ? "" : "ltr"}">${f.page ? "Page " + (f.page + 1) : where(f)}&lrm;</small></span></button>`).join("");
 }
-function addRecent(f, thumb = null) {
-  if (!D || !f || !f.path) return;
-  const all = storeGet("recent", []);
-  const old = all.find(x => x.path === f.path) || {};
-  const list = all.filter(x => x.path !== f.path);
-  list.unshift({ name: f.name, path: f.path, thumb: thumb || old.thumb || null, page: old.page || 0 });
-  storeSet("recent", list.slice(0, 12));
+/** Put a file at the top of Recent. On the phone `bytes` is the copy that will be reopened. */
+async function addRecent(f, thumb = null, bytes = null) {
+  if (!f) return;
+  if (D) {
+    if (!f.path) return;
+    const all = recentList();
+    const old = all.find(x => x.path === f.path) || {};
+    const list = all.filter(x => x.path !== f.path);
+    list.unshift({ name: f.name, path: f.path, thumb: thumb || old.thumb || null, page: old.page || 0 });
+    recentSave(list.slice(0, 12));
+    drawRecent();
+    return;
+  }
+  if (!P.recentPhone) return;
+  const key = placeKey(f);
+  if (!key) return;
+  const all = recentList();
+  const old = all.find(x => x.key === key);
+  if (!old && !bytes) return;                     // nothing kept to reopen it from
+  if (bytes && bytes.length > PHONE_RECENT_BYTES) return;
+  if (bytes) await recentStore.put({ key, bytes });
+  const list = all.filter(x => x.key !== key);
+  list.unshift({ key, name: f.name, size: f.size || (bytes ? bytes.length : 0), thumb: thumb || (old && old.thumb) || null, page: (old && old.page) || 0 });
+  for (const gone of list.slice(PHONE_RECENT_MAX)) recentStore.drop(gone.key);
+  recentSave(list.slice(0, PHONE_RECENT_MAX));
   drawRecent();
 }
 /** A small picture of the first page for the Recent list. */
 async function recentThumb(d) {
-  if (!P.recentThumbs || !D || !d.file || !d.file.path) return;
+  if (!P.recentThumbs || !d.file || !recentOn()) return;
+  if (D ? !d.file.path : !recentList().some(x => x.key === placeKey(d.file))) return;
   try {
     const p = d.pages[0];
     const jpg = await call("renderJPEG", d.id, 0, Math.min(1, 150 / Math.max(p.w, p.h)), 68);
@@ -155,7 +225,7 @@ async function recentThumb(d) {
   } catch (_) { /* */ }
 }
 // where each file was left (by path on PC, by name + size on the phone)
-const placeKey = (f) => f ? (f.path || (f.name + ":" + (f.size || 0))) : "";
+const placeKey = (f) => f ? (f.path || f.recentKey || (f.name + ":" + (f.size || 0))) : "";
 function rememberPage() {
   if (!P.lastPage || !S.doc || !S.doc.file) return;
   const k = placeKey(S.doc.file);
@@ -165,15 +235,29 @@ function rememberPage() {
   const keys = Object.keys(map);
   if (keys.length > 300) keys.sort((a, b) => map[a].at - map[b].at).slice(0, keys.length - 300).forEach(x => delete map[x]);
   storeSet("lastPages", map);
-  if (D && S.doc.file.path) { const list = storeGet("recent", []); const r = list.find(x => x.path === S.doc.file.path); if (r) { r.page = map[k].page; storeSet("recent", list); } }
+  const list = recentList(), r = list.find(x => (D ? x.path : x.key) === k);
+  if (r) { r.page = map[k].page; recentSave(list); }
 }
 $("recent").onclick = async (e) => {
   const b = e.target.closest(".rec");
   if (!b) return;
-  const list = storeGet("recent", []), f = list[+b.dataset.k];
-  const ok = await openFile({ name: f.name, path: f.path, token: f.path, canSave: true });
-  if (!ok && !(await D.exists(f.path))) { storeSet("recent", list.filter(x => x.path !== f.path)); drawRecent(); }
+  const list = recentList(), f = list[+b.dataset.k];
+  if (!f) return;
+  if (D) {
+    const ok = await openFile({ name: f.name, path: f.path, token: f.path, canSave: true });
+    if (!ok && !(await D.exists(f.path))) { recentSave(list.filter(x => x.path !== f.path)); drawRecent(); }
+    return;
+  }
+  const rec = await recentStore.get(f.key);
+  if (!rec || !rec.bytes) { recentSave(list.filter(x => x.key !== f.key)); drawRecent(); toast("That copy is gone. Open the file again."); return; }
+  await openFile({ name: f.name, size: f.size, recentKey: f.key, canSave: false }, new Uint8Array(rec.bytes));
 };
+$("recentClear") && ($("recentClear").onclick = async () => {
+  if (!(await confirmBox("Clear Recent?", PHONE ? "The copies PdfEditor kept are deleted too. Your files stay where they are." : "Only the list is cleared. Your files stay where they are.", "Clear"))) return;
+  if (!D) for (const f of recentList()) recentStore.drop(f.key);
+  recentSave([]);
+  drawRecent();
+});
 drawRecent();
 
 async function openThen(after) {
@@ -183,7 +267,7 @@ async function openThen(after) {
 }
 
 // ================================================================== opening & closing documents
-async function openFile(f) {
+async function openFile(f, given = null) {
   const e = ext(f.name);
   if (e && e !== "pdf" && (C.OFFICE_EXT.includes(e) || C.NATIVE_EXT.includes(e))) {
     const pdf = await task("Converting " + f.name + "…", async () => C.fileToPdf(await readFile(f), f.name));
@@ -194,12 +278,15 @@ async function openFile(f) {
   // already open in a tab: just show it
   const k = placeKey(f);
   const open = k && TABS.find(t => t.doc.file && placeKey(t.doc.file) === k);
-  if (open && f.path) { switchTab(open); releaseFile(f); return true; }
-  let bytes = await task("Opening…", () => readFile(f));
+  if (open && (f.path || f.recentKey)) { switchTab(open); releaseFile(f); return true; }
+  let bytes = given || await task("Opening…", () => readFile(f));
   if (!bytes) return false;
+  // phone: keep a copy for Recent (the open call hands the bytes over to the PDF engine)
+  if (!D && !f.recentKey) f.recentKey = f.name + ":" + (f.size || 0);   // stays the same after saving
+  const keep = !D && P.recentPhone && (!f.size || f.size <= PHONE_RECENT_BYTES) && bytes.length <= PHONE_RECENT_BYTES ? bytes.slice() : null;
   const ok = await openBytes(bytes, f.name || "document.pdf", f);
   if (ok) {
-    addRecent(f);
+    await addRecent(f, null, keep);
     recentThumb(S.doc);
     const last = P.lastPage && storeGet("lastPages", {})[k];
     if (last && last.page > 0 && last.page < S.doc.pages.length) { requestAnimationFrame(() => goToPage(last.page, false)); toast(`Back where you left it: page ${last.page + 1}.`); }
@@ -225,8 +312,8 @@ async function openBytes(bytes, name, file, password = null) {
   S.gen++;
   S.zoom = 1;
   S.search = { needle: "", hits: [], cur: -1 };
-  S.night = !!P.nightDefault;
-  S.spread = !!P.spreadDefault;
+  S.night = !!P.nightDefault && on("night");
+  S.spread = !!P.spreadDefault && on("spread");
   TABS.push({ key: "t" + Date.now() + Math.random().toString(36).slice(2, 6), doc: S.doc, dirty: S.dirty, zoom: 1, page: 0, night: S.night, spread: S.spread });
   $("docTitle").textContent = name;
   show("viewer");
@@ -279,7 +366,7 @@ async function saveDoc(asNew) {
   const bytes = await task("Saving…", () => call("save", d.id, {}));
   if (!bytes) return false;
   if (!asNew && d.file && d.file.token && d.canSave) {
-    if (await saveOver(bytes, d.file.token)) { S.dirty = false; markDirty(); toast("Saved."); const t = tabOf(d); if (t) recovery.drop(t.key); return true; }
+    if (await saveOver(bytes, d.file.token)) { S.dirty = false; markDirty(); toast("Saved."); const t = tabOf(d); if (t) recovery.drop(t.key); keepRecentCopy(d, bytes); return true; }
     toast("Could not overwrite the file. Choose where to save it.");
   }
   const r = await saveAs(bytes, d.name.toLowerCase().endsWith(".pdf") ? d.name : d.name + ".pdf", MIME.pdf);
@@ -288,9 +375,17 @@ async function saveDoc(asNew) {
     if (r.name) { d.name = r.name; $("docTitle").textContent = r.name; }
     if (r.path) { d.file = { name: r.name, path: r.path, token: r.path, canSave: true }; d.canSave = true; addRecent(d.file); recentThumb(d); }
     const t = tabOf(d); if (t) recovery.drop(t.key);
+    keepRecentCopy(d, bytes);
     markDirty();
   }
   return r.ok;
+}
+
+/** Phone: after saving, the copy kept for Recent becomes the saved version. */
+function keepRecentCopy(d, bytes) {
+  if (D || !P.recentPhone || !bytes || bytes.length > PHONE_RECENT_BYTES) return;
+  if (!d.file) d.file = { name: d.name, size: bytes.length, recentKey: d.name + ":" + bytes.length, canSave: false };
+  addRecent({ ...d.file, name: d.name, size: bytes.length }, null, bytes.slice()).then(() => recentThumb(d));
 }
 
 // files arriving from other apps ("Open with", "Share")
@@ -380,7 +475,7 @@ async function renderLoop() {
       for (let i = a; i <= b; i++) order.push(i);
       if (b + 1 < PE.length) order.push(b + 1);
       if (a - 1 >= 0) order.push(a - 1);
-      const next = order.find(i => PE[i].key !== wantKey(i));
+      const next = order.find(i => PE[i] && S.doc.pages[i] && PE[i].key !== wantKey(i));   // the page list can change while drawing
       if (next == null) break;
       await renderPage(next);
     }
@@ -673,7 +768,7 @@ function renderToolstrip() {
   if (stripMode !== S.mode) $("toolstrip").scrollTo(0, 0);
   stripMode = S.mode;
   const key = (id) => (SHORTCUT_OF[id] ? ` (${SHORTCUT_OF[id]})` : "");
-  $("toolstrip").innerHTML = list.map((t, k) => `<button class="tool ${S.tool && S.tool.id === t.id ? "on" : ""}" data-t="${t.id}" style="--k:${k}" title="${esc(t.label + (P.shortcuts ? key(t.id) : ""))}">${icon(t.icon)}${t.id === "color" ? `<span class="dot" style="background:${S.color}"></span>` : ""}<span>${esc(t.label)}</span></button>`).join("")
+  $("toolstrip").innerHTML = list.filter(toolOn).map((t, k) => `<button class="tool ${S.tool && S.tool.id === t.id ? "on" : ""}" data-t="${t.id}" style="--k:${k}" title="${esc(t.label + (P.shortcuts ? key(t.id) : ""))}">${icon(t.icon)}${t.id === "color" ? `<span class="dot" style="background:${S.color}"></span>` : ""}<span>${esc(t.label)}</span></button>`).join("")
     + quickColorsHtml();
 }
 /** Coloured dots under the tools while highlighting or drawing: one click changes the colour. */
@@ -1356,7 +1451,7 @@ function buildGrid() {
   const g = $("grid");
   const gen = S.gen + ":" + Date.now();
   g.dataset.gen = gen;
-  g.innerHTML = S.doc.pages.map((p, i) => `<button class="thumb" data-i="${i}" ${PHONE ? "" : 'draggable="true"'}><div class="tw"><img alt="" style="aspect-ratio:${p.w}/${p.h};width:${p.w > p.h ? 100 : 100 * p.w / p.h}%"></div>${i + 1}</button>`).join("");
+  g.innerHTML = S.doc.pages.map((p, i) => `<button class="thumb" data-i="${i}" ${PHONE || !on("dragpages") ? "" : 'draggable="true"'}><div class="tw"><img alt="" style="aspect-ratio:${p.w}/${p.h};width:${p.w > p.h ? 100 : 100 * p.w / p.h}%"></div>${i + 1}</button>`).join("");
   const io = new IntersectionObserver(async (entries) => {
     for (const en of entries) {
       if (!en.isIntersecting) continue;
@@ -1402,7 +1497,7 @@ const ORG_ACTIONS = [
 function updateOrgBar() {
   $("orgTitle").textContent = ORG.sel.size ? `${ORG.sel.size} selected` : `${S.doc.pages.length} pages`;
   $("orgAll").textContent = ORG.sel.size === S.doc.pages.length ? "Select none" : "Select all";
-  $("orgActions").innerHTML = ORG_ACTIONS.filter(a => !a.tabs || TABS.length > 1).map(a => `<button class="tool" data-a="${a.id}" ${a.need && !ORG.sel.size ? "disabled style=opacity:.4" : ""}>${icon(a.icon)}<span>${a.label}</span></button>`).join("");
+  $("orgActions").innerHTML = ORG_ACTIONS.filter(a => (!a.tabs || (TABS.length > 1 && on("copyto")))).map(a => `<button class="tool" data-a="${a.id}" ${a.need && !ORG.sel.size ? "disabled style=opacity:.4" : ""}>${icon(a.icon)}<span>${a.label}</span></button>`).join("");
 }
 $("orgActions").onclick = async (e) => {
   const b = e.target.closest(".tool");
@@ -1907,11 +2002,11 @@ $("moreBtn").onclick = async () => {
     { value: "save", label: "Save", icon: "save", sub: S.doc.canSave ? "Overwrite the original file" : "Choose where to save" },
     { value: "saveas", label: PHONE ? "Save as copy" : "Save as…", icon: "saveas" },
     PHONE && { value: "share", label: "Share", icon: "link" },
-    { value: "read", label: "Read aloud", icon: "speaker" },
-    { value: "reflow", label: "Reading mode", icon: "book" },
-    { value: "night", label: S.night ? "Night mode off" : "Night mode", icon: "moon", sub: "Dark pages for reading" },
+    on("read") && { value: "read", label: "Read aloud", icon: "speaker" },
+    on("reflow") && { value: "reflow", label: "Reading mode", icon: "book" },
+    on("night") && { value: "night", label: S.night ? "Night mode off" : "Night mode", icon: "moon", sub: "Dark pages for reading" },
     { value: "goto", label: "Go to page", icon: "pages" },
-    { value: "print", label: "Print…", icon: "print", sub: "Some pages, or several on one sheet" },
+    on("print") && { value: "print", label: "Print…", icon: "print", sub: "Some pages, or several on one sheet" },
     { value: "props", label: "Properties", icon: "info" },
     { value: "settings", label: "Settings", icon: "settings" },
     { value: "theme", label: "Appearance", icon: document.documentElement.classList.contains("dark") ? "sun" : "moon",
@@ -1965,13 +2060,13 @@ document.addEventListener("keydown", (e) => {
   }
   if (!inViewer || sheetOpen()) return;
   if (mod && k === "s") { e.preventDefault(); saveDoc(e.shiftKey); return; }
-  if (mod && k === "f") { e.preventDefault(); openSearch(); $("searchInput").select(); return; }
-  if (mod && k === "p") { e.preventDefault(); printTool(); return; }
+  if (mod && k === "f") { e.preventDefault(); if (on("search")) { openSearch(); $("searchInput").select(); } return; }
+  if (mod && k === "p") { e.preventDefault(); if (on("print")) printTool(); return; }
   if (mod && k === "w") { e.preventDefault(); goBack(); return; }
   if (mod && k === "tab" && TABS.length > 1) { e.preventDefault(); const i = TABS.indexOf(tabOf(S.doc)); switchTab(TABS[(i + (e.shiftKey ? -1 : 1) + TABS.length) % TABS.length]); return; }
-  if (mod && k === "b") { e.preventDefault(); toggleSide(); return; }
-  if (mod && e.shiftKey && k === "n") { e.preventDefault(); toggleNight(); return; }
-  if (mod && k === "2") { e.preventDefault(); if (!S.spread) toggleSpread(); return; }
+  if (mod && k === "b") { e.preventDefault(); if (on("bookmarks")) toggleSide(); return; }
+  if (mod && e.shiftKey && k === "n") { e.preventDefault(); if (on("night")) toggleNight(); return; }
+  if (mod && k === "2") { e.preventDefault(); if (!S.spread && on("spread")) toggleSpread(); return; }
   if (mod && k === "1") { e.preventDefault(); if (S.spread) toggleSpread(); return; }
   if (e.key === "Escape") {
     if (!$("searchbar").classList.contains("hidden")) closeSearch();
@@ -2012,6 +2107,7 @@ window.addEventListener("drop", (e) => {
   e.preventDefault();
   dragDepth = 0; $("dropveil").classList.remove("on");
   if (busyState.on || sheetOpen()) return;
+  if (D && !on("dropfiles")) { toast("Dropping files is switched off in Settings › Features."); return; }
   const files = droppedFiles(e.dataTransfer.files);
   if (files.length) dropFiles(files);
 });
@@ -2514,7 +2610,8 @@ const SETTINGS = [
   { id: "general", label: "General", icon: "settings", items: [
     { k: "tabs", label: "Open several PDFs in tabs", sub: "Off: opening a PDF closes the one you're reading." },
     { k: "lastPage", label: "Reopen each PDF where you left it" },
-    { k: "recentThumbs", label: "Show a small picture in Recent", desk: true },
+    { k: "recentPhone", label: "Recent files on the home screen", sub: "PdfEditor keeps a copy of the last 8 PDFs you opened, so they open again with one tap. Saving updates the copy.", phone: true },
+    { k: "recentThumbs", label: "Show a small picture in Recent" },
     { k: "openWith", label: "“Open with PdfEditor” in the right-click menu", sub: "Also lists PdfEditor among the apps for PDFs.", desk: true, act: "openWith" },
     { btn: "default", label: "Make PdfEditor the default PDF app…", desk: true },
   ] },
@@ -2530,6 +2627,8 @@ const SETTINGS = [
     { btn: "stamps", label: "Your saved stamps" },
     { btn: "sigs", label: "Your saved signatures" },
   ] },
+  { id: "features", label: "Features", icon: "layers", note: "Switch off what you don't use: its buttons, menu entries and shortcuts disappear.",
+    items: FEATURES.map(x => ({ k: "f_" + x.f, label: x.label, sub: x.sub, desk: x.desk })) },
   { id: "saving", label: "Saving", icon: "save", items: [
     { k: "autosave", label: "Keep a recovery copy of unsaved changes", sub: "If PdfEditor or the computer stops, you're offered your work back next time." },
     { k: "autosaveMin", label: "Every", type: "range", min: 1, max: 10, step: 1, fmt: v => v + " min" },
@@ -2543,7 +2642,7 @@ function settingsSheet() {
   const draw = (card) => {
     const sec = SETTINGS.find(x => x.id === setTab);
     card.querySelector(".set-tabs").innerHTML = SETTINGS.map(x => `<button data-tab="${x.id}" class="${x.id === setTab ? "on" : ""}">${icon(x.icon)}<span>${esc(x.label)}</span></button>`).join("");
-    card.querySelector(".set-body").innerHTML = sec.items.filter(it => !it.desk || D).map(it => {
+    card.querySelector(".set-body").innerHTML = (sec.note ? `<p class="muted small set-note">${esc(sec.note)}</p>` : "") + sec.items.filter(it => (!it.desk || D) && (!it.phone || !D)).map(it => {
       if (it.btn) return `<button class="item set-btn" data-btn="${it.btn}">${icon(it.btn === "keys" ? "info" : it.btn === "default" ? "check" : it.btn === "stamps" ? "stamp" : "sign")}<span>${esc(it.label)}</span>${icon("right", "chev")}</button>`;
       if (it.type === "range") return `<div class="set-range"><span>${esc(it.label)}</span><input type="range" data-k="${it.k}" min="${it.min}" max="${it.max}" step="${it.step}" value="${P[it.k]}"><b>${esc(it.fmt(P[it.k]))}</b></div>`;
       return `<label class="set-row"><span class="tx"><b>${esc(it.label)}</b>${it.sub ? `<small>${esc(it.sub)}</small>` : ""}</span><input type="checkbox" data-k="${it.k}" ${P[it.k] ? "checked" : ""}><span class="sw"></span></label>`;
@@ -2556,7 +2655,9 @@ function settingsSheet() {
         if (it && it.act === "openWith" && D && D.openWith) { const ok = await D.openWith(c.checked); toast(c.checked ? (ok ? "Added to the right-click menu." : "Couldn't add it.") : "Removed from the right-click menu."); }
         if (c.dataset.k === "tabs") drawTabs();
         if (c.dataset.k === "recentThumbs") drawRecent();
+        if (c.dataset.k === "recentPhone") { if (!c.checked) { for (const f of recentList()) recentStore.drop(f.key); recentSave([]); } drawRecent(); }
         if (c.dataset.k === "quickColors" || c.dataset.k === "shortcuts") renderToolstrip();
+        if (c.dataset.k.startsWith("f_")) applyFeatures();
       };
     });
     card.querySelectorAll('.set-body input[type=range]').forEach(r => {
@@ -2582,7 +2683,7 @@ $("settingsBtn") && ($("settingsBtn").onclick = () => settingsSheet());
 // ================================================================== Pages view: drag pages to reorder, or onto a tab to copy them
 $("grid").addEventListener("dragstart", (e) => {
   const t = e.target.closest(".thumb");
-  if (!t || PHONE) return;
+  if (!t || PHONE || !on("dragpages")) return;
   const i = +t.dataset.i;
   const pages = ORG.sel.has(i) ? [...ORG.sel].sort((a, b) => a - b) : [i];
   e.dataTransfer.setData("pe/pages", JSON.stringify(pages));
@@ -2620,6 +2721,18 @@ $("grid").addEventListener("drop", async (e) => {
   $("grid").querySelectorAll(".thumb").forEach(x => x.classList.toggle("on", ORG.sel.has(+x.dataset.i)));
 });
 
+/** After a function is switched on or off: hide or show its buttons everywhere. */
+function applyFeatures() {
+  $("searchBtn").classList.toggle("hidden", !on("search"));
+  if (!on("search") && !$("searchbar").classList.contains("hidden")) closeSearch();
+  if (!on("bookmarks") && sideOpen) toggleSide(false);
+  if (S.doc && !on("spread") && S.spread) toggleSpread();
+  if (S.doc && !on("night") && S.night) toggleNight();
+  drawTiles();
+  if (S.doc) renderToolstrip();
+  if (S.doc && curScreen() === "organize") buildGrid();
+}
+
 // ================================================================== update check
 function verTuple(s) { return (String(s || "").match(/\d+/g) || ["0"]).slice(0, 3).map(Number); }
 function newer(a, b) { const x = verTuple(a), y = verTuple(b); for (let k = 0; k < 3; k++) { if ((x[k] || 0) !== (y[k] || 0)) return (x[k] || 0) > (y[k] || 0); } return false; }
@@ -2643,6 +2756,7 @@ async function checkUpdates() {
 
 // ================================================================== start
 applyTheme();
+applyFeatures();
 themeMq.addEventListener?.("change", applyTheme);
 placeModes();
 show("home");
