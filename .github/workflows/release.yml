@@ -47,7 +47,7 @@ jobs:
           cp ../tools/set_exe_info.js .
           node set_exe_info.js "../out/$APP/$APP.exe" "../desktop/icon.ico" "$APP" "${{ steps.ver.outputs.v }}" "$APP"
 
-      - name: Installer (NSIS: install / repair / uninstall, 21 languages)
+      - name: Installer (NSIS - install, repair, uninstall - 21 languages)
         run: |
           MAKENSIS="/c/Program Files (x86)/NSIS/makensis.exe"
           [ -f "$MAKENSIS" ] || choco install nsis -y --no-progress
