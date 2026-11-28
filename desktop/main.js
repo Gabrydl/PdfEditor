@@ -18,6 +18,13 @@ if (app.isPackaged) {
   } catch (_) { /* read-only place (e.g. Program Files): fall back to the user's AppData */ }
 }
 
+// languages (www/locales) and the log file PdfEditor.log in the program folder
+const exeDir = app.isPackaged ? path.dirname(app.getPath("exe")) : __dirname;
+const L = require("./i18n_main");
+const { T } = L;
+L.init(WWW, exeDir);
+L.startLog("PdfEditor", exeDir);
+
 protocol.registerSchemesAsPrivileged([{ scheme: "app", privileges: { standard: true, secure: true, supportFetchAPI: true, stream: true, codeCache: true } }]);
 
 const MIME = { html: "text/html; charset=utf-8", js: "text/javascript; charset=utf-8", mjs: "text/javascript; charset=utf-8",
@@ -71,6 +78,7 @@ function createWindow() {
     webPreferences: { preload: path.join(__dirname, "preload.js"), contextIsolation: true, nodeIntegration: false, sandbox: true, spellcheck: false },
   });
   if (st.max) win.maximize();
+  L.watchWindow(win);
   win.once("ready-to-show", () => win.show());
   win.loadURL("app://pdfeditor/index.html");
   win.webContents.setWindowOpenHandler(({ url }) => { if (/^https?:/i.test(url)) shell.openExternal(url); return { action: "deny" }; });
@@ -133,13 +141,13 @@ ipcMain.handle("save-as", async (_e, bytes, name) => {
   const ext = path.extname(name).slice(1).toLowerCase() || "pdf";
   const last = loadState().saveDir;
   const r = await dialog.showSaveDialog(win, { defaultPath: path.join(last && fs.existsSync(last) ? last : app.getPath("documents"), name),
-    filters: [{ name: ext.toUpperCase(), extensions: [ext] }, { name: "All files", extensions: ["*"] }] });
+    filters: [{ name: ext.toUpperCase(), extensions: [ext] }, { name: T("All files"), extensions: ["*"] }] });
   if (r.canceled || !r.filePath) return { ok: false };
   try {
     await fs.promises.writeFile(r.filePath, Buffer.from(bytes));
     try { fs.writeFileSync(stateFile(), JSON.stringify({ ...loadState(), saveDir: path.dirname(r.filePath) })); } catch (_) { /* */ }
     return { ok: true, name: path.basename(r.filePath), path: r.filePath };
-  } catch (err) { dialog.showErrorBox("Could not save", String(err.message || err)); return { ok: false }; }
+  } catch (err) { dialog.showErrorBox(T("Could not save"), String(err.message || err)); return { ok: false }; }
 });
 ipcMain.handle("open-temp", async (_e, bytes, name) => {
   const dir = path.join(os.tmpdir(), "PdfEditor");
@@ -159,6 +167,10 @@ ipcMain.on("set-title", (_e, t) => { if (win) win.setTitle(t ? `${t} - PdfEditor
 ipcMain.on("ready", () => { rendererReady = true; const f = pendingFiles; pendingFiles = []; if (f.length && win) win.webContents.send("open-files", f); });
 ipcMain.on("close-now", () => { closing = true; if (win) win.close(); });
 ipcMain.on("version", (e) => { e.returnValue = app.getVersion(); });
+ipcMain.on("lang-get", (e) => { e.returnValue = L.getLang(); });
+ipcMain.on("lang-set", (e, c) => { e.returnValue = L.setLang(c); L.log("info", "language: " + c); });
+ipcMain.on("log", (_e, level, msg) => L.log(level === "error" ? "error" : "info", "page: " + msg));
+ipcMain.on("open-log", () => { const f = L.logFile(); if (f && fs.existsSync(f)) shell.openPath(f); });
 
 // ------------------------------------------------------------------ print: chosen pages, 1 to 9 per sheet, through the Windows print window
 ipcMain.handle("print-images", async (_e, imgs, per, title) => {
@@ -212,7 +224,7 @@ async function setOpenWith(on) {
     ["add", `${C}\\PdfEditor.PDF\\DefaultIcon`, "/ve", "/d", `"${exe}",0`, "/f"],
     ["add", `${C}\\PdfEditor.PDF\\shell\\open\\command`, "/ve", "/d", cmd, "/f"],
     ["add", `${C}\\.pdf\\OpenWithProgids`, "/v", "PdfEditor.PDF", "/t", "REG_NONE", "/f"],
-    ["add", `${C}\\SystemFileAssociations\\.pdf\\shell\\PdfEditor`, "/ve", "/d", "Open with PdfEditor", "/f"],
+    ["add", `${C}\\SystemFileAssociations\\.pdf\\shell\\PdfEditor`, "/ve", "/d", T("Open with PdfEditor"), "/f"],
     ["add", `${C}\\SystemFileAssociations\\.pdf\\shell\\PdfEditor`, "/v", "Icon", "/d", `"${exe}"`, "/f"],
     ["add", `${C}\\SystemFileAssociations\\.pdf\\shell\\PdfEditor\\command`, "/ve", "/d", cmd, "/f"],
     ["add", `${C}\\Applications\\PdfEditor.exe\\shell\\open\\command`, "/ve", "/d", cmd, "/f"],

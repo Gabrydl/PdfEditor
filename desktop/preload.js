@@ -21,4 +21,9 @@ contextBridge.exposeInMainWorld("Desktop", {
   printImages: (imgs, per, title) => ipcRenderer.invoke("print-images", imgs, per, title),
   openWith: (on) => ipcRenderer.invoke("open-with", on),
   openDefaultApps: () => ipcRenderer.send("default-apps"),
+  // 1.7.0: languages and the log file
+  lang: () => ipcRenderer.sendSync("lang-get"),
+  setLang: (c) => ipcRenderer.sendSync("lang-set", c),
+  log: (level, msg) => ipcRenderer.send("log", level, String(msg)),
+  openLog: () => ipcRenderer.send("open-log"),
 });

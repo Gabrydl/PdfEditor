@@ -1,0 +1,594 @@
+1|(walay sulod nga presentation)
+2|(walay text niining panid – sulayi ang OCR)
+3|(walay text)
+4|Gikopya ang 1 ka panid sa katapusan sa “{0}”.
+5|1 ka panid nga adunay kalainan
+6|Kinahanglan adunay bisan usa ka panid ang PDF.
+7|Idugang
+8|Pagdugang og password
+9|Pagdugang og bisan usa ka file.
+10|Pagdugang og mga file
+11|Pagdugang og hulagway
+12|Pagdugang o pagkuha og password
+13|Pagdugang og hulagway
+14|Pagdugang og text
+15|Idugang sa katapusan sa “{0}”
+16|Pagdugang, pag-ilis og ngalan ug pagbalhin og bookmark
+17|Nadugang sa katapusan.
+18|Nadugang sa right-click menu.
+19|Nagdugang og panid…
+20|Nagdugang og watermark…
+21|Nagdugang…
+22|Tanan
+23|Tanang file
+24|Tanan sa usa
+25|Tanang panid
+26|Tanang {0}
+27|Tugoti ang mga kausaban ug komento
+28|Tugoti ang pagkopya sa text
+29|Tugoti ang pag-print
+30|Gamay na
+31|Iapil usab ang PdfEditor sa mga app para sa PDF.
+32|Apil ang mga panid nga adunay text na
+33|Anggulo
+34|Mag-annotate
+35|Laing file…
+36|Hitsura
+37|Ipadapat karon
+38|Ipadapat ang redaction
+39|Ipadapat ang mga redaction
+40|Aprobado
+41|Udyong
+42|Isip text file
+43|Sa katapusan
+44|Tagsulat
+45|Balik
+46|Balik kung asa ka mibiya: panid {0}.
+47|Taboni ang pribadong data
+48|Blangkong panid
+49|Bold
+50|Mga bookmark
+51|Panel sa bookmark
+52|Pareho
+53|Ubos sa tunga
+54|Ubos sa wala
+55|Ubos sa tuo
+56|Sumala sa range sa panid o matag N ka panid
+57|Sumala sa range
+58|Kanselaha
+59|Gikansela
+60|Ilisi ang kolor
+61|Usba ang text, pagdugang og text ug hulagway
+62|Natipigan ang mga kausaban {0}
+63|Giusab…
+64|Tsek
+65|Pagpili
+66|Pagpili og file gikan niining device
+67|Mga gipiling panid, pipila matag sheet
+68|Limpyohi
+69|Limpyohan ang Bag-o lang?
+70|Sirad-i
+71|Sirad-i (Ctrl+W)
+72|Sirad-i ang dokumento
+73|Sirad-i ang pagpangita
+74|Sirad-i ang tab
+75|Gitigom ang mga highlight ug nota…
+76|Kolor
+77|Kolor ug linya
+78|Kolor
+79|Kolor nga tulbok samtang nag-highlight o nagdrowing
+80|Komento
+81|Komento: {0}
+82|Mahimong bahin sa panid ang mga komento ug form field ug dili na mausab.
+83|Ikumpara
+84|Ikumpara ang duha ka bersyon
+85|Ikumpara ang “{0}” sa…
+86|I-compress
+87|I-compress: kuhaa ang metadata
+88|I-compress: pamuboa ang mga font sa mga letra nga gigamit
+89|Na-compress
+90|Gi-compress…
+91|Kompidensyal
+92|Sulod
+93|I-convert
+94|Gi-convert ngadto sa {0}…
+95|Gi-convert ang {0}…
+96|Nakopya.
+97|Kopyaha
+98|Kopyaha ang mga panid sa laing abli nga PDF
+99|Kopyaha ang text
+100|Kopyaha ang mga panid sa…
+101|Kopyaha sa tab
+102|Gikopya ang mga panid…
+103|Dili ma-load ang {0}
+104|Dili ma-overwrite ang file. Pilia kung asa kini i-save.
+105|Dili mabasa ang {0}
+106|Wala ma-save
+107|Dili masulat ang file.
+108|Wala madugang.
+109|I-crop
+110|Gi-crop…
+111|Ekis
+112|Ngitngit
+113|Ngitngit nga panid para sa pagbasa
+114|Ngitngit nga panid, hayag nga text. Ilisi bisan kanus-a gamit ang Ctrl+Shift+N.
+115|Petsa
+116|Papasa ang usa sa imong mga stamp
+117|Papasa ang panid
+118|Papasa ang mga panid
+119|Papasa ang na-save
+120|Hain ang papason?
+121|Hain nga stamp ang papason?
+122|Papason ang {0}?
+123|Napapas.
+124|Gipapas…
+125|Sulod-opisina
+126|Sirad-i
+127|Dokumento
+128|Dili abli ang dokumento.
+129|Ayaw i-save
+130|Human na
+131|Tulbok
+132|I-download ang bersyon {0}
+133|Draft
+134|I-drag ibabaw sa text aron pilion kini.
+135|I-drag ibabaw sa text.
+136|I-drag ibabaw sa kinahanglang mawala.
+137|I-drag ang mga panid aron usbon ang han-ay
+138|I-drag ang bahin nga tipigan.
+139|I-drag ang asul nga kahon
+140|I-drag ang asul nga kahon aron ibalhin kini.
+141|I-drag aron magdrowing og linya.
+142|I-drag aron magdrowing og rektanggulo.
+143|I-drag aron magdrowing og udyong.
+144|I-drag aron magdrowing og ellipse.
+145|Drowing
+146|Drowing (pen)
+147|Pagdrowing una.
+148|Pagdrowing gamit ang tudlo. I-tap pag-usab ang Drowing aron mag-scroll.
+149|I-drowing ang imong initials
+150|I-drowing ang imong pirma
+151|Drowing
+152|Nagdrowing…
+153|I-drop dinhi ang file, o i-click aron mag-browse
+154|I-drop dinhi ang file, o i-click aron mopili
+155|I-drop ang mga file sa window
+156|I-drop aron ablihan
+157|Naka-off ang pag-drop og file sa Settings › Features.
+158|I-duplicate
+159|I-duplicate ang mga panid
+160|Gi-duplicate…
+161|I-edit
+162|I-edit ang PDF
+163|I-edit ug pirmahi
+164|I-edit ang komento
+165|I-edit ang nota
+166|I-edit ang text
+167|.docx nga ma-edit
+168|Pag-edit
+169|Ellipse
+170|Gi-encrypt…
+171|English
+172|Pangpapas
+173|Matag
+174|Matag N ka panid
+175|Mahimong hulagway ang matag panid (dili na mapili ang text)
+176|Tanan para sa PDF, offline.
+177|Excel
+178|Expired
+179|I-export ang mga highlight ug nota
+180|I-export ang mga nota
+181|I-extract
+182|I-extract ang mga panid
+183|Mga na-extract nga panid
+184|Gi-extract…
+185|Mga feature
+186|Field
+187|Pun-a ug Pirmahi
+188|Pun-a ug pirmahi
+189|Pun-a ang form
+190|Pun-a
+191|Pinal
+192|Pangitaa
+193|Pangitaa sa dokumento
+194|Nahuman ang pagbasa.
+195|I-fit ang hulagway
+196|I-fit sa gilapdon
+197|I-flatten
+198|Gi-flatten…
+199|Sunda ang setting sa device
+200|Para sa Komento
+201|Para sa Publiko
+202|Format
+203|Mga form, pirma, initials
+204|Kinatibuk-an
+205|Adto
+206|Adto sa panid
+207|Taas
+208|I-highlight
+209|Pag-highlight, pagdrowing, mga nota
+210|Mga highlight ug nota
+211|Magpabilin ang mga highlight sa ilang text.
+212|Kung mohunong ang PdfEditor o ang computer, ihalad kanimo pagbalik ang imong trabaho sa sunod.
+213|Andam na ang mga hulagway
+214|Sa Windows Settings, pilia ang PdfEditor para sa mga .pdf nga file.
+215|Sa view nga Panid, ug sa usa ka tab aron kopyahon kini
+216|Initials
+217|Initials {0}{1}
+218|Isal-ot og file
+219|Isal-ot og panid
+220|Isal-ot og mga panid
+221|Gisal-ot ang {0}…
+222|Ngadto sa mas gagmay nga PDF
+223|Nagtudlo kini sa panid {0}.
+224|Italian
+225|JPG o PNG
+226|Hiusaha ang pipila ka file
+227|Pagtipig og recovery copy sa mga wala ma-save nga kausaban
+228|Mga keyboard shortcut
+229|Mga keyword
+230|Pinulongan
+231|Dako
+232|Unya
+233|Letter
+234|Molihok ang mga letra kung adunay abli nga PDF ug wala ka nag-type. Mahimo kining i-off sa Settings.
+235|Hayag
+236|Hayag / ngitngit
+237|Linya
+238|Gibag-on sa linya
+239|Paminawa ang PDF
+240|Na-save ang log: {0}
+241|Ubos
+242|Gihimo gamit ang:
+243|Paghimo og PDF
+244|Himoang default nga PDF app ang PdfEditor…
+245|Himoang mapangita ang mga scan
+246|Himoa ang PDF
+247|Pagamaya ang file
+248|Naghimo og mga hulagway…
+249|Gihimo ang PDF…
+250|Margin
+251|Markahi para i-redact
+252|Dili kuhaon ang mga namarkahan nga bahin hangtod imong ipadapat ang redaction.
+253|Nagmarka…
+254|Tunga-tunga
+255|Hiusaha
+256|Hiusaha ang mga PDF
+257|Mihunong ang paghiusa: protektado ang “{0}”.
+258|Hiusaha sila sa usa ka PDF
+259|Gihiusa…
+260|Dugang pa
+261|Ibalhin
+262|Ipaubos
+263|Ibalhin sulod sa naa sa ibabaw
+264|Ibalhin sa wala
+265|Igawas og usa ka level
+266|Ibalhin ang mga panid
+267|Ibalhin sa tuo
+268|Ipataas
+269|Ibalhin, i-rotate, papasa
+270|Gibalhin…
+271|Ngalan
+272|Bag-ong bookmark
+273|Bag-ong stamp
+274|Bag-ong stamp…
+275|Bag-ong {0}
+276|Sunod
+277|Sunod nga kalainan
+278|Sunod nga panid
+279|Sunod nga resulta
+280|Sunod nga tab (Shift: miagi)
+281|Gabii
+282|Mode sa gabii
+283|Naka-off ang night mode.
+284|Naka-on ang night mode.
+285|Wala pay bookmark. Adto sa usa ka panid ug pindota ang
+286|Walay komento dinhi.
+287|Walay kalainan sa text.
+288|Walay panid {0} niining bersyon
+289|Walay panid nga nagkinahanglan og OCR (adunay text na sila).
+290|Walay panid nga i-print.
+291|Walay nawala nga kalidad
+292|Walay luna aron isulat ang file.
+293|Walay text dinhi. Para sa hulagway, gamita ang Drowing o usa ka porma.
+294|Wala
+295|Dili Aprobado
+296|Wala makit-i.
+297|Nota
+298|Walay namarkahan. Gamita una ang Redact aron markahan ang mga bahin.
+299|Walay bahinon.
+300|Unsang mga panid ang butangan og numero
+301|Gibutangan og numero…
+302|Off: masirado ang imong gibasa kung moabli og PDF.
+303|Office ngadto sa PDF
+304|Usa ka panid / duha ka panid nga magtapad
+305|Usa ka panid matag higayon.
+306|Usa matag panid
+307|Usa ka slide matag panid
+308|Usa ka letra nga keyboard shortcut (H, P, N…)
+309|Ang lista ra ang malimpyohan. Magpabilin ang imong mga file kung asa sila.
+310|Opacity
+311|Ablihi
+312|Ablihi ang mga PDF sa night mode
+313|Ablihi ang mga PDF nga duha ka panid nga magtapad
+314|Pag-abli og PDF
+315|Pag-abli og laing PDF (Ctrl+T)
+316|Mga abli nga dokumento
+317|Ablihi ang matag usa sa kaugalingong tab
+318|Ablihi sa bag-ong tab
+319|Ablihi sa tab
+320|Ablihi kini
+321|Ablihan ang link?
+322|Ablihi karon
+323|Pag-abli og pipila ka PDF sa mga tab
+324|Ablihi ang una
+325|Ablihi ang log file
+326|Ablihi gamit ang PdfEditor
+327|Ablihi gamit ang laing app
+328|Ablihi, hiusaha o idugang sila sa abli nga PDF
+329|Giablihan…
+330|I-optimize ug protektahi
+331|Han-aya
+332|Han-aya ang mga panid
+333|Error sa PDF engine: {0}
+334|PDF ngadto sa Excel
+335|PDF ngadto sa PowerPoint
+336|PDF ngadto sa Word
+337|PDF ngadto sa Word, Excel, PowerPoint, hulagway, text
+338|PDF ngadto sa hulagway
+339|PDF nga walay password
+340|PDF, hulagway o Office nga file
+341|Panid
+342|Panid (1–{0})
+343|Panid 1
+344|Panid 1 sa 10
+345|Mga numero sa panid
+346|Gidak-on sa panid
+347|Gidak-on sa panid: {0} × {1} mm
+348|Gidak-on sa panid: {0} × {1} mm{2}
+349|Panid {0}
+350|Panid {0}\n{1}
+351|Panid {0} sa {1}
+352|Panid {0} sa {1} ·
+353|Panid {0}{1}
+354|Mga panid
+355|Nadugang ang mga panid.
+356|View nga Panid (han-ay)
+357|Password
+358|Kinahanglan ang password
+359|Nasirado ang PdfEditor sa wala pa ma-save kining mga kausaban.
+360|Nagtipig ang PdfEditor og kopya sa katapusang 8 ka PDF nga imong giablihan, aron maabli pag-usab sa usa ka tap. Ma-update ang kopya kung mag-save.
+362|PdfEditor {0}{1}
+363|Pen ug mga porma
+364|Matag sheet
+365|Mga litrato
+366|Mga litrato ngadto sa PDF
+367|Hulagway {0} sa {1}
+368|Maayong kalidad sa hulagway, wala hilabti ang text
+369|Mga hulagway o scan
+370|Itudlo niining panid ({0})
+371|Posisyon
+372|Giandam ang OCR…
+373|Giandam ang mga panid…
+374|Nag-andam…
+375|Miaging panid
+376|Miaging resulta
+377|I-print
+378|Wala nagsugod ang pag-print.
+379|I-print…
+380|Mga kinaiya
+381|Protektahi
+382|Protektahi gamit ang password
+383|Protektadong PDF (AES-256)
+384|Kalidad
+385|Range
+386|Mga range
+387|Basaha og kusog
+388|Pagbasa
+389|Mode sa pagbasa
+390|Gibasa ang panid {0} sa {1}…
+391|Gibasa ang {0}
+392|Kapaspas sa pagbasa og kusog
+393|Andam na
+394|Andam nang i-print
+395|Bag-o lang
+396|Mga bag-o lang nga file sa home screen
+397|Ilha ang text
+398|Ilha ang text (OCR)
+399|Girekomenda
+400|Ibalik ang wala ma-save nga trabaho?
+401|Nabalik. I-save kini aron tipigan ang mga kausaban.
+402|Rektanggulo
+403|I-redact
+404|Marka sa redaction
+405|Buhata pag-usab
+406|Hinumdumi niining phone
+407|Kuhaa ang metadata
+408|Kuhaa ang password
+409|Gikuha sa right-click menu.
+410|Gikuha.
+411|Gikuha ang metadata, gipamubo ang mga font, mas gihugot ang file. Eksaktong parehas ang hitsura sa mga panid.
+412|Gikuha ang sulod…
+413|Gikuha ang password…
+414|Ilisi ang ngalan
+415|Ilisi ang ngalan sa bookmark
+416|Ablihi pag-usab ang matag PDF kung asa ka mibiya
+417|Sublia
+418|Sublia sa tibuok panid
+419|I-rotate
+420|I-rotate sa wala
+421|I-rotate sa tuo
+422|Gi-rotate…
+423|I-save
+424|I-save (Shift: i-save isip)
+425|I-save isip…
+426|I-save ang mga kausaban sa “{0}”?
+427|I-save ang log
+428|I-save sa phone
+429|Na-save
+430|Na-save.
+431|Gi-save
+432|Gi-save ang mga bookmark…
+433|Gi-save…
+434|Makabaton ang mga na-scan nga panid og dili makita nga layer sa text: dayon imong mapangita, mapili ug makopya ang text.
+435|Pangitaa
+436|Button sa Pangita, Ctrl+F
+437|Tan-awa ang tanang shortcut
+438|Pilia
+439|Pilia tanan
+440|Pilia ang mga komento
+441|Walay pilion
+442|Gipiling text
+443|Gipili
+444|Settings
+445|Makadaginot og papel ang pipila ka panid matag sheet (2 = magtapad, 4 = duha sa duha).
+446|Ipaambit
+447|Mga sheet
+448|Ipakita ang gamay nga hulagway sa Bag-o lang
+449|Pirma
+450|Pirma {0}{1}
+451|Nagpirma…
+452|Gidak-on
+453|Slide
+454|Slide {0}
+455|Gamay
+456|Mas gagmay nga hulagway, mabasa gihapon
+457|Pinakagamay
+458|Adunay sayop
+459|Kapaspas
+460|Bahina
+461|Gibahin…
+462|Kulot
+463|Stamp
+464|Sinugdanan
+465|Sugdi sa
+466|Nangita pa…
+467|Hunonga ang tool, sirad-i ang pagpangita
+468|Gihunong.
+469|Gihunong…
+470|Linyahi
+471|Kusog
+472|Nalinyahan
+473|Hilisgutan
+474|Mag-ilis sa hayag ug ngitngit
+475|I-off ang wala nimo gigamit: mawala ang mga button, menu entry ug shortcut niini.
+476|System
+477|Gihimo pag-usab ang mga table gikan sa posisyon sa text.
+478|Mga table isip .xlsx
+479|I-tap ang asul nga field aron pun-on kini.
+480|I-tap ang komento aron papason kini.
+481|I-tap ang komento aron i-edit, ibalhin o papason kini.
+482|I-tap ang parapo aron usbon kini.
+483|I-tap ang usa ka parapo.
+484|I-tap aron magbutang og tsek.
+485|I-tap aron magbutang og ekis.
+486|I-tap aron magbutang og tulbok.
+487|I-tap kung asa ibutang ang petsa.
+488|I-tap kung asa ibutang ang nota.
+489|I-tap kung asa ibutang ang hulagway.
+490|I-tap kung asa ibutang ang stamp.
+491|I-tap kung asa ibutang ang text box.
+492|I-tap kung asa ibutang ang text.
+493|I-tap kung asa ibutang ang imong initials.
+494|I-tap kung asa mopirma.
+495|I-tap kung asa mosulat.
+496|Text
+497|Kahon sa text
+498|Text ra, mas dagkong letra
+499|Text ibabaw sa matag panid
+500|Nailhan ang text sa {0} ka panid. I-save aron tipigan kini.
+501|Dili available ang text-to-speech niining phone.
+502|Dili available ang text-to-speech.
+503|Dili maabli dinhi kadtong PDF.
+504|Wala na kadtong kopya. Ablihi pag-usab ang file.
+505|Wala nagsugod ang PDF engine.
+506|Papason usab ang mga kopya nga gitipigan sa PdfEditor. Magpabilin ang imong mga file kung asa sila.
+507|Isulat pag-usab ang parapo gamit ang standard nga font.
+508|Lahi ang mga password.
+509|Walay highlight o nota niining PDF.
+510|Dili kaayo daghan ang makuha dinhi ({0}). {1}
+511|Walay password nga kuhaon niining PDF.
+512|Walay table of contents kining PDF.
+513|Pinakagamay na kining PDF.
+514|Wala na kining komento.
+515|Adunay mga field nga pun-on kining dokumento.
+516|Kining field
+517|Kining lista
+518|Kini ({0})
+519|Kining panid
+520|Ilabay sila
+521|Titulo
+522|Ngadto sa Excel
+523|Ngadto sa PowerPoint
+524|Ngadto sa Word
+525|Ngadto sa hulagway
+526|Ngadto sa text
+527|Mga tool
+528|Hilabihan ka sekreto
+529|Ibabaw sa tunga
+530|Ibabaw sa wala
+531|Ibabaw sa tuo
+532|Pamuboa ang mga font
+533|Sulayi ang “Girekomenda” kung adunay litrato ang file, o “Pinakagamay” para sa mga scan.
+534|Sulayi ang “Pinakagamay” kung scan ang file.
+535|Duha ka panid
+536|Duha ka panid nga magtapad
+537|Duha ka panid nga magtapad.
+538|Linyahi sa ubos
+539|Nalinyahan sa ubos
+540|I-undo
+541|I-undo / buhata pag-usab
+542|I-unlock
+543|Adunay update
+544|Gamita
+545|Gigamit sa matag opsyon sa Compress.
+546|View
+547|Watermark
+548|Butangi og watermark ang mga panid
+549|Hain
+550|Unsang mga panid
+551|Word
+552|Word, Excel, PowerPoint, text
+553|Berde ang marka sa mga gidugang nga pulong, pula ang mga gikuha.
+554|Gibuhat…
+555|Molihok offline. Dili gayud mobiya niining computer ang imong mga file.
+556|Pagsulat og nota
+557|Isulat ang mga panid sama niini: 1-3, 5.
+558|Sayop nga password, sulayi pag-usab.
+559|Mahimo nimong usbon una ang han-ay
+560|Naa kay {0}. Ablihi ang na-download nga file aron i-install kini.
+561|Dili gayud mobiya niining device ang imong mga file.
+562|Dili gayud mobiya niining phone ang imong mga file.
+563|Imong kaugalingong text, na-save para sa sunod
+564|Imong mga na-save nga pirma
+565|Imong mga na-save nga stamp
+566|Imong stamp
+567|Padak-a ang view
+568|Padak-a / pagamya / i-fit
+569|Pagamya ang view
+570|pananglitan 1-3, 5
+571|pananglitan 1-3, 7, 10-
+572|pananglitan 1-3; 4-6; 7-
+573|pananglitan Gisusi ni Gabriele
+574|nangita og kalainan…
+575|walay kalainan sa text
+576|panid · {0} · {1} · Encryption:
+577|aron markahan kini.
+578|{0}\nMga highlight ug nota, na-export niadtong {1}\n\n{2}
+579|{0} - mga nota.txt
+580|{0} Pagdugang og mga file
+581|{0} PDF
+582|{0} ka bahin ang permanenteng gikuha. I-save aron tipigan ang kausaban.
+583|{0} file andam na
+584|{0} ka file
+585|Kinahanglan ang {0}.
+586|{0} ka panid · {1} · {2} · Encryption: {3}
+587|{0} ka panid
+588|Gikopya ang {0} ka panid sa katapusan sa “{1}”.
+589|{0} ka panid nga adunay kalainan
+590|{0} ang napili
+591|{0} → {1} (−{2}%). I-save ang dokumento aron tipigan ang mas gamay nga file.
+592|· {0} ang gidugang
+593|· {0} ang gikuha
+594|“Ablihi gamit ang PdfEditor” sa right-click menu
+595|Protektado ang “{0}”.

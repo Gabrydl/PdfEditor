@@ -572,3 +572,4 @@ kbd { font: 600 12px/1 "Segoe UI", system-ui, sans-serif; padding: 5px 7px; min-
 @media (max-width: 859px) { #viewer.side-on #scroller, #viewer.side-on .toolstrip, #viewer.side-on .modes { filter: brightness(.55); transition: filter var(--t); } }
 .set-note { margin: 2px 6px 4px; line-height: 1.45; }
 .rec small.ltr { direction: ltr; }
+.link-btn { border: 0; background: none; color: var(--accent-text); font: inherit; padding: 0; cursor: pointer; text-decoration: underline; }

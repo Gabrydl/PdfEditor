@@ -1,6 +1,7 @@
 // Shared helpers: DOM, sheets, busy overlay, worker calls and the bridge to the host app
 // (Android WebView on the phone, Electron on the PC, or a plain browser for testing).
 import { icon } from "./icons.js";
+import { T } from "./i18n.js";
 
 export const $ = (id) => document.getElementById(id);
 export const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -26,7 +27,7 @@ export function ext(name) { const m = /\.([^.]+)$/.exec(name || ""); return m ? 
 // ------------------------------------------------------------------ worker (MuPDF)
 const worker = new Worker("worker.js", { type: "module" });
 let workerReady;
-const readyP = new Promise((res, rej) => { workerReady = res; setTimeout(() => rej(new Error("The PDF engine did not start.")), 60000); });
+const readyP = new Promise((res, rej) => { workerReady = res; setTimeout(() => rej(new Error(T("The PDF engine did not start."))), 60000); });
 readyP.catch(() => {});
 const calls = new Map();
 let seq = 0;
@@ -38,7 +39,7 @@ worker.onmessage = (e) => {
   calls.delete(m.id);
   if (m.ok) c.res(m.result); else c.rej(new Error(m.error));
 };
-worker.onerror = (e) => { toast("PDF engine error: " + (e.message || "could not load")); };
+worker.onerror = (e) => { toast(T("PDF engine error: {0}", (e.message || T("could not load")))); };
 
 export async function call(fn, ...args) {
   await readyP;
@@ -85,8 +86,8 @@ export function idle() {
   clearTimeout(busyTimer);
   busyTimer = setTimeout(() => { if (!busyState.on) b.classList.add("hidden"); b.classList.remove("closing"); }, 160);
 }
-$("busyCancel").onclick = () => { busyState.cancelled = true; $("busyText").textContent = "Stopping…"; };
-export class Cancelled extends Error { constructor() { super("Cancelled"); } }
+$("busyCancel").onclick = () => { busyState.cancelled = true; $("busyText").textContent = T("Stopping…"); };
+export class Cancelled extends Error { constructor() { super(T("Cancelled")); } }
 export function checkCancel() { if (busyState.cancelled) throw new Cancelled(); }
 
 /** Run a job behind the busy overlay; errors become a message. */
@@ -95,16 +96,48 @@ export async function task(text, fn, opts = {}) {
   try {
     return await fn();
   } catch (e) {
-    if (e instanceof Cancelled) toast("Stopped.");
+    if (e instanceof Cancelled) toast(T("Stopped."));
     else { console.error(e); showError(e); }
     return undefined;
   } finally {
     idle();
   }
 }
+// ------------------------------------------------------------------ log: on Windows PdfEditor.log in the program folder,
+// on the phone the last lines are kept here and can be saved as a text file (Downloads) when an error shows up
+const LOG = [];
+export function logLine(level, msg) {
+  const d = new Date(), p = (n) => String(n).padStart(2, "0");
+  const line = `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())} [${String(level).toUpperCase()}] ${String(msg).slice(0, 4000)}`;
+  LOG.push(line);
+  if (LOG.length > 400) LOG.splice(0, LOG.length - 400);
+  try { if (D && D.log) D.log(level, msg); } catch (_) { /* */ }
+}
+export function logText() {
+  const ua = navigator.userAgent.replace(/\s*\(KHTML[^)]*\)/, "");
+  return `PdfEditor log\r\n${A ? "Android" : D ? "Windows" : "Browser"} · ${ua}\r\nLanguage: ${document.documentElement.lang || "en"}\r\n\r\n` + LOG.join("\r\n") + "\r\n";
+}
+/** Phone: the log as a .txt file; the save window opens in Downloads. */
+export async function saveLog() {
+  const d = new Date(), p = (n) => String(n).padStart(2, "0");
+  const name = `PdfEditor-log-${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}.txt`;
+  const r = await saveAs(new TextEncoder().encode(logText()), name, "text/plain");
+  if (r && r.ok) toast(T("Log saved: {0}", r.name || name));
+}
+addEventListener("error", (e) => logLine("error", `${e.message} (${String(e.filename || "").split("/").pop()}:${e.lineno})`));
+addEventListener("unhandledrejection", (e) => logLine("error", String((e.reason && e.reason.stack) || e.reason)));
+logLine("info", `PdfEditor started (${A ? "Android" : D ? "Windows" : "browser"})`);
+
 export function showError(e) {
   const msg = String((e && e.message) || e).replace(/^Error:\s*/, "");
-  alertBox("Something went wrong", msg);
+  logLine("error", (e && e.stack) || msg);
+  if (!A) { alertBox(T("Something went wrong"), msg); return; }
+  // phone: offer to save the log
+  sheet(`<h3>${esc(T("Something went wrong"))}</h3><p class="muted">${esc(msg)}</p><div class="btns"><button data-log>${esc(T("Save log"))}</button><button class="ok" data-ok>OK</button></div>`,
+    card => {
+      card.querySelector("[data-ok]").onclick = () => closeSheet(true);
+      card.querySelector("[data-log]").onclick = () => { closeSheet(true); setTimeout(saveLog, 250); };
+    });
 }
 
 // ------------------------------------------------------------------ bottom sheets
@@ -151,7 +184,7 @@ export function alertBox(title, text) {
     card => { card.querySelector("[data-ok]").onclick = () => closeSheet(true); });
 }
 
-export function confirmBox(title, text, ok = "OK", cancel = "Cancel") {
+export function confirmBox(title, text, ok = "OK", cancel = T("Cancel")) {
   return sheet(`<h3>${esc(title)}</h3>${text ? `<p class="muted">${esc(text)}</p>` : ""}
     <div class="btns"><button data-no>${esc(cancel)}</button><button class="ok" data-ok>${esc(ok)}</button></div>`,
   card => {
@@ -211,7 +244,7 @@ export function form(title, fields, ok = "OK", note = "") {
         else out[f.name] = el.value;
       });
       for (const f of fields) {
-        if (f.required && (out[f.name] == null || out[f.name] === "")) { toast((f.label || "This field") + " is required."); return; }
+        if (f.required && (out[f.name] == null || out[f.name] === "")) { toast(T("{0} is required.", (f.label || T("This field")))); return; }
         if (f.validate) { const err = f.validate(out[f.name], out); if (err) { toast(err); return; } }
       }
       closeSheet(out);
@@ -284,11 +317,11 @@ export async function readFile(f) {
   if (f.file) return new Uint8Array(await f.file.arrayBuffer());
   if (D && f.path) {
     const b = await D.read(f.path);
-    if (!b) throw new Error("Could not read " + f.name);
+    if (!b) throw new Error(T("Could not read {0}", f.name));
     return new Uint8Array(b);
   }
   const r = await fetch(f.url);
-  if (!r.ok) throw new Error("Could not read " + f.name);
+  if (!r.ok) throw new Error(T("Could not read {0}", f.name));
   return new Uint8Array(await r.arrayBuffer());
 }
 export function releaseFile(f) {
@@ -304,10 +337,10 @@ function b64(u8) {
 }
 function toTemp(bytes) {
   const h = A.beginWrite();
-  if (!h) throw new Error("No space to write the file.");
+  if (!h) throw new Error(T("No space to write the file."));
   const CH = 3 * 512 * 1024;
   for (let i = 0; i < bytes.length; i += CH) {
-    if (!A.writeChunk(h, b64(bytes.subarray(i, i + CH)))) throw new Error("Could not write the file.");
+    if (!A.writeChunk(h, b64(bytes.subarray(i, i + CH)))) throw new Error(T("Could not write the file."));
   }
   return h;
 }
@@ -368,15 +401,15 @@ export const MIME = {
 };
 
 /** A finished file: offer Save / Share / Open. */
-export async function deliver(bytes, name, mime, title = "Ready") {
+export async function deliver(bytes, name, mime, title = T("Ready")) {
   const v = await sheet(`<h3>${esc(title)}</h3><p class="muted">${esc(name)}, ${fmtSize(bytes.length)}</p>
-    <button class="item" data-v="save">${icon("save")}<span>${PHONE ? "Save to phone" : "Save as…"}</span></button>
+    <button class="item" data-v="save">${icon("save")}<span>${PHONE ? T("Save to phone") : T("Save as…")}</span></button>
     ${PHONE ? `<button class="item" data-v="share">${icon("link")}<span>Share</span></button>` : ""}
-    <button class="item" data-v="open">${icon("open")}<span>${PHONE ? "Open with another app" : "Open now"}</span></button>`,
+    <button class="item" data-v="open">${icon("open")}<span>${PHONE ? T("Open with another app") : T("Open now")}</span></button>`,
   card => card.querySelectorAll(".item").forEach(b => { b.onclick = () => closeSheet(b.dataset.v); }));
   if (v === "save") {
     const r = await saveAs(bytes, name, mime);
-    if (r.ok) toast("Saved" + (r.name ? ": " + r.name : "."));
+    if (r.ok) toast(T("Saved") + (r.name ? ": " + r.name : "."));
   } else if (v === "share") share(bytes, name, mime);
   else if (v === "open") openWith(bytes, name, mime);
 }
@@ -389,7 +422,7 @@ export function loadScript(src) {
       const s = document.createElement("script");
       s.src = src;
       s.onload = () => res();
-      s.onerror = () => { libs.delete(src); rej(new Error("Could not load " + src)); };
+      s.onerror = () => { libs.delete(src); rej(new Error(T("Could not load {0}", src))); };
       document.head.appendChild(s);
     }));
   }

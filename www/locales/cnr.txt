@@ -1,0 +1,594 @@
+1|(prazna prezentacija)
+2|(nema teksta na ovoj stranici – pokušaj OCR)
+3|(nema teksta)
+4|1 stranica kopirana na kraj „{0}”.
+5|1 stranica s razlikama
+6|PDF mora zadržati barem jednu stranicu.
+7|Dodaj
+8|Dodaj lozinku
+9|Dodaj barem jednu datoteku.
+10|Dodaj datoteke
+11|Dodaj sliku
+12|Dodaj ili ukloni lozinku
+13|Dodaj sliku
+14|Dodaj tekst
+15|Dodaj na kraj „{0}”
+16|Dodaj, preimenuj i premjesti oznake
+17|Dodano na kraj.
+18|Dodano u meni desnog klika.
+19|Dodavanje stranice…
+20|Dodavanje vodenog žiga…
+21|Dodavanje…
+22|Sve
+23|Sve datoteke
+24|Sve u jednom
+25|Sve stranice
+26|Svih {0}
+27|Dozvoli izmjene i komentare
+28|Dozvoli kopiranje teksta
+29|Dozvoli štampanje
+30|Već je malo
+31|Navodi PdfEditor i među aplikacijama za PDF.
+32|I stranice koje već imaju tekst
+33|Ugao
+34|Bilješke
+35|Druga datoteka…
+36|Izgled
+37|Primijeni sada
+38|Primijeni zacrnjenje
+39|Primijeni zacrnjenja
+40|Odobreno
+41|Strelica
+42|Kao tekstualnu datoteku
+43|Na kraju
+44|Autor
+45|Nazad
+46|Tamo gdje si stao: stranica {0}.
+47|Zacrni privatne podatke
+48|Prazna stranica
+49|Podebljano
+50|Oznake
+51|Panel oznaka
+52|Oboje
+53|Dolje u sredini
+54|Dolje lijevo
+55|Dolje desno
+56|Po rasponima stranica ili svakih N stranica
+57|Po rasponima
+58|Otkaži
+59|Otkazano
+60|Promijeni boju
+61|Promijeni tekst, dodaj tekst i slike
+62|Promjene zadržane {0}
+63|Mijenjanje…
+64|Kvačica
+65|Izaberi
+66|Izaberi datoteku s ovog uređaja
+67|Izabrane stranice, više po listu
+68|Očisti
+69|Očistiti nedavne?
+70|Zatvori
+71|Zatvori (Ctrl+W)
+72|Zatvori dokument
+73|Zatvori pretraživanje
+74|Zatvori karticu
+75|Prikupljanje isticanja i bilješki…
+76|Boja
+77|Boja i crta
+78|Boja
+79|Tačke u boji pri isticanju ili crtanju
+80|Komentar
+81|Komentar: {0}
+82|Komentari i polja obrasca postaju dio stranice i više se ne mogu mijenjati.
+83|Usporedi
+84|Usporedi dvije verzije
+85|Usporedi „{0}” s…
+86|Komprimuj
+87|Komprimuj: ukloni metapodatke
+88|Komprimuj: skrati fontove na korištena slova
+89|Komprimovano
+90|Komprimovanje…
+91|Povjerljivo
+92|Sadržaj
+93|Pretvori
+94|Pretvaranje u {0}…
+95|Pretvaranje {0}…
+96|Kopirano.
+97|Kopiraj
+98|Kopiraj stranice u drugi otvoreni PDF
+99|Kopiraj tekst
+100|Kopiraj stranice u…
+101|Kopiraj u karticu
+102|Kopiranje stranica…
+103|Nije moguće učitati {0}
+104|Datoteku nije moguće prebrisati. Izaberi gdje je sačuvati.
+105|Nije moguće pročitati {0}
+106|Čuvanje nije uspjelo
+107|Datoteku nije moguće zapisati.
+108|Nije se moglo dodati.
+109|Obreži
+110|Obrezivanje…
+111|Krstić
+112|Tamno
+113|Tamne stranice za čitanje
+114|Tamne stranice, svijetli tekst. Prebaci bilo kada s Ctrl+Shift+N.
+115|Datum
+116|Izbriši jedan od svojih žigova
+117|Izbriši stranicu
+118|Izbriši stranice
+119|Izbriši sačuvano
+120|Koji izbrisati?
+121|Koji žig izbrisati?
+122|Izbrisati {0}?
+123|Izbrisano.
+124|Brisanje…
+125|Interno
+126|Zatvori
+127|Dokument
+128|Dokument nije otvoren.
+129|Nemoj sačuvati
+130|Gotovo
+131|Tačka
+132|Preuzmi verziju {0}
+133|Nacrt
+134|Povuci preko teksta da ga označiš.
+135|Povuci preko teksta.
+136|Povuci preko onoga što mora nestati.
+137|Povuci stranice da promijeniš redoslijed
+138|Povuci područje koje ostaje.
+139|Povuci plavi okvir
+140|Povuci plavi okvir da ga premjestiš.
+141|Povuci da nacrtaš crtu.
+142|Povuci da nacrtaš pravokutnik.
+143|Povuci da nacrtaš strelicu.
+144|Povuci da nacrtaš elipsu.
+145|Crtaj
+146|Crtaj (olovka)
+147|Najprije nacrtaj.
+148|Crtaj prstom. Ponovo dodirni Crtaj za pomicanje.
+149|Nacrtaj svoje inicijale
+150|Nacrtaj svoj potpis
+151|Crtež
+152|Crtanje…
+153|Ispusti datoteku ovdje ili klikni za pregledavanje
+154|Ispusti datoteku ovdje ili klikni da je izabereš
+155|Ispusti datoteke na prozor
+156|Ispusti za otvaranje
+157|Ispuštanje datoteka isključeno je u Postavke › Značajke.
+158|Udvostruči
+159|Udvostruči stranice
+160|Udvostručavanje…
+161|Uredi
+162|Uredi PDF
+163|Uredi i potpiši
+164|Uredi komentar
+165|Uredi bilješku
+166|Uredi tekst
+167|.docx za uređivanje
+168|Uređivanje
+169|Elipsa
+170|Šifrovanje…
+171|Engleski
+172|Gumica
+173|Svakih
+174|Svakih N stranica
+175|Svaka stranica postaje slika (tekst se više ne može označiti)
+176|Sve za PDF-ove, bez interneta.
+177|Excel
+178|Isteklo
+179|Izvezi isticanja i bilješke
+180|Izvezi bilješke
+181|Izdvoji
+182|Izdvoji stranice
+183|Izdvojene stranice
+184|Izdvajanje…
+185|Značajke
+186|Polje
+187|Ispuni i potpiši
+188|Ispuni i potpiši
+189|Ispuni obrazac
+190|Ispuni
+191|Konačno
+192|Traži
+193|Traži u dokumentu
+194|Čitanje završeno.
+195|Prilagodi sliku
+196|Prilagodi širini
+197|Spljošti
+198|Spljoštavanje…
+199|Prati postavku uređaja
+200|Za komentar
+201|Za javnu objavu
+202|Format
+203|Obrasci, potpis, inicijali
+204|Opšte
+205|Idi
+206|Idi na stranicu
+207|Visoka
+208|Istakni
+209|Isticanje, crtanje, bilješke
+210|Isticanja i bilješke
+211|Isticanja ostaju na svom tekstu.
+212|Ako se PdfEditor ili računar zaustavi, sljedeći put dobit ćeš svoj rad natrag.
+213|Slike su spremne
+214|U postavkama sistema Windows izaberi PdfEditor za .pdf datoteke.
+215|U prikazu Stranice, a na karticu da ih kopiraš
+216|Inicijali
+217|Inicijali {0}{1}
+218|Umetni datoteku
+219|Umetni stranicu
+220|Umetni stranice
+221|Umetanje {0}…
+222|U manje PDF-ove
+223|Pokazuje na stranicu {0}.
+224|Italijanski
+225|JPG ili PNG
+226|Spoji više datoteka
+227|Čuvaj kopiju za oporavak nespremljenih promjena
+228|Prečice na tastaturi
+229|Ključne riječi
+230|Jezik
+231|Veliko
+232|Kasnije
+233|Letter
+234|Slova rade dok je PDF otvoren i ne kucaš. Mogu se isključiti u Postavkama.
+235|Svijetlo
+236|Svijetlo / tamno
+237|Crta
+238|Debljina crte
+239|Poslušaj PDF
+240|Zapisnik sačuvan: {0}
+241|Niska
+242|Izrađeno s:
+243|Izradi PDF
+244|Postavi PdfEditor kao zadanu aplikaciju za PDF…
+245|Omogući pretraživanje skenova
+246|Izradi PDF
+247|Smanji datoteku
+248|Izrada slika…
+249|Izrada PDF-a…
+250|Margina
+251|Označi za zacrnjenje
+252|Označena područja ne uklanjaju se dok ne primijeniš zacrnjenje.
+253|Označavanje…
+254|Srednja
+255|Spoji
+256|Spoji PDF-ove
+257|Spajanje zaustavljeno: „{0}” je zaštićen.
+258|Spoji ih u jedan PDF
+259|Spajanje…
+260|Više
+261|Premjesti
+262|Pomakni dolje
+263|Premjesti unutar gornje
+264|Pomakni lijevo
+265|Pomakni razinu van
+266|Premjesti stranice
+267|Pomakni desno
+268|Pomakni gore
+269|Premjesti, okreni, izbriši
+270|Premještanje…
+271|Naziv
+272|Nova oznaka
+273|Novi žig
+274|Novi žig…
+275|Novo: {0}
+276|Dalje
+277|Sljedeća razlika
+278|Sljedeća stranica
+279|Sljedeći rezultat
+280|Sljedeća kartica (Shift: prethodna)
+281|Noć
+282|Noćni način
+283|Noćni način isključen.
+284|Noćni način uključen.
+285|Još nema oznaka. Idi na stranicu i pritisni
+286|Ovdje nema komentara.
+287|Nema razlika u tekstu.
+288|U ovoj verziji nema stranice {0}
+289|Nijednoj stranici nije trebao OCR (već imaju tekst).
+290|Nema stranica za štampu.
+291|Bez gubitka kvalitete
+292|Nema prostora za zapisivanje datoteke.
+293|Ovdje nema teksta. Za slike koristi Crtaj ili oblik.
+294|Ništa
+295|Nije odobreno
+296|Nije pronađeno.
+297|Bilješka
+298|Ništa nije označeno. Najprije označi područja alatom Zacrni.
+299|Nema se što razdvojiti.
+300|Koje stranice numerisati
+301|Numerisanje…
+302|Isključeno: otvaranje PDF-a zatvara onaj koji čitaš.
+303|Office u PDF
+304|Jedna stranica / dvije stranice jedna pored druge
+305|Jedna stranica odjednom.
+306|Jedan po stranici
+307|Jedan slajd po stranici
+308|Prečice na tastaturi od jednog slova (H, P, N…)
+309|Čisti se samo spisak. Tvoje datoteke ostaju gdje jesu.
+310|Neprozirnost
+311|Otvori
+312|Otvaraj PDF-ove u noćnom načinu
+313|Otvaraj PDF-ove s dvije stranice jednu pored druge
+314|Otvori PDF
+315|Otvori drugi PDF (Ctrl+T)
+316|Otvoreni dokumenti
+317|Otvori svaki u vlastitoj kartici
+318|Otvori u novoj kartici
+319|Otvori u kartici
+320|Otvori
+321|Otvoriti link?
+322|Otvori sada
+323|Otvaraj više PDF-ova u karticama
+324|Otvori prvi
+325|Otvori datoteku zapisnika
+326|Otvori u PdfEditoru
+327|Otvori drugom aplikacijom
+328|Otvori, spoji ili dodaj u otvoreni PDF
+329|Otvaranje…
+330|Optimizuj i zaštiti
+331|Organizuj
+332|Organizuj stranice
+333|Greška PDF mehanizma: {0}
+334|PDF u Excel
+335|PDF u PowerPoint
+336|PDF u Word
+337|PDF u Word, Excel, PowerPoint, slike, tekst
+338|PDF u slike
+339|PDF bez lozinke
+340|PDF, slike ili Office datoteke
+341|Stranica
+342|Stranica (1–{0})
+343|Stranica 1
+344|Stranica 1 od 10
+345|Brojevi stranica
+346|Veličina stranice
+347|Veličina stranice: {0} × {1} mm
+348|Veličina stranice: {0} × {1} mm{2}
+349|Stranica {0}
+350|Stranica {0}\n{1}
+351|Stranica {0} od {1}
+352|Stranica {0} od {1} ·
+353|Stranica {0}{1}
+354|Stranice
+355|Stranice dodane.
+356|Prikaz stranica (organizovanje)
+357|Lozinka
+358|Potrebna je lozinka
+359|PdfEditor se zatvorio prije nego što su ove promjene sačuvane.
+360|PdfEditor čuva kopiju zadnjih 8 otvorenih PDF-ova da se ponovo otvore jednim dodirom. Čuvanje ažurira kopiju.
+362|PdfEditor {0}{1}
+363|Olovka i oblici
+364|Po listu
+365|Fotografije
+366|Fotografije u PDF
+367|Slika {0} od {1}
+368|Slike dobre kvalitete, tekst netaknut
+369|Slike ili skenovi
+370|Usmjeri na ovu stranicu ({0})
+371|Položaj
+372|Priprema OCR-a…
+373|Priprema stranica…
+374|Priprema…
+375|Prethodna stranica
+376|Prethodni rezultat
+377|Štampaj
+378|Štampanje nije počelo.
+379|Štampaj…
+380|Svojstva
+381|Zaštiti
+382|Zaštiti lozinkom
+383|Zaštićeni PDF (AES-256)
+384|Kvaliteta
+385|Raspon
+386|Rasponi
+387|Čitaj naglas
+388|Čitanje
+389|Način čitanja
+390|Čitanje stranice {0} od {1}…
+391|Čitanje: {0}
+392|Brzina čitanja naglas
+393|Spremno
+394|Spremno za štampu
+395|Nedavno
+396|Nedavne datoteke na početnom ekranu
+397|Prepoznaj tekst
+398|Prepoznaj tekst (OCR)
+399|Preporučeno
+400|Oporaviti nespremljeni rad?
+401|Oporavljeno. Sačuvaj da zadržiš promjene.
+402|Pravokutnik
+403|Zacrni
+404|Oznaka zacrnjenja
+405|Ponovi
+406|Zapamti na ovom telefonu
+407|Ukloni metapodatke
+408|Ukloni lozinku
+409|Uklonjeno iz menija desnog klika.
+410|Uklonjeno.
+411|Uklanja metapodatke, skraćuje fontove, bolje sažima datoteku. Stranice izgledaju potpuno isto.
+412|Uklanjanje sadržaja…
+413|Uklanjanje lozinke…
+414|Preimenuj
+415|Preimenuj oznaku
+416|Ponovo otvori svaki PDF gdje si stao
+417|Ponovi
+418|Ponavljaj preko stranice
+419|Okreni
+420|Okreni ulijevo
+421|Okreni udesno
+422|Okretanje…
+423|Sačuvaj
+424|Sačuvaj (Shift: sačuvaj kao)
+425|Sačuvaj kao…
+426|Sačuvati promjene u „{0}”?
+427|Sačuvaj zapisnik
+428|Sačuvaj na telefon
+429|Sačuvano
+430|Sačuvano.
+431|Čuvanje
+432|Čuvanje oznaka…
+433|Čuvanje…
+434|Skenirane stranice dobivaju nevidljiv sloj teksta: tada možeš tražiti, označavati i kopirati tekst.
+435|Traži
+436|Dugme Traži, Ctrl+F
+437|Pogledaj sve prečice
+438|Označi
+439|Označi sve
+440|Označi komentare
+441|Poništi odabir
+442|Označeni tekst
+443|Odabir
+444|Postavke
+445|Više stranica po listu štedi papir (2 = jedna pored druge, 4 = dvije puta dvije).
+446|Podijeli
+447|Listovi
+448|Prikaži malu sličicu u Nedavnima
+449|Potpis
+450|Potpis {0}{1}
+451|Potpisivanje…
+452|Veličina
+453|Slajd
+454|Slajd {0}
+455|Malo
+456|Manje slike, i dalje čitljive
+457|Najmanje
+458|Nešto je pošlo po zlu
+459|Brzina
+460|Razdvoji
+461|Razdvajanje…
+462|Valovito
+463|Žig
+464|Početak
+465|Počni od
+466|Još tražim…
+467|Zaustavi alat, zatvori pretraživanje
+468|Zaustavljeno.
+469|Zaustavljanje…
+470|Precrtaj
+471|Jaka
+472|Precrtano
+473|Predmet
+474|Prebaci između svijetlog i tamnog
+475|Isključi ono što ne koristiš: njegovi dugmad, stavke menija i prečice nestaju.
+476|Sistem
+477|Tablice se ponovo grade prema položaju teksta.
+478|Tablice kao .xlsx
+479|Dodirni plavo polje da ga ispuniš.
+480|Dodirni komentar da ga izbrišeš.
+481|Dodirni komentar da ga urediš, premjestiš ili izbrišeš.
+482|Dodirni odlomak da ga promijeniš.
+483|Dodirni odlomak.
+484|Dodirni da staviš kvačicu.
+485|Dodirni da staviš krstić.
+486|Dodirni da staviš tačku.
+487|Dodirni gdje ide datum.
+488|Dodirni gdje ide bilješka.
+489|Dodirni gdje ide slika.
+490|Dodirni gdje ide žig.
+491|Dodirni gdje ide tekstni okvir.
+492|Dodirni gdje ide tekst.
+493|Dodirni gdje staviti inicijale.
+494|Dodirni gdje potpisati.
+495|Dodirni gdje pisati.
+496|Tekst
+497|Tekstni okvir
+498|Samo tekst, veća slova
+499|Tekst preko svake stranice
+500|Tekst prepoznat na stranica: {0}. Sačuvaj da ga zadržiš.
+501|Čitanje naglas nije dostupno na ovom telefonu.
+502|Čitanje naglas nije dostupno.
+503|Taj PDF ne može se ovdje otvoriti.
+504|Te kopije više nema. Ponovo otvori datoteku.
+505|PDF mehanizam se nije pokrenuo.
+506|Brišu se i kopije koje je PdfEditor čuvao. Tvoje datoteke ostaju gdje jesu.
+507|Odlomak se ponovo piše standardnim fontom.
+508|Lozinke se razlikuju.
+509|U ovom PDF-u nema isticanja ni bilješki.
+510|Ovdje se nema puno za dobiti ({0}). {1}
+511|Ovaj PDF nema lozinku za uklanjanje.
+512|Ovaj PDF nema sadržaj.
+513|Ovaj PDF je već najmanji što može biti.
+514|Ovaj komentar više ne postoji.
+515|Ovaj dokument ima polja za ispunjavanje.
+516|Ovo polje
+517|Ovaj spisak
+518|Ovaj ({0})
+519|Ova stranica
+520|Odbaci ih
+521|Naslov
+522|U Excel
+523|U PowerPoint
+524|U Word
+525|U slike
+526|U tekst
+527|Alati
+528|Strogo povjerljivo
+529|Gore u sredini
+530|Gore lijevo
+531|Gore desno
+532|Skrati fontove
+533|Pokušaj „Preporučeno” ako datoteka ima fotografije ili „Najmanje” za skenove.
+534|Pokušaj „Najmanje” ako je datoteka sken.
+535|Dvije stranice
+536|Dvije stranice jedna pored druge
+537|Dvije stranice jedna pored druge.
+538|Podcrtaj
+539|Podcrtano
+540|Poništi
+541|Poništi / ponovi
+542|Otključaj
+543|Dostupno ažuriranje
+544|Koristi
+545|Koristi ga svaka opcija Komprimuj.
+546|Prikaz
+547|Vodeni žig
+548|Dodaj vodeni žig na stranice
+549|Koje
+550|Koje stranice
+551|Word
+552|Word, Excel, PowerPoint, tekst
+553|Dodane riječi označene su zeleno, uklonjene crveno.
+554|U toku…
+555|Radi bez interneta. Tvoje datoteke nikad ne napuštaju ovaj računar.
+556|Napiši bilješku
+557|Napiši stranice ovako: 1-3, 5.
+558|Pogrešna lozinka, pokušaj ponovo.
+559|Najprije možeš promijeniti redoslijed
+560|Imaš verziju {0}. Otvori preuzetu datoteku da je instaliraš.
+561|Tvoje datoteke nikad ne napuštaju ovaj uređaj.
+562|Tvoje datoteke nikad ne napuštaju ovaj telefon.
+563|Tvoj vlastiti tekst, sačuvan za sljedeći put
+564|Tvoji sačuvani potpisi
+565|Tvoji sačuvani žigovi
+566|Tvoj žig
+567|Povećaj
+568|Povećaj / smanji / prilagodi
+569|Smanji
+570|npr. 1-3, 5
+571|npr. 1-3, 7, 10-
+572|npr. 1-3; 4-6; 7-
+573|npr. Provjerio Gabriele
+574|traženje razlika…
+575|nema razlika u tekstu
+576|str. · {0} · {1} · Šifrovanje:
+577|da ga označiš.
+578|{0}\nIsticanja i bilješke, izvezeno {1}\n\n{2}
+579|{0} - bilješke.txt
+580|{0} Dodaj datoteke
+581|PDF-ova: {0}
+582|Trajno uklonjenih područja: {0}. Sačuvaj da zadržiš promjenu.
+583|{0} datoteka spremna
+584|Datoteka: {0}
+585|{0} je obavezno.
+586|Stranica: {0} · {1} · {2} · Šifrovanje: {3}
+587|Stranica: {0}
+588|Stranica kopirano na kraj „{1}”: {0}.
+589|Stranica s razlikama: {0}
+590|Izabrano: {0}
+591|{0} → {1} (−{2}%). Sačuvaj dokument da zadržiš manju datoteku.
+592|· dodano {0}
+593|· uklonjeno {0}
+594|„Otvori u PdfEditoru” u meniju desnog klika
+595|„{0}” je zaštićen.

@@ -1,7 +1,7 @@
 {
   "name": "pdfeditor",
   "productName": "PdfEditor",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "PdfEditor: everything for PDFs, offline.",
   "main": "main.js",
   "author": "Gabrydl",

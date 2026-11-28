@@ -1,0 +1,594 @@
+1|(walang lamang presentation)
+2|(walang text sa pahinang ito – subukan ang OCR)
+3|(walang text)
+4|Kinopya ang 1 pahina sa dulo ng “{0}”.
+5|1 pahina na may pagkakaiba
+6|Kailangang may hindi bababa sa isang pahina ang PDF.
+7|Idagdag
+8|Magdagdag ng password
+9|Magdagdag ng kahit isang file.
+10|Magdagdag ng mga file
+11|Magdagdag ng larawan
+12|Magdagdag o mag-alis ng password
+13|Magdagdag ng larawan
+14|Magdagdag ng text
+15|Idagdag sa dulo ng “{0}”
+16|Magdagdag, magpalit ng pangalan at maglipat ng bookmark
+17|Naidagdag sa dulo.
+18|Naidagdag sa right-click menu.
+19|Nagdadagdag ng pahina…
+20|Nagdadagdag ng watermark…
+21|Nagdadagdag…
+22|Lahat
+23|Lahat ng file
+24|Lahat sa isa
+25|Lahat ng pahina
+26|Lahat ng {0}
+27|Payagan ang mga pagbabago at komento
+28|Payagan ang pagkopya ng text
+29|Payagan ang pag-print
+30|Maliit na
+31|Isinasama rin ang PdfEditor sa mga app para sa PDF.
+32|Pati ang mga pahinang may text na
+33|Anggulo
+34|Mag-annotate
+35|Ibang file…
+36|Hitsura
+37|Ilapat ngayon
+38|Ilapat ang redaction
+39|Ilapat ang mga redaction
+40|Aprubado
+41|Arrow
+42|Bilang text file
+43|Sa dulo
+44|May-akda
+45|Bumalik
+46|Bumalik sa iniwan mo: pahina {0}.
+47|Takpan ang pribadong data
+48|Blangkong pahina
+49|Bold
+50|Mga bookmark
+51|Panel ng bookmark
+52|Pareho
+53|Ibaba sa gitna
+54|Ibaba sa kaliwa
+55|Ibaba sa kanan
+56|Ayon sa range ng pahina o bawat N pahina
+57|Ayon sa range
+58|Kanselahin
+59|Kinansela
+60|Palitan ang kulay
+61|Baguhin ang text, magdagdag ng text at larawan
+62|Naitago ang mga pagbabago {0}
+63|Binabago…
+64|Tsek
+65|Pumili
+66|Pumili ng file mula sa device na ito
+67|Mga napiling pahina, ilan sa bawat sheet
+68|I-clear
+69|I-clear ang Kamakailan?
+70|Isara
+71|Isara (Ctrl+W)
+72|Isara ang dokumento
+73|Isara ang paghahanap
+74|Isara ang tab
+75|Kinokolekta ang mga highlight at tala…
+76|Kulay
+77|Kulay at linya
+78|Kulay
+79|Mga tuldok na kulay habang nagha-highlight o gumuguhit
+80|Komento
+81|Komento: {0}
+82|Magiging bahagi ng pahina ang mga komento at form field at hindi na mababago.
+83|Ikumpara
+84|Ikumpara ang dalawang bersyon
+85|Ikumpara ang “{0}” sa…
+86|I-compress
+87|I-compress: alisin ang metadata
+88|I-compress: paikliin ang mga font sa mga letrang ginamit
+89|Naka-compress
+90|Kino-compress…
+91|Kumpidensyal
+92|Nilalaman
+93|I-convert
+94|Kino-convert sa {0}…
+95|Kino-convert ang {0}…
+96|Nakopya.
+97|Kopyahin
+98|Kopyahin ang mga pahina sa ibang bukas na PDF
+99|Kopyahin ang text
+100|Kopyahin ang mga pahina sa…
+101|Kopyahin sa tab
+102|Kinokopya ang mga pahina…
+103|Hindi ma-load ang {0}
+104|Hindi ma-overwrite ang file. Piliin kung saan ito ise-save.
+105|Hindi mabasa ang {0}
+106|Hindi na-save
+107|Hindi maisulat ang file.
+108|Hindi naidagdag.
+109|I-crop
+110|Kino-crop…
+111|Ekis
+112|Madilim
+113|Madidilim na pahina para sa pagbabasa
+114|Madidilim na pahina, maliwanag na text. Magpalit kahit kailan gamit ang Ctrl+Shift+N.
+115|Petsa
+116|Burahin ang isa sa mga stamp mo
+117|Burahin ang pahina
+118|Burahin ang mga pahina
+119|Burahin ang naka-save
+120|Alin ang buburahin?
+121|Aling stamp ang buburahin?
+122|Burahin ang {0}?
+123|Nabura.
+124|Binubura…
+125|Panloob
+126|Isara
+127|Dokumento
+128|Hindi bukas ang dokumento.
+129|Huwag i-save
+130|Tapos na
+131|Tuldok
+132|I-download ang bersyon {0}
+133|Draft
+134|I-drag sa ibabaw ng text para piliin ito.
+135|I-drag sa ibabaw ng text.
+136|I-drag sa ibabaw ng dapat mawala.
+137|I-drag ang mga pahina para ayusin ang pagkakasunod
+138|I-drag ang bahaging itatago.
+139|I-drag ang asul na kahon
+140|I-drag ang asul na kahon para ilipat ito.
+141|I-drag para gumuhit ng linya.
+142|I-drag para gumuhit ng parihaba.
+143|I-drag para gumuhit ng arrow.
+144|I-drag para gumuhit ng ellipse.
+145|Gumuhit
+146|Gumuhit (pen)
+147|Gumuhit muna.
+148|Gumuhit gamit ang daliri. I-tap ulit ang Gumuhit para mag-scroll.
+149|Iguhit ang iyong initials
+150|Iguhit ang iyong pirma
+151|Guhit
+152|Gumuguhit…
+153|I-drop dito ang file, o i-click para mag-browse
+154|I-drop dito ang file, o i-click para pumili
+155|I-drop ang mga file sa window
+156|I-drop para buksan
+157|Naka-off ang pag-drop ng file sa Settings › Features.
+158|I-duplicate
+159|I-duplicate ang mga pahina
+160|Dinu-duplicate…
+161|I-edit
+162|I-edit ang PDF
+163|I-edit at pirmahan
+164|I-edit ang komento
+165|I-edit ang tala
+166|I-edit ang text
+167|.docx na nae-edit
+168|Pag-edit
+169|Ellipse
+170|Ine-encrypt…
+171|English
+172|Pambura
+173|Bawat
+174|Bawat N pahina
+175|Nagiging larawan ang bawat pahina (hindi na mapipili ang text)
+176|Lahat para sa PDF, offline.
+177|Excel
+178|Expired
+179|I-export ang mga highlight at tala
+180|I-export ang mga tala
+181|I-extract
+182|I-extract ang mga pahina
+183|Mga na-extract na pahina
+184|Ine-extract…
+185|Mga feature
+186|Field
+187|Punan at Pirmahan
+188|Punan at pirmahan
+189|Punan ang form
+190|Punan
+191|Pinal
+192|Hanapin
+193|Hanapin sa dokumento
+194|Tapos na ang pagbabasa.
+195|I-fit ang larawan
+196|I-fit sa lapad
+197|I-flatten
+198|Fina-flatten…
+199|Sundin ang setting ng device
+200|Para sa Komento
+201|Para sa Publiko
+202|Format
+203|Mga form, pirma, initials
+204|Pangkalahatan
+205|Pumunta
+206|Pumunta sa pahina
+207|Mataas
+208|I-highlight
+209|Mag-highlight, gumuhit, mga tala
+210|Mga highlight at tala
+211|Nananatili ang mga highlight sa kanilang text.
+212|Kapag huminto ang PdfEditor o ang computer, iaalok sa iyo pabalik ang trabaho mo sa susunod.
+213|Handa na ang mga larawan
+214|Sa Windows Settings, piliin ang PdfEditor para sa mga .pdf file.
+215|Sa view na Pahina, at sa isang tab para kopyahin ang mga ito
+216|Initials
+217|Initials {0}{1}
+218|Magsingit ng file
+219|Magsingit ng pahina
+220|Magsingit ng mga pahina
+221|Isinisingit ang {0}…
+222|Sa mas maliliit na PDF
+223|Tumuturo ito sa pahina {0}.
+224|Italian
+225|JPG o PNG
+226|Pagsamahin ang ilang file
+227|Magtago ng recovery copy ng mga hindi na-save na pagbabago
+228|Mga keyboard shortcut
+229|Mga keyword
+230|Wika
+231|Malaki
+232|Mamaya
+233|Letter
+234|Gumagana ang mga letra kapag may bukas na PDF at hindi ka nagta-type. Puwede itong i-off sa Settings.
+235|Maliwanag
+236|Maliwanag / madilim
+237|Linya
+238|Kapal ng linya
+239|Pakinggan ang PDF
+240|Na-save ang log: {0}
+241|Mababa
+242|Ginawa gamit ang:
+243|Gumawa ng PDF
+244|Gawing default na PDF app ang PdfEditor…
+245|Gawing mahahanap ang mga scan
+246|Gawin ang PDF
+247|Paliitin ang file
+248|Gumagawa ng mga larawan…
+249|Ginagawa ang PDF…
+250|Margin
+251|Markahan para i-redact
+252|Hindi inaalis ang mga minarkahang bahagi hangga't hindi mo inilalapat ang redaction.
+253|Nagmamarka…
+254|Katamtaman
+255|Pagsamahin
+256|Pagsamahin ang mga PDF
+257|Huminto ang pagsasama: protektado ang “{0}”.
+258|Pagsamahin sila sa isang PDF
+259|Pinagsasama…
+260|Iba pa
+261|Ilipat
+262|Ibaba
+263|Ilipat sa loob ng nasa itaas
+264|Ilipat pakaliwa
+265|Ilabas ng isang level
+266|Ilipat ang mga pahina
+267|Ilipat pakanan
+268|Itaas
+269|Ilipat, i-rotate, burahin
+270|Inililipat…
+271|Pangalan
+272|Bagong bookmark
+273|Bagong stamp
+274|Bagong stamp…
+275|Bagong {0}
+276|Susunod
+277|Susunod na pagkakaiba
+278|Susunod na pahina
+279|Susunod na resulta
+280|Susunod na tab (Shift: nakaraan)
+281|Gabi
+282|Mode sa gabi
+283|Naka-off ang night mode.
+284|Naka-on ang night mode.
+285|Wala pang bookmark. Pumunta sa isang pahina at pindutin ang
+286|Walang komento dito.
+287|Walang pagkakaiba sa text.
+288|Walang pahina {0} sa bersyong ito
+289|Walang pahinang nangailangan ng OCR (may text na sila).
+290|Walang pahinang ipi-print.
+291|Walang nawawalang kalidad
+292|Walang espasyo para isulat ang file.
+293|Walang text dito. Para sa larawan, gamitin ang Gumuhit o isang hugis.
+294|Wala
+295|Hindi Aprubado
+296|Hindi nahanap.
+297|Tala
+298|Walang minarkahan. Gamitin muna ang Redact para markahan ang mga bahagi.
+299|Walang hahatiin.
+300|Aling mga pahina ang lalagyan ng numero
+301|Nilalagyan ng numero…
+302|Off: isinasara ng pagbukas ng PDF ang binabasa mo.
+303|Office papuntang PDF
+304|Isang pahina / dalawang pahina nang magkatabi
+305|Isang pahina bawat beses.
+306|Isa bawat pahina
+307|Isang slide bawat pahina
+308|Isang-letrang keyboard shortcut (H, P, N…)
+309|Ang listahan lang ang nali-clear. Nananatili ang mga file mo kung nasaan sila.
+310|Opacity
+311|Buksan
+312|Buksan ang mga PDF sa night mode
+313|Buksan ang mga PDF na may dalawang pahinang magkatabi
+314|Magbukas ng PDF
+315|Magbukas ng ibang PDF (Ctrl+T)
+316|Mga bukas na dokumento
+317|Buksan ang bawat isa sa sariling tab
+318|Buksan sa bagong tab
+319|Buksan sa isang tab
+320|Buksan ito
+321|Buksan ang link?
+322|Buksan ngayon
+323|Magbukas ng ilang PDF sa mga tab
+324|Buksan ang una
+325|Buksan ang log file
+326|Buksan gamit ang PdfEditor
+327|Buksan gamit ang ibang app
+328|Buksan, pagsamahin o idagdag sila sa bukas na PDF
+329|Binubuksan…
+330|I-optimize at protektahan
+331|Ayusin
+332|Ayusin ang mga pahina
+333|Error ng PDF engine: {0}
+334|PDF papuntang Excel
+335|PDF papuntang PowerPoint
+336|PDF papuntang Word
+337|PDF papuntang Word, Excel, PowerPoint, larawan, text
+338|PDF papuntang larawan
+339|PDF na walang password
+340|PDF, larawan o Office file
+341|Pahina
+342|Pahina (1–{0})
+343|Pahina 1
+344|Pahina 1 ng 10
+345|Mga numero ng pahina
+346|Laki ng pahina
+347|Laki ng pahina: {0} × {1} mm
+348|Laki ng pahina: {0} × {1} mm{2}
+349|Pahina {0}
+350|Pahina {0}\n{1}
+351|Pahina {0} ng {1}
+352|Pahina {0} ng {1} ·
+353|Pahina {0}{1}
+354|Mga pahina
+355|Naidagdag ang mga pahina.
+356|View na Pahina (ayusin)
+357|Password
+358|Kailangan ng password
+359|Nagsara ang PdfEditor bago na-save ang mga pagbabagong ito.
+360|Nagtatago ang PdfEditor ng kopya ng huling 8 PDF na binuksan mo, para mabuksan ulit sa isang tap. Ina-update ng pag-save ang kopya.
+362|PdfEditor {0}{1}
+363|Pen at mga hugis
+364|Bawat sheet
+365|Mga larawan
+366|Mga larawan papuntang PDF
+367|Larawan {0} ng {1}
+368|Magandang kalidad ng larawan, hindi ginalaw ang text
+369|Mga larawan o scan
+370|Ituro sa pahinang ito ({0})
+371|Posisyon
+372|Inihahanda ang OCR…
+373|Inihahanda ang mga pahina…
+374|Naghahanda…
+375|Nakaraang pahina
+376|Nakaraang resulta
+377|I-print
+378|Hindi nagsimula ang pag-print.
+379|I-print…
+380|Mga katangian
+381|Protektahan
+382|Protektahan gamit ang password
+383|Protektadong PDF (AES-256)
+384|Kalidad
+385|Range
+386|Mga range
+387|Basahin nang malakas
+388|Pagbabasa
+389|Mode sa pagbasa
+390|Binabasa ang pahina {0} ng {1}…
+391|Binabasa ang {0}
+392|Bilis ng pagbasa nang malakas
+393|Handa na
+394|Handa nang i-print
+395|Kamakailan
+396|Mga kamakailang file sa home screen
+397|Kilalanin ang text
+398|Kilalanin ang text (OCR)
+399|Inirerekomenda
+400|Ibalik ang hindi na-save na trabaho?
+401|Naibalik. I-save ito para itago ang mga pagbabago.
+402|Parihaba
+403|I-redact
+404|Marka ng redaction
+405|Ulitin
+406|Tandaan sa phone na ito
+407|Alisin ang metadata
+408|Alisin ang password
+409|Inalis sa right-click menu.
+410|Inalis.
+411|Inaalis ang metadata, pinaiikli ang mga font, mas sinisiksik ang file. Eksaktong pareho ang hitsura ng mga pahina.
+412|Inaalis ang nilalaman…
+413|Inaalis ang password…
+414|Palitan ang pangalan
+415|Palitan ang pangalan ng bookmark
+416|Buksan ulit ang bawat PDF kung saan mo iniwan
+417|Ulitin
+418|Ulitin sa buong pahina
+419|I-rotate
+420|I-rotate pakaliwa
+421|I-rotate pakanan
+422|Nire-rotate…
+423|I-save
+424|I-save (Shift: i-save bilang)
+425|I-save bilang…
+426|I-save ang mga pagbabago sa “{0}”?
+427|I-save ang log
+428|I-save sa phone
+429|Na-save
+430|Na-save.
+431|Sine-save
+432|Sine-save ang mga bookmark…
+433|Sine-save…
+434|Nagkakaroon ang mga na-scan na pahina ng di-nakikitang layer ng text: saka mo mahahanap, mapipili at makokopya ang text.
+435|Hanapin
+436|Button na Hanapin, Ctrl+F
+437|Tingnan ang lahat ng shortcut
+438|Piliin
+439|Piliin lahat
+440|Piliin ang mga komento
+441|Walang pipiliin
+442|Napiling text
+443|Pinili
+444|Settings
+445|Nakakatipid ng papel ang ilang pahina bawat sheet (2 = magkatabi, 4 = dalawa sa dalawa).
+446|Ibahagi
+447|Mga sheet
+448|Magpakita ng maliit na larawan sa Kamakailan
+449|Pirma
+450|Pirma {0}{1}
+451|Pumipirma…
+452|Laki
+453|Slide
+454|Slide {0}
+455|Maliit
+456|Mas maliliit na larawan, nababasa pa rin
+457|Pinakamaliit
+458|May nagkamali
+459|Bilis
+460|Hatiin
+461|Hinahati…
+462|Kulot
+463|Stamp
+464|Simula
+465|Magsimula sa
+466|Naghahanap pa…
+467|Ihinto ang tool, isara ang paghahanap
+468|Inihinto.
+469|Inihihinto…
+470|Guhitan
+471|Malakas
+472|Ginuhitan
+473|Paksa
+474|Magpalit sa maliwanag at madilim
+475|I-off ang hindi mo ginagamit: mawawala ang mga button, menu entry at shortcut nito.
+476|System
+477|Binubuo ulit ang mga table mula sa posisyon ng text.
+478|Mga table bilang .xlsx
+479|I-tap ang asul na field para punan ito.
+480|I-tap ang komento para burahin ito.
+481|I-tap ang komento para i-edit, ilipat o burahin ito.
+482|I-tap ang talata para baguhin ito.
+483|I-tap ang isang talata.
+484|I-tap para maglagay ng tsek.
+485|I-tap para maglagay ng ekis.
+486|I-tap para maglagay ng tuldok.
+487|I-tap kung saan ilalagay ang petsa.
+488|I-tap kung saan ilalagay ang tala.
+489|I-tap kung saan ilalagay ang larawan.
+490|I-tap kung saan ilalagay ang stamp.
+491|I-tap kung saan ilalagay ang text box.
+492|I-tap kung saan ilalagay ang text.
+493|I-tap kung saan ilalagay ang initials mo.
+494|I-tap kung saan pipirma.
+495|I-tap kung saan magsusulat.
+496|Text
+497|Kahon ng text
+498|Text lang, mas malalaking letra
+499|Text sa ibabaw ng bawat pahina
+500|Nakilala ang text sa {0} pahina. I-save para itago ito.
+501|Hindi available ang text-to-speech sa phone na ito.
+502|Hindi available ang text-to-speech.
+503|Hindi mabubuksan dito ang PDF na iyon.
+504|Wala na ang kopyang iyon. Buksan ulit ang file.
+505|Hindi nagsimula ang PDF engine.
+506|Binubura rin ang mga kopyang itinago ng PdfEditor. Nananatili ang mga file mo kung nasaan sila.
+507|Isinusulat ulit ang talata gamit ang standard na font.
+508|Magkaiba ang mga password.
+509|Walang highlight o tala sa PDF na ito.
+510|Hindi gaanong may mapapakinabangan dito ({0}). {1}
+511|Walang password na aalisin sa PDF na ito.
+512|Walang table of contents ang PDF na ito.
+513|Pinakamaliit na ang PDF na ito.
+514|Wala na ang komentong ito.
+515|May mga field na pupunan ang dokumentong ito.
+516|Ang field na ito
+517|Ang listahang ito
+518|Ito ({0})
+519|Ang pahinang ito
+520|Itapon sila
+521|Pamagat
+522|Papuntang Excel
+523|Papuntang PowerPoint
+524|Papuntang Word
+525|Papuntang larawan
+526|Papuntang text
+527|Mga tool
+528|Lubhang lihim
+529|Itaas sa gitna
+530|Itaas sa kaliwa
+531|Itaas sa kanan
+532|Paikliin ang mga font
+533|Subukan ang “Inirerekomenda” kung may larawan ang file, o “Pinakamaliit” para sa mga scan.
+534|Subukan ang “Pinakamaliit” kung scan ang file.
+535|Dalawang pahina
+536|Dalawang pahinang magkatabi
+537|Dalawang pahinang magkatabi.
+538|Salungguhitan
+539|May salungguhit
+540|I-undo
+541|I-undo / ulitin
+542|I-unlock
+543|May update
+544|Gamitin
+545|Ginagamit ng bawat opsyon ng Compress.
+546|View
+547|Watermark
+548|Lagyan ng watermark ang mga pahina
+549|Alin
+550|Aling mga pahina
+551|Word
+552|Word, Excel, PowerPoint, text
+553|Berde ang marka ng mga idinagdag na salita, pula ang mga inalis.
+554|Ginagawa…
+555|Gumagana offline. Hindi kailanman umaalis sa computer na ito ang mga file mo.
+556|Magsulat ng tala
+557|Isulat ang mga pahina nang ganito: 1-3, 5.
+558|Maling password, subukan ulit.
+559|Puwede mo munang baguhin ang pagkakasunod
+560|Mayroon kang {0}. Buksan ang na-download na file para i-install ito.
+561|Hindi kailanman umaalis sa device na ito ang mga file mo.
+562|Hindi kailanman umaalis sa phone na ito ang mga file mo.
+563|Sarili mong text, naka-save para sa susunod
+564|Mga naka-save mong pirma
+565|Mga naka-save mong stamp
+566|Ang stamp mo
+567|Mag-zoom in
+568|Mag-zoom in / out / i-fit
+569|Mag-zoom out
+570|hal. 1-3, 5
+571|hal. 1-3, 7, 10-
+572|hal. 1-3; 4-6; 7-
+573|hal. Sinuri ni Gabriele
+574|naghahanap ng pagkakaiba…
+575|walang pagkakaiba sa text
+576|pahina · {0} · {1} · Encryption:
+577|para markahan ito.
+578|{0}\nMga highlight at tala, na-export noong {1}\n\n{2}
+579|{0} - mga tala.txt
+580|{0} Magdagdag ng mga file
+581|{0} PDF
+582|{0} bahagi ang permanenteng inalis. I-save para itago ang pagbabago.
+583|{0} file handa na
+584|{0} file
+585|Kailangan ang {0}.
+586|{0} pahina · {1} · {2} · Encryption: {3}
+587|{0} pahina
+588|Kinopya ang {0} pahina sa dulo ng “{1}”.
+589|{0} pahina na may pagkakaiba
+590|{0} napili
+591|{0} → {1} (−{2}%). I-save ang dokumento para itago ang mas maliit na file.
+592|· {0} idinagdag
+593|· {0} inalis
+594|“Buksan gamit ang PdfEditor” sa right-click menu
+595|Protektado ang “{0}”.

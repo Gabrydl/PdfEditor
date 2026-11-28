@@ -1,0 +1,594 @@
+1|(tühi esitlus)
+2|(sellel leheküljel pole teksti – proovi tekstituvastust)
+3|(teksti pole)
+4|1 lehekülg kopeeriti faili „{0}” lõppu.
+5|1 lehekülg erinevustega
+6|PDF-is peab jääma vähemalt üks lehekülg.
+7|Lisa
+8|Lisa parool
+9|Lisa vähemalt üks fail.
+10|Lisa failid
+11|Lisa pilt
+12|Lisa või eemalda parool
+13|Lisa pilt
+14|Lisa tekst
+15|Lisa faili „{0}” lõppu
+16|Lisa, nimeta ümber ja teisalda järjehoidjaid
+17|Lisatud lõppu.
+18|Lisatud paremklõpsu menüüsse.
+19|Lehekülje lisamine…
+20|Vesimärgi lisamine…
+21|Lisamine…
+22|Kõik
+23|Kõik failid
+24|Kõik ühes
+25|Kõik leheküljed
+26|Kõik {0}
+27|Luba muudatused ja kommentaarid
+28|Luba teksti kopeerimine
+29|Luba printimine
+30|Juba väike
+31|Lisab PdfEditori ka PDF-rakenduste hulka.
+32|Ka leheküljed, kus on juba tekst
+33|Nurk
+34|Märkused
+35|Muu fail…
+36|Välimus
+37|Rakenda kohe
+38|Rakenda varjamine
+39|Rakenda varjamised
+40|Kinnitatud
+41|Nool
+42|Tekstifailina
+43|Lõppu
+44|Autor
+45|Tagasi
+46|Seal, kus pooleli jäid: lehekülg {0}.
+47|Varja privaatsed andmed
+48|Tühi lehekülg
+49|Paks kiri
+50|Järjehoidjad
+51|Järjehoidjate paneel
+52|Mõlemad
+53|All keskel
+54|All vasakul
+55|All paremal
+56|Lehekülgede vahemike järgi või iga N lehekülje järel
+57|Vahemike järgi
+58|Tühista
+59|Tühistatud
+60|Muuda värvi
+61|Muuda teksti, lisa teksti ja pilte
+62|Muudatused säilitatud {0}
+63|Muutmine…
+64|Linnuke
+65|Vali
+66|Vali fail sellest seadmest
+67|Valitud leheküljed, mitu lehel
+68|Tühjenda
+69|Kas tühjendada hiljutised?
+70|Sulge
+71|Sulge (Ctrl+W)
+72|Sulge dokument
+73|Sulge otsing
+74|Sulge vahekaart
+75|Esiletõstude ja märkmete kogumine…
+76|Värv
+77|Värv ja joon
+78|Värv
+79|Värvitäpid esiletõstmisel või joonistamisel
+80|Kommentaar
+81|Kommentaar: {0}
+82|Kommentaarid ja vormiväljad muutuvad lehekülje osaks ja neid ei saa enam muuta.
+83|Võrdle
+84|Võrdle kahte versiooni
+85|Võrdle faili „{0}” failiga…
+86|Paki
+87|Paki: eemalda metaandmed
+88|Paki: kärbi fondid kasutatud tähtedeni
+89|Pakitud
+90|Pakkimine…
+91|Konfidentsiaalne
+92|Sisukord
+93|Teisenda
+94|Teisendamine vormingusse {0}…
+95|{0} teisendamine…
+96|Kopeeritud.
+97|Kopeeri
+98|Kopeeri leheküljed teise avatud PDF-i
+99|Kopeeri tekst
+100|Kopeeri leheküljed…
+101|Kopeeri vahekaardile
+102|Lehekülgede kopeerimine…
+103|{0} ei saanud laadida
+104|Faili ei saanud üle kirjutada. Vali, kuhu see salvestada.
+105|{0} ei saanud lugeda
+106|Salvestamine ebaõnnestus
+107|Faili ei saanud kirjutada.
+108|Ei saanud lisada.
+109|Kärbi
+110|Kärpimine…
+111|Rist
+112|Tume
+113|Tumedad leheküljed lugemiseks
+114|Tumedad leheküljed, hele tekst. Vaheta igal ajal klahvidega Ctrl+Shift+N.
+115|Kuupäev
+116|Kustuta üks oma templitest
+117|Kustuta lehekülg
+118|Kustuta leheküljed
+119|Kustuta salvestatud
+120|Millise kustutada?
+121|Millise templi kustutada?
+122|Kas kustutada {0}?
+123|Kustutatud.
+124|Kustutamine…
+125|Sisemine
+126|Sulge
+127|Dokument
+128|Dokument pole avatud.
+129|Ära salvesta
+130|Valmis
+131|Täpp
+132|Laadi alla versioon {0}
+133|Mustand
+134|Lohista üle teksti, et see valida.
+135|Lohista üle teksti.
+136|Lohista üle selle, mis peab kaduma.
+137|Lohista lehekülgi, et järjestust muuta
+138|Lohista ala, mis jääb alles.
+139|Lohista sinist kasti
+140|Lohista sinist kasti, et seda liigutada.
+141|Lohista, et joonistada joon.
+142|Lohista, et joonistada ristkülik.
+143|Lohista, et joonistada nool.
+144|Lohista, et joonistada ellips.
+145|Joonista
+146|Joonista (pliiats)
+147|Joonista enne.
+148|Joonista sõrmega. Kerimiseks puuduta uuesti Joonista.
+149|Joonista oma initsiaalid
+150|Joonista oma allkiri
+151|Joonistus
+152|Joonistamine…
+153|Lohista fail siia või klõpsa sirvimiseks
+154|Lohista fail siia või klõpsa selle valimiseks
+155|Lohista failid aknale
+156|Avamiseks lase lahti
+157|Failide lohistamine on välja lülitatud jaotises Seaded › Funktsioonid.
+158|Dubleeri
+159|Dubleeri leheküljed
+160|Dubleerimine…
+161|Muuda
+162|Muuda PDF-i
+163|Muuda ja allkirjasta
+164|Muuda kommentaari
+165|Muuda märget
+166|Muuda teksti
+167|Muudetav .docx
+168|Muutmine
+169|Ellips
+170|Krüptimine…
+171|Inglise
+172|Kustutuskumm
+173|Iga
+174|Iga N lehekülje järel
+175|Igast leheküljest saab pilt (teksti ei saa enam valida)
+176|Kõik PDF-ide jaoks, võrguühenduseta.
+177|Excel
+178|Aegunud
+179|Ekspordi esiletõstud ja märkmed
+180|Ekspordi märkmed
+181|Eralda
+182|Eralda leheküljed
+183|Eraldatud leheküljed
+184|Eraldamine…
+185|Funktsioonid
+186|Väli
+187|Täida ja allkirjasta
+188|Täida ja allkirjasta
+189|Täida vorm
+190|Täida
+191|Lõplik
+192|Otsi
+193|Otsi dokumendist
+194|Lugemine lõpetatud.
+195|Sobita pilt
+196|Sobita laiusele
+197|Lamenda
+198|Lamendamine…
+199|Järgi seadme seadet
+200|Kommenteerimiseks
+201|Avaldamiseks
+202|Vorming
+203|Vormid, allkiri, initsiaalid
+204|Üldine
+205|Mine
+206|Mine leheküljele
+207|Kõrge
+208|Tõsta esile
+209|Esiletõst, joonistamine, märkmed
+210|Esiletõstud ja märkmed
+211|Esiletõstud jäävad oma teksti peale.
+212|Kui PdfEditor või arvuti seiskub, pakutakse sulle järgmisel korral töö tagasi.
+213|Pildid valmis
+214|Vali Windowsi sätetes .pdf-failide jaoks PdfEditor.
+215|Lehekülgede vaates, ja vahekaardile nende kopeerimiseks
+216|Initsiaalid
+217|Initsiaalid {0}{1}
+218|Lisa fail
+219|Lisa lehekülg
+220|Lisa leheküljed
+221|{0} lisamine…
+222|Väiksemateks PDF-ideks
+223|See viitab leheküljele {0}.
+224|Itaalia
+225|JPG või PNG
+226|Ühenda mitu faili
+227|Hoia salvestamata muudatustest taastamiskoopiat
+228|Kiirklahvid
+229|Märksõnad
+230|Keel
+231|Suur
+232|Hiljem
+233|Letter
+234|Tähed töötavad, kui PDF on avatud ja sa ei trüki. Need saab seadetes välja lülitada.
+235|Hele
+236|Hele / tume
+237|Joon
+238|Joone paksus
+239|Kuula PDF-i
+240|Logi salvestatud: {0}
+241|Madal
+242|Loodud rakendusega:
+243|Loo PDF
+244|Tee PdfEditor PDF-i vaikerakenduseks…
+245|Muuda skaneeringud otsitavaks
+246|Loo PDF
+247|Muuda fail väiksemaks
+248|Piltide loomine…
+249|PDF-i loomine…
+250|Veeris
+251|Märgi varjamiseks
+252|Märgitud alasid ei eemaldata enne, kui rakendad varjamise.
+253|Märkimine…
+254|Keskmine
+255|Ühenda
+256|Ühenda PDF-id
+257|Ühendamine peatati: „{0}” on kaitstud.
+258|Ühenda need üheks PDF-iks
+259|Ühendamine…
+260|Veel
+261|Teisalda
+262|Liiguta alla
+263|Teisalda ülemise sisse
+264|Liiguta vasakule
+265|Tõsta tase kõrgemale
+266|Teisalda leheküljed
+267|Liiguta paremale
+268|Liiguta üles
+269|Teisalda, pööra, kustuta
+270|Teisaldamine…
+271|Nimi
+272|Uus järjehoidja
+273|Uus tempel
+274|Uus tempel…
+275|Uus: {0}
+276|Järgmine
+277|Järgmine erinevus
+278|Järgmine lehekülg
+279|Järgmine tulemus
+280|Järgmine vahekaart (Shift: eelmine)
+281|Öö
+282|Öörežiim
+283|Öörežiim väljas.
+284|Öörežiim sees.
+285|Järjehoidjaid veel pole. Mine leheküljele ja vajuta
+286|Siin pole kommentaari.
+287|Tekstis pole erinevusi.
+288|Selles versioonis pole lehekülge {0}
+289|Ükski lehekülg ei vajanud tekstituvastust (neil on juba tekst).
+290|Pole lehekülgi printimiseks.
+291|Kvaliteeti kaotamata
+292|Faili kirjutamiseks pole ruumi.
+293|Siin pole teksti. Piltide jaoks kasuta Joonista või kujundit.
+294|Mitte ükski
+295|Pole kinnitatud
+296|Ei leitud.
+297|Märge
+298|Midagi pole märgitud. Märgi enne alad tööriistaga Varja.
+299|Pole midagi poolitada.
+300|Millised leheküljed nummerdada
+301|Nummerdamine…
+302|Väljas: PDF-i avamine sulgeb selle, mida loed.
+303|Office PDF-iks
+304|Üks lehekülg / kaks lehekülge kõrvuti
+305|Üks lehekülg korraga.
+306|Üks lehekülje kohta
+307|Üks slaid lehekülje kohta
+308|Ühetähelised kiirklahvid (H, P, N…)
+309|Tühjendatakse ainult loend. Sinu failid jäävad oma kohale.
+310|Läbipaistmatus
+311|Ava
+312|Ava PDF-id öörežiimis
+313|Ava PDF-id kahe leheküljega kõrvuti
+314|Ava PDF
+315|Ava teine PDF (Ctrl+T)
+316|Avatud dokumendid
+317|Ava igaüks oma vahekaardil
+318|Ava uuel vahekaardil
+319|Ava vahekaardil
+320|Ava see
+321|Kas avada link?
+322|Ava kohe
+323|Ava mitu PDF-i vahekaartidel
+324|Ava esimene
+325|Ava logifail
+326|Ava PdfEditoriga
+327|Ava teise rakendusega
+328|Ava, ühenda või lisa need avatud PDF-i
+329|Avamine…
+330|Optimeeri ja kaitse
+331|Korralda
+332|Korralda leheküljed
+333|PDF-mootori viga: {0}
+334|PDF Exceliks
+335|PDF PowerPointiks
+336|PDF Wordiks
+337|PDF Wordiks, Exceliks, PowerPointiks, piltideks, tekstiks
+338|PDF piltideks
+339|Paroolita PDF
+340|PDF, pildid või Office'i failid
+341|Lehekülg
+342|Lehekülg (1–{0})
+343|Lehekülg 1
+344|Lehekülg 1/10
+345|Leheküljenumbrid
+346|Lehekülje suurus
+347|Lehekülje suurus: {0} × {1} mm
+348|Lehekülje suurus: {0} × {1} mm{2}
+349|Lehekülg {0}
+350|Lehekülg {0}\n{1}
+351|Lehekülg {0}/{1}
+352|Lehekülg {0}/{1} ·
+353|Lehekülg {0}{1}
+354|Leheküljed
+355|Leheküljed lisatud.
+356|Lehekülgede vaade (korralda)
+357|Parool
+358|Parool on vajalik
+359|PdfEditor suleti enne nende muudatuste salvestamist.
+360|PdfEditor hoiab koopiat 8 viimati avatud PDF-ist, et need avaneksid uuesti ühe puudutusega. Salvestamine uuendab koopiat.
+362|PdfEditor {0}{1}
+363|Pliiats ja kujundid
+364|Lehe kohta
+365|Fotod
+366|Fotod PDF-iks
+367|Pilt {0}/{1}
+368|Pildid hea kvaliteediga, tekst puutumata
+369|Pildid või skaneeringud
+370|Suuna sellele leheküljele ({0})
+371|Asukoht
+372|Tekstituvastuse ettevalmistamine…
+373|Lehekülgede ettevalmistamine…
+374|Ettevalmistamine…
+375|Eelmine lehekülg
+376|Eelmine tulemus
+377|Prindi
+378|Printimine ei alanud.
+379|Prindi…
+380|Atribuudid
+381|Kaitse
+382|Kaitse parooliga
+383|Kaitstud PDF (AES-256)
+384|Kvaliteet
+385|Vahemik
+386|Vahemikud
+387|Loe ette
+388|Lugemine
+389|Lugemisrežiim
+390|Lehekülje {0}/{1} lugemine…
+391|{0} lugemine
+392|Ettelugemise kiirus
+393|Valmis
+394|Valmis printimiseks
+395|Hiljutised
+396|Hiljutised failid avakuval
+397|Tuvasta tekst
+398|Tuvasta tekst (OCR)
+399|Soovitatav
+400|Kas taastada salvestamata töö?
+401|Taastatud. Salvesta, et muudatused alles jääksid.
+402|Ristkülik
+403|Varja
+404|Varjamismärk
+405|Tee uuesti
+406|Mäleta selles telefonis
+407|Eemalda metaandmed
+408|Eemalda parool
+409|Eemaldatud paremklõpsu menüüst.
+410|Eemaldatud.
+411|Eemaldab metaandmed, kärbib fonte, pakib faili tihedamalt. Leheküljed näevad välja täpselt samad.
+412|Sisu eemaldamine…
+413|Parooli eemaldamine…
+414|Nimeta ümber
+415|Nimeta järjehoidja ümber
+416|Ava iga PDF seal, kus pooleli jäid
+417|Korda
+418|Korda üle lehekülje
+419|Pööra
+420|Pööra vasakule
+421|Pööra paremale
+422|Pööramine…
+423|Salvesta
+424|Salvesta (Shift: salvesta nimega)
+425|Salvesta nimega…
+426|Kas salvestada muudatused faili „{0}”?
+427|Salvesta logi
+428|Salvesta telefoni
+429|Salvestatud
+430|Salvestatud.
+431|Salvestamine
+432|Järjehoidjate salvestamine…
+433|Salvestamine…
+434|Skannitud leheküljed saavad nähtamatu tekstikihi: seejärel saad teksti otsida, valida ja kopeerida.
+435|Otsi
+436|Otsingunupp, Ctrl+F
+437|Vaata kõiki kiirklahve
+438|Vali
+439|Vali kõik
+440|Vali kommentaarid
+441|Tühista valik
+442|Valitud tekst
+443|Valik
+444|Seaded
+445|Mitu lehekülge lehel säästab paberit (2 = kõrvuti, 4 = kaks korda kaks).
+446|Jaga
+447|Lehed
+448|Näita hiljutistes väikest eelvaadet
+449|Allkiri
+450|Allkiri {0}{1}
+451|Allkirjastamine…
+452|Suurus
+453|Slaid
+454|Slaid {0}
+455|Väike
+456|Väiksemad pildid, endiselt loetavad
+457|Väikseim
+458|Midagi läks valesti
+459|Kiirus
+460|Poolita
+461|Poolitamine…
+462|Lainjoon
+463|Tempel
+464|Algus
+465|Alusta kohast
+466|Otsin veel…
+467|Lõpeta tööriist, sulge otsing
+468|Peatatud.
+469|Peatamine…
+470|Kriipsuta läbi
+471|Tugev
+472|Läbi kriipsutatud
+473|Teema
+474|Vaheta heleda ja tumeda vahel
+475|Lülita välja see, mida ei kasuta: selle nupud, menüükirjed ja kiirklahvid kaovad.
+476|Süsteem
+477|Tabelid taastatakse teksti asukoha põhjal.
+478|Tabelid .xlsx-ina
+479|Puuduta sinist välja, et see täita.
+480|Puuduta kommentaari, et see kustutada.
+481|Puuduta kommentaari, et seda muuta, teisaldada või kustutada.
+482|Puuduta lõiku, et seda muuta.
+483|Puuduta lõiku.
+484|Puuduta, et panna linnuke.
+485|Puuduta, et panna rist.
+486|Puuduta, et panna täpp.
+487|Puuduta kohta, kuhu läheb kuupäev.
+488|Puuduta kohta, kuhu läheb märge.
+489|Puuduta kohta, kuhu läheb pilt.
+490|Puuduta kohta, kuhu läheb tempel.
+491|Puuduta kohta, kuhu läheb tekstikast.
+492|Puuduta kohta, kuhu läheb tekst.
+493|Puuduta kohta, kuhu panna oma initsiaalid.
+494|Puuduta kohta, kuhu allkirjastada.
+495|Puuduta kohta, kuhu kirjutada.
+496|Tekst
+497|Tekstikast
+498|Ainult tekst, suuremad tähed
+499|Tekst igal leheküljel
+500|Tekst tuvastati {0} leheküljel. Salvesta, et see alles jääks.
+501|Ettelugemine pole selles telefonis saadaval.
+502|Ettelugemine pole saadaval.
+503|Seda PDF-i ei saa siin avada.
+504|Seda koopiat enam pole. Ava fail uuesti.
+505|PDF-mootor ei käivitunud.
+506|Ka PdfEditori hoitud koopiad kustutatakse. Sinu failid jäävad oma kohale.
+507|Lõik kirjutatakse ümber standardse fondiga.
+508|Paroolid on erinevad.
+509|Selles PDF-is pole esiletõste ega märkmeid.
+510|Siin pole palju võita ({0}). {1}
+511|Sellel PDF-il pole eemaldatavat parooli.
+512|Sellel PDF-il pole sisukorda.
+513|See PDF on juba nii väike kui võimalik.
+514|Seda kommentaari enam pole.
+515|Sellel dokumendil on täidetavad väljad.
+516|See väli
+517|See loend
+518|See ({0})
+519|See lehekülg
+520|Viska need ära
+521|Pealkiri
+522|Excelisse
+523|PowerPointi
+524|Wordi
+525|Piltideks
+526|Tekstiks
+527|Tööriistad
+528|Täiesti salajane
+529|Üleval keskel
+530|Üleval vasakul
+531|Üleval paremal
+532|Kärbi fonte
+533|Proovi „Soovitatav”, kui failis on fotosid, või „Väikseim” skaneeringute jaoks.
+534|Proovi „Väikseim”, kui fail on skaneering.
+535|Kaks lehekülge
+536|Kaks lehekülge kõrvuti
+537|Kaks lehekülge kõrvuti.
+538|Joonista alla
+539|Allajoonitud
+540|Võta tagasi
+541|Võta tagasi / tee uuesti
+542|Ava lukk
+543|Värskendus saadaval
+544|Kasuta
+545|Seda kasutavad kõik pakkimisvalikud.
+546|Vaade
+547|Vesimärk
+548|Lisa lehekülgedele vesimärk
+549|Millised
+550|Millised leheküljed
+551|Word
+552|Word, Excel, PowerPoint, tekst
+553|Lisatud sõnad on märgitud roheliselt, eemaldatud punaselt.
+554|Töös…
+555|Töötab võrguühenduseta. Sinu failid ei lahku kunagi sellest arvutist.
+556|Kirjuta märge
+557|Kirjuta leheküljed nii: 1-3, 5.
+558|Vale parool, proovi uuesti.
+559|Järjestust saad enne muuta
+560|Sul on {0}. Paigaldamiseks ava allalaaditud fail.
+561|Sinu failid ei lahku kunagi sellest seadmest.
+562|Sinu failid ei lahku kunagi sellest telefonist.
+563|Sinu oma tekst, salvestatud järgmiseks korraks
+564|Sinu salvestatud allkirjad
+565|Sinu salvestatud templid
+566|Sinu tempel
+567|Suurenda
+568|Suurenda / vähenda / sobita
+569|Vähenda
+570|nt 1-3, 5
+571|nt 1-3, 7, 10-
+572|nt 1-3; 4-6; 7-
+573|nt Kontrollinud Gabriele
+574|erinevuste otsimine…
+575|tekstis pole erinevusi
+576|lk · {0} · {1} · Krüptimine:
+577|selle märkimiseks.
+578|{0}\nEsiletõstud ja märkmed, eksporditud {1}\n\n{2}
+579|{0} - märkmed.txt
+580|{0} Lisa failid
+581|{0} PDF-i
+582|{0} ala eemaldati jäädavalt. Salvesta, et muudatus alles jääks.
+583|{0} fail valmis
+584|{0} faili
+585|{0} on kohustuslik.
+586|{0} lk · {1} · {2} · Krüptimine: {3}
+587|{0} lehekülge
+588|{0} lehekülge kopeeriti faili „{1}” lõppu.
+589|{0} lehekülge erinevustega
+590|{0} valitud
+591|{0} → {1} (−{2}%). Salvesta dokument, et väiksem fail alles jääks.
+592|· {0} lisatud
+593|· {0} eemaldatud
+594|„Ava PdfEditoriga” paremklõpsu menüüs
+595|„{0}” on kaitstud.

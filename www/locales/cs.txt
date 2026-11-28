@@ -1,0 +1,594 @@
+1|(prázdná prezentace)
+2|(na této stránce není text – zkuste OCR)
+3|(bez textu)
+4|1 stránka zkopírována na konec „{0}“.
+5|1 stránka s rozdíly
+6|PDF musí mít aspoň jednu stránku.
+7|Přidat
+8|Přidat heslo
+9|Přidejte aspoň jeden soubor.
+10|Přidat soubory
+11|Přidat obrázek
+12|Přidat nebo odebrat heslo
+13|Přidat obrázek
+14|Přidat text
+15|Přidat na konec „{0}“
+16|Přidávat, přejmenovávat a přesouvat záložky
+17|Přidáno na konec.
+18|Přidáno do nabídky pravého tlačítka.
+19|Přidává se stránka…
+20|Přidává se vodoznak…
+21|Přidává se…
+22|Vše
+23|Všechny soubory
+24|Vše v jednom
+25|Všechny stránky
+26|Všech {0}
+27|Povolit změny a komentáře
+28|Povolit kopírování textu
+29|Povolit tisk
+30|Už je malé
+31|Zařadí PdfEditor i mezi aplikace pro PDF.
+32|I stránky, které už text mají
+33|Úhel
+34|Poznámky
+35|Jiný soubor…
+36|Vzhled
+37|Použít hned
+38|Použít začernění
+39|Použít začernění
+40|Schváleno
+41|Šipka
+42|Jako textový soubor
+43|Na konec
+44|Autor
+45|Zpět
+46|Tam, kde jste skončili: stránka {0}.
+47|Začernit soukromé údaje
+48|Prázdná stránka
+49|Tučně
+50|Záložky
+51|Panel záložek
+52|Obojí
+53|Dole uprostřed
+54|Dole vlevo
+55|Dole vpravo
+56|Podle rozsahů stránek nebo každých N stránek
+57|Podle rozsahů
+58|Zrušit
+59|Zrušeno
+60|Změnit barvu
+61|Změnit text, přidat text a obrázky
+62|Změny zachovány {0}
+63|Mění se…
+64|Fajfka
+65|Vybrat
+66|Vybrat soubor z tohoto zařízení
+67|Vybrané stránky, více na list
+68|Vymazat
+69|Vymazat nedávné?
+70|Zavřít
+71|Zavřít (Ctrl+W)
+72|Zavřít dokument
+73|Zavřít hledání
+74|Zavřít kartu
+75|Shromažďují se zvýraznění a poznámky…
+76|Barva
+77|Barva a čára
+78|Barva
+79|Barevné tečky při zvýrazňování nebo kreslení
+80|Komentář
+81|Komentář: {0}
+82|Komentáře a pole formuláře se stanou součástí stránky a už je nepůjde změnit.
+83|Porovnat
+84|Porovnat dvě verze
+85|Porovnat „{0}“ s…
+86|Komprimovat
+87|Komprimovat: odstranit metadata
+88|Komprimovat: zredukovat písma na použitá písmena
+89|Komprimováno
+90|Komprimuje se…
+91|Důvěrné
+92|Obsah
+93|Převést
+94|Převádí se do {0}…
+95|Převádí se {0}…
+96|Zkopírováno.
+97|Kopírovat
+98|Kopírovat stránky do jiného otevřeného PDF
+99|Kopírovat text
+100|Kopírovat stránky do…
+101|Kopírovat na kartu
+102|Kopírují se stránky…
+103|{0} nelze načíst
+104|Soubor nelze přepsat. Zvolte, kam ho uložit.
+105|{0} nelze přečíst
+106|Nelze uložit
+107|Soubor nelze zapsat.
+108|Nelze přidat.
+109|Oříznout
+110|Ořezává se…
+111|Křížek
+112|Tmavý
+113|Tmavé stránky na čtení
+114|Tmavé stránky, světlý text. Přepínejte kdykoli klávesami Ctrl+Shift+N.
+115|Datum
+116|Smazat jedno ze svých razítek
+117|Smazat stránku
+118|Smazat stránky
+119|Smazat uložené
+120|Které smazat?
+121|Které razítko smazat?
+122|Smazat {0}?
+123|Smazáno.
+124|Maže se…
+125|Interní
+126|Zavřít
+127|Dokument
+128|Dokument není otevřený.
+129|Neukládat
+130|Hotovo
+131|Tečka
+132|Stáhnout verzi {0}
+133|Koncept
+134|Přetažením přes text ho označte.
+135|Přetáhněte přes text.
+136|Přetáhněte přes to, co má zmizet.
+137|Přetažením stránek změníte pořadí
+138|Přetáhněte oblast, která má zůstat.
+139|Přetáhněte modrý rámeček
+140|Přetažením modrého rámečku ho přesunete.
+141|Tažením nakreslíte čáru.
+142|Tažením nakreslíte obdélník.
+143|Tažením nakreslíte šipku.
+144|Tažením nakreslíte elipsu.
+145|Kreslit
+146|Kreslit (pero)
+147|Nejdřív kreslete.
+148|Kreslete prstem. Opětovným klepnutím na Kreslit můžete posouvat.
+149|Nakreslete své iniciály
+150|Nakreslete svůj podpis
+151|Kresba
+152|Kreslí se…
+153|Přetáhněte sem soubor nebo klikněte a vyhledejte ho
+154|Přetáhněte sem soubor nebo klikněte a vyberte ho
+155|Přetáhněte soubory do okna
+156|Pusťte pro otevření
+157|Přetahování souborů je vypnuté v Nastavení › Funkce.
+158|Duplikovat
+159|Duplikovat stránky
+160|Duplikuje se…
+161|Upravit
+162|Upravit PDF
+163|Upravit a podepsat
+164|Upravit komentář
+165|Upravit poznámku
+166|Upravit text
+167|Upravitelný .docx
+168|Úpravy
+169|Elipsa
+170|Šifruje se…
+171|Angličtina
+172|Guma
+173|Každých
+174|Každých N stránek
+175|Každá stránka se stane obrázkem (text už nepůjde označit)
+176|Vše pro PDF, offline.
+177|Excel
+178|Platnost vypršela
+179|Exportovat zvýraznění a poznámky
+180|Exportovat poznámky
+181|Vyjmout
+182|Vyjmout stránky
+183|Vyjmuté stránky
+184|Vyjímá se…
+185|Funkce
+186|Pole
+187|Vyplnit a podepsat
+188|Vyplnit a podepsat
+189|Vyplnit formulář
+190|Vyplnit
+191|Konečné
+192|Najít
+193|Najít v dokumentu
+194|Čtení dokončeno.
+195|Přizpůsobit obrázek
+196|Přizpůsobit šířce
+197|Sloučit vrstvy
+198|Slučují se vrstvy…
+199|Podle nastavení zařízení
+200|K připomínkám
+201|K zveřejnění
+202|Formát
+203|Formuláře, podpis, iniciály
+204|Obecné
+205|Přejít
+206|Přejít na stránku
+207|Vysoká
+208|Zvýraznit
+209|Zvýrazňovat, kreslit, poznámky
+210|Zvýraznění a poznámky
+211|Zvýraznění zůstávají na svém textu.
+212|Pokud se PdfEditor nebo počítač zastaví, příště vám bude nabídnuta obnova práce.
+213|Obrázky hotové
+214|V Nastavení Windows zvolte PdfEditor pro soubory .pdf.
+215|V zobrazení Stránky, a na kartu pro jejich zkopírování
+216|Iniciály
+217|Iniciály {0}{1}
+218|Vložit soubor
+219|Vložit stránku
+220|Vložit stránky
+221|Vkládá se {0}…
+222|Na menší PDF
+223|Odkazuje na stránku {0}.
+224|Italština
+225|JPG nebo PNG
+226|Spojit více souborů
+227|Uchovávat záložní kopii neuložených změn
+228|Klávesové zkratky
+229|Klíčová slova
+230|Jazyk
+231|Velké
+232|Později
+233|Letter
+234|Písmena fungují, když je otevřené PDF a nepíšete. Dají se vypnout v Nastavení.
+235|Světlý
+236|Světlý / tmavý
+237|Čára
+238|Tloušťka čáry
+239|Poslechnout si PDF
+240|Protokol uložen: {0}
+241|Nízká
+242|Vytvořeno v:
+243|Vytvořit PDF
+244|Nastavit PdfEditor jako výchozí aplikaci pro PDF…
+245|Zprohledávatelnit skeny
+246|Vytvořit PDF
+247|Zmenšit soubor
+248|Vytvářejí se obrázky…
+249|Vytváří se PDF…
+250|Okraj
+251|Označit k začernění
+252|Označené oblasti se odstraní až po použití začernění.
+253|Označuje se…
+254|Střední
+255|Spojit
+256|Spojit PDF
+257|Spojování zastaveno: „{0}“ je chráněný.
+258|Spojit je do jednoho PDF
+259|Spojuje se…
+260|Další
+261|Přesunout
+262|Posunout dolů
+263|Přesunout do nadřazené
+264|Posunout doleva
+265|Posunout o úroveň výš
+266|Přesunout stránky
+267|Posunout doprava
+268|Posunout nahoru
+269|Přesouvat, otáčet, mazat
+270|Přesouvá se…
+271|Název
+272|Nová záložka
+273|Nové razítko
+274|Nové razítko…
+275|Nové: {0}
+276|Další
+277|Další rozdíl
+278|Další stránka
+279|Další výsledek
+280|Další karta (Shift: předchozí)
+281|Noc
+282|Noční režim
+283|Noční režim vypnut.
+284|Noční režim zapnut.
+285|Zatím žádné záložky. Přejděte na stránku a stiskněte
+286|Tady není komentář.
+287|V textu nejsou rozdíly.
+288|V této verzi není stránka {0}
+289|Žádná stránka nepotřebovala OCR (už mají text).
+290|Žádné stránky k tisku.
+291|Bez ztráty kvality
+292|Na zápis souboru není místo.
+293|Tady není text. Na obrázky použijte Kreslit nebo tvar.
+294|Žádné
+295|Neschváleno
+296|Nenalezeno.
+297|Poznámka
+298|Nic není označeno. Nejdřív označte oblasti nástrojem Začernit.
+299|Není co rozdělit.
+300|Které stránky číslovat
+301|Čísluje se…
+302|Vypnuto: otevření PDF zavře to, které čtete.
+303|Office do PDF
+304|Jedna stránka / dvě stránky vedle sebe
+305|Jedna stránka najednou.
+306|Jeden na stránku
+307|Jeden snímek na stránku
+308|Jednopísmenné klávesové zkratky (H, P, N…)
+309|Vymaže se jen seznam. Vaše soubory zůstanou na místě.
+310|Neprůhlednost
+311|Otevřít
+312|Otevírat PDF v nočním režimu
+313|Otevírat PDF se dvěma stránkami vedle sebe
+314|Otevřít PDF
+315|Otevřít další PDF (Ctrl+T)
+316|Otevřené dokumenty
+317|Otevřít každý na vlastní kartě
+318|Otevřít na nové kartě
+319|Otevřít na kartě
+320|Otevřít
+321|Otevřít odkaz?
+322|Otevřít teď
+323|Otevírat více PDF na kartách
+324|Otevřít první
+325|Otevřít soubor protokolu
+326|Otevřít v PdfEditor
+327|Otevřít v jiné aplikaci
+328|Otevřít, spojit nebo přidat do otevřeného PDF
+329|Otevírá se…
+330|Optimalizovat a chránit
+331|Uspořádat
+332|Uspořádat stránky
+333|Chyba jádra PDF: {0}
+334|PDF do Excelu
+335|PDF do PowerPointu
+336|PDF do Wordu
+337|PDF do Wordu, Excelu, PowerPointu, obrázků, textu
+338|PDF do obrázků
+339|PDF bez hesla
+340|PDF, obrázky nebo soubory Office
+341|Stránka
+342|Stránka (1–{0})
+343|Stránka 1
+344|Stránka 1 z 10
+345|Čísla stránek
+346|Velikost stránky
+347|Velikost stránky: {0} × {1} mm
+348|Velikost stránky: {0} × {1} mm{2}
+349|Stránka {0}
+350|Stránka {0}\n{1}
+351|Stránka {0} z {1}
+352|Stránka {0} z {1} ·
+353|Stránka {0}{1}
+354|Stránky
+355|Stránky přidány.
+356|Zobrazení stránek (uspořádat)
+357|Heslo
+358|Je potřeba heslo
+359|PdfEditor se zavřel před uložením těchto změn.
+360|PdfEditor uchovává kopii posledních 8 otevřených PDF, aby se daly znovu otevřít jedním klepnutím. Uložení kopii aktualizuje.
+362|PdfEditor {0}{1}
+363|Pero a tvary
+364|Na list
+365|Fotky
+366|Fotky do PDF
+367|Obrázek {0} z {1}
+368|Obrázky v dobré kvalitě, text nedotčen
+369|Obrázky nebo skeny
+370|Nasměrovat na tuto stránku ({0})
+371|Pozice
+372|Připravuje se OCR…
+373|Připravují se stránky…
+374|Připravuje se…
+375|Předchozí stránka
+376|Předchozí výsledek
+377|Tisk
+378|Tisk se nespustil.
+379|Tisk…
+380|Vlastnosti
+381|Chránit
+382|Chránit heslem
+383|Chráněné PDF (AES-256)
+384|Kvalita
+385|Rozsah
+386|Rozsahy
+387|Číst nahlas
+388|Čtení
+389|Režim čtení
+390|Čte se stránka {0} z {1}…
+391|Čte se {0}
+392|Rychlost čtení nahlas
+393|Připraveno
+394|Připraveno k tisku
+395|Nedávné
+396|Nedávné soubory na úvodní obrazovce
+397|Rozpoznat text
+398|Rozpoznat text (OCR)
+399|Doporučeno
+400|Obnovit neuloženou práci?
+401|Obnoveno. Uložte, abyste změny zachovali.
+402|Obdélník
+403|Začernit
+404|Značka začernění
+405|Znovu
+406|Pamatovat si v tomto telefonu
+407|Odstranit metadata
+408|Odstranit heslo
+409|Odebráno z nabídky pravého tlačítka.
+410|Odstraněno.
+411|Odstraní metadata, zredukuje písma, lépe zabalí soubor. Stránky vypadají úplně stejně.
+412|Odstraňuje se obsah…
+413|Odstraňuje se heslo…
+414|Přejmenovat
+415|Přejmenovat záložku
+416|Otevírat každé PDF tam, kde jste skončili
+417|Opakovat
+418|Opakovat přes stránku
+419|Otočit
+420|Otočit doleva
+421|Otočit doprava
+422|Otáčí se…
+423|Uložit
+424|Uložit (Shift: uložit jako)
+425|Uložit jako…
+426|Uložit změny v „{0}“?
+427|Uložit protokol
+428|Uložit do telefonu
+429|Uloženo
+430|Uloženo.
+431|Ukládání
+432|Ukládají se záložky…
+433|Ukládá se…
+434|Naskenované stránky dostanou neviditelnou textovou vrstvu: pak můžete text hledat, označovat a kopírovat.
+435|Hledat
+436|Tlačítko Hledat, Ctrl+F
+437|Zobrazit všechny zkratky
+438|Vybrat
+439|Vybrat vše
+440|Vybrat komentáře
+441|Zrušit výběr
+442|Vybraný text
+443|Výběr
+444|Nastavení
+445|Více stránek na list šetří papír (2 = vedle sebe, 4 = dvě na dvě).
+446|Sdílet
+447|Listy
+448|Zobrazovat malý náhled v Nedávných
+449|Podpis
+450|Podpis {0}{1}
+451|Podepisuje se…
+452|Velikost
+453|Snímek
+454|Snímek {0}
+455|Malé
+456|Menší obrázky, stále čitelné
+457|Nejmenší
+458|Něco se pokazilo
+459|Rychlost
+460|Rozdělit
+461|Rozděluje se…
+462|Vlnovka
+463|Razítko
+464|Začátek
+465|Začít od
+466|Pořád se hledá…
+467|Ukončit nástroj, zavřít hledání
+468|Zastaveno.
+469|Zastavuje se…
+470|Přeškrtnout
+471|Silná
+472|Přeškrtnuto
+473|Předmět
+474|Přepnout mezi světlým a tmavým
+475|Vypněte, co nepoužíváte: jeho tlačítka, položky nabídek a zkratky zmizí.
+476|Systém
+477|Tabulky se sestaví podle polohy textu.
+478|Tabulky jako .xlsx
+479|Klepnutím na modré pole ho vyplníte.
+480|Klepnutím na komentář ho smažete.
+481|Klepnutím na komentář ho upravíte, přesunete nebo smažete.
+482|Klepnutím na odstavec ho změníte.
+483|Klepněte na odstavec.
+484|Klepnutím vložíte fajfku.
+485|Klepnutím vložíte křížek.
+486|Klepnutím vložíte tečku.
+487|Klepněte tam, kam patří datum.
+488|Klepněte tam, kam patří poznámka.
+489|Klepněte tam, kam patří obrázek.
+490|Klepněte tam, kam patří razítko.
+491|Klepněte tam, kam patří textové pole.
+492|Klepněte tam, kam patří text.
+493|Klepněte tam, kam chcete dát iniciály.
+494|Klepněte tam, kde chcete podepsat.
+495|Klepněte tam, kde chcete psát.
+496|Text
+497|Textové pole
+498|Jen text, větší písmo
+499|Text přes každou stránku
+500|Text rozpoznán na {0} stránkách. Uložte, abyste ho zachovali.
+501|Čtení nahlas není v tomto telefonu dostupné.
+502|Čtení nahlas není dostupné.
+503|Toto PDF tu nelze otevřít.
+504|Tato kopie už neexistuje. Otevřete soubor znovu.
+505|Jádro PDF se nespustilo.
+506|Smažou se i kopie, které si PdfEditor uchoval. Vaše soubory zůstanou na místě.
+507|Odstavec se přepíše standardním písmem.
+508|Hesla se liší.
+509|V tomto PDF nejsou žádná zvýraznění ani poznámky.
+510|Tady se toho moc nezíská ({0}). {1}
+511|Toto PDF nemá heslo k odstranění.
+512|Toto PDF nemá obsah.
+513|Toto PDF už je tak malé, jak to jde.
+514|Tento komentář už neexistuje.
+515|Tento dokument má vyplnitelná pole.
+516|Toto pole
+517|Tento seznam
+518|Tento ({0})
+519|Tato stránka
+520|Zahodit je
+521|Název
+522|Do Excelu
+523|Do PowerPointu
+524|Do Wordu
+525|Do obrázků
+526|Do textu
+527|Nástroje
+528|Přísně tajné
+529|Nahoře uprostřed
+530|Nahoře vlevo
+531|Nahoře vpravo
+532|Zredukovat písma
+533|Zkuste „Doporučeno“, pokud soubor obsahuje fotky, nebo „Nejmenší“ pro skeny.
+534|Zkuste „Nejmenší“, pokud je soubor sken.
+535|Dvě stránky
+536|Dvě stránky vedle sebe
+537|Dvě stránky vedle sebe.
+538|Podtrhnout
+539|Podtrženo
+540|Zpět
+541|Zpět / znovu
+542|Odemknout
+543|Je dostupná aktualizace
+544|Použít
+545|Používá ho každá možnost Komprimovat.
+546|Zobrazení
+547|Vodoznak
+548|Přidat vodoznak na stránky
+549|Které
+550|Které stránky
+551|Word
+552|Word, Excel, PowerPoint, text
+553|Přidaná slova jsou označena zeleně, odebraná červeně.
+554|Pracuje se…
+555|Funguje offline. Vaše soubory nikdy neopustí tento počítač.
+556|Napište poznámku
+557|Napište stránky takto: 1-3, 5.
+558|Špatné heslo, zkuste to znovu.
+559|Nejdřív můžete změnit pořadí
+560|Máte verzi {0}. Otevřete stažený soubor a nainstalujte ji.
+561|Vaše soubory nikdy neopustí toto zařízení.
+562|Vaše soubory nikdy neopustí tento telefon.
+563|Váš vlastní text, uložený na příště
+564|Vaše uložené podpisy
+565|Vaše uložená razítka
+566|Vaše razítko
+567|Přiblížit
+568|Přiblížit / oddálit / přizpůsobit
+569|Oddálit
+570|např. 1-3, 5
+571|např. 1-3, 7, 10-
+572|např. 1-3; 4-6; 7-
+573|např. Zkontroloval Gabriele
+574|hledají se rozdíly…
+575|v textu nejsou rozdíly
+576|str. · {0} · {1} · Šifrování:
+577|pro označení.
+578|{0}\nZvýraznění a poznámky, exportováno {1}\n\n{2}
+579|{0} - poznámky.txt
+580|{0} Přidat soubory
+581|{0} PDF
+582|Natrvalo odstraněno oblastí: {0}. Uložte, abyste změnu zachovali.
+583|{0} soubor připraven
+584|Souborů: {0}
+585|{0} je povinné.
+586|Stránek: {0} · {1} · {2} · Šifrování: {3}
+587|Stránek: {0}
+588|Stránek zkopírováno na konec „{1}“: {0}.
+589|Stránek s rozdíly: {0}
+590|Vybráno: {0}
+591|{0} → {1} (−{2} %). Uložte dokument, abyste zachovali menší soubor.
+592|· přidáno {0}
+593|· odebráno {0}
+594|„Otevřít v PdfEditor“ v nabídce pravého tlačítka
+595|„{0}“ je chráněný.

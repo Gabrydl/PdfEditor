@@ -1,4 +1,5 @@
 // PdfEditor: the whole user interface. The same code runs in the Android app (WebView) and in the Windows app (Electron).
+import { T, languageButton } from "./i18n.js";
 import { icon } from "./icons.js";
 import {
   $, esc, A, D, PHONE, tx, droppedFiles, call, toast, task, busy, idle, progress, busyState, checkCancel, sheet, sheetOpen, closeSheet, alertBox, confirmBox,
@@ -6,10 +7,20 @@ import {
   fmtSize, baseName, ext, normalizeImage, storeGet, storeSet, showError, sleep, u8ToB64,
 } from "./ui.js";
 import * as C from "./convert.js";
+import { saveLog, logLine } from "./ui.js";
+
+// log buttons in Settings (Windows: open PdfEditor.log; phone: save the log as a text file)
+document.addEventListener("click", (e) => {
+  const b = e.target.closest && e.target.closest("[data-openlog],[data-savelog]");
+  if (!b) return;
+  if (b.hasAttribute("data-openlog")) D.openLog(); else saveLog();
+});
+// the flag button, next to light / dark
+for (const id of ["themeBtn", "themeBtn2"]) { const tb = document.getElementById(id); if (tb) tb.before(languageButton("icon-btn" + (id === "themeBtn2" ? " desk-only" : ""))); }
 
 // Update check (phone app): looks at the latest GitHub release when the app opens. The Windows app does the same in desktop/updater.js.
 const REPO = "Gabrydl/PdfEditor";
-const APP_VERSION = "1.6.0";   // phone app version; the release build keeps it equal to desktop/package.json
+const APP_VERSION = "1.7.0";   // phone app version; the release build keeps it equal to desktop/package.json
 
 // ================================================================== state
 const S = {
@@ -39,23 +50,23 @@ const P = { ...PREF_DEFAULTS, ...storeGet("prefs", {}) };
 const savePrefs = () => storeSet("prefs", P);
 // every function can be switched off in Settings › Features: its buttons, menu entries and shortcuts disappear
 const FEATURES = [
-  { f: "search", label: "Find in document", sub: "Search button, Ctrl+F" },
-  { f: "bookmarks", label: "Bookmarks panel", sub: "Add, rename and move bookmarks" },
-  { f: "night", label: "Night mode", sub: "Dark pages for reading" },
-  { f: "spread", label: "Two pages side by side" },
-  { f: "reflow", label: "Reading mode", sub: "Text only, bigger letters" },
-  { f: "read", label: "Read aloud" },
-  { f: "compare", label: "Compare two versions" },
-  { f: "print", label: "Print", sub: "Chosen pages, several per sheet" },
-  { f: "exportnotes", label: "Export highlights and notes", sub: "As a text file" },
-  { f: "copyto", label: "Copy pages to another open PDF" },
-  { f: "dragpages", label: "Drag pages to reorder them", sub: "In the Pages view, and onto a tab to copy them", desk: true },
-  { f: "dropfiles", label: "Drop files on the window", sub: "Open, merge or add them to the open PDF", desk: true },
-  { f: "split", label: "Split", sub: "By page ranges or every N pages" },
-  { f: "compress", label: "Compress" },
-  { f: "protect", label: "Add or remove a password" },
-  { f: "ocr", label: "OCR", sub: "Make scans searchable" },
-  { f: "convert", label: "Convert", sub: "PDF to Word, Excel, PowerPoint, images, text" },
+  { f: "search", label: T("Find in document"), sub: T("Search button, Ctrl+F") },
+  { f: "bookmarks", label: T("Bookmarks panel"), sub: T("Add, rename and move bookmarks") },
+  { f: "night", label: T("Night mode"), sub: T("Dark pages for reading") },
+  { f: "spread", label: T("Two pages side by side") },
+  { f: "reflow", label: T("Reading mode"), sub: T("Text only, bigger letters") },
+  { f: "read", label: T("Read aloud") },
+  { f: "compare", label: T("Compare two versions") },
+  { f: "print", label: T("Print"), sub: T("Chosen pages, several per sheet") },
+  { f: "exportnotes", label: T("Export highlights and notes"), sub: T("As a text file") },
+  { f: "copyto", label: T("Copy pages to another open PDF") },
+  { f: "dragpages", label: T("Drag pages to reorder them"), sub: T("In the Pages view, and onto a tab to copy them"), desk: true },
+  { f: "dropfiles", label: T("Drop files on the window"), sub: T("Open, merge or add them to the open PDF"), desk: true },
+  { f: "split", label: T("Split"), sub: T("By page ranges or every N pages") },
+  { f: "compress", label: T("Compress") },
+  { f: "protect", label: T("Add or remove a password") },
+  { f: "ocr", label: "OCR", sub: T("Make scans searchable") },
+  { f: "convert", label: T("Convert"), sub: T("PDF to Word, Excel, PowerPoint, images, text") },
 ];
 const on = (f) => !f || P["f_" + f] !== false;
 // which function each button belongs to
@@ -111,38 +122,38 @@ const ICONS = { backBtn: "left", undoBtn: "undo", redoBtn: "redo", searchBtn: "s
   zoomOut: "minus", zoomIn: "plus", settingsBtn: "settings", sideClose: "close", cmpBack: "left", cmpPrev: "left", cmpNext: "right" };
 for (const [id, name] of Object.entries(ICONS)) $(id).innerHTML = icon(name);
 $("openIc").innerHTML = icon("open");
-if (!PHONE) $("openSub").textContent = D ? "Drop a file here, or click to browse" : "Drop a file here, or click to choose one";
-if (PHONE) $("privacy").textContent = "Your files never leave this phone.";
-else $("privacy").textContent = "Works offline. Your files never leave this computer.";
+if (!PHONE) $("openSub").textContent = D ? T("Drop a file here, or click to browse") : T("Drop a file here, or click to choose one");
+if (PHONE) $("privacy").textContent = T("Your files never leave this phone.");
+else $("privacy").textContent = T("Works offline. Your files never leave this computer.");
 
 // ================================================================== home
 const GROUPS = [
-  { t: "Edit and sign", tiles: [
-    { icon: "edit", t: "Edit PDF", s: "Change text, add text and pictures", run: () => openThen(() => setMode("edit")) },
-    { icon: "sign", t: "Fill and sign", s: "Forms, signature, initials", run: () => openThen(() => setMode("sign")) },
-    { icon: "highlight", t: "Annotate", s: "Highlight, draw, notes", run: () => openThen(() => setMode("comment")) },
-    { icon: "redact", t: "Redact", s: "Black out private data", run: () => openThen(() => { setMode("edit"); selectTool("redact"); }) },
-    { icon: "watermark", t: "Watermark", s: "Text over every page", run: () => openThen(() => watermarkTool()) },
+  { t: T("Edit and sign"), tiles: [
+    { icon: "edit", t: T("Edit PDF"), s: T("Change text, add text and pictures"), run: () => openThen(() => setMode("edit")) },
+    { icon: "sign", t: T("Fill and sign"), s: T("Forms, signature, initials"), run: () => openThen(() => setMode("sign")) },
+    { icon: "highlight", t: T("Annotate"), s: T("Highlight, draw, notes"), run: () => openThen(() => setMode("comment")) },
+    { icon: "redact", t: T("Redact"), s: T("Black out private data"), run: () => openThen(() => { setMode("edit"); selectTool("redact"); }) },
+    { icon: "watermark", t: T("Watermark"), s: T("Text over every page"), run: () => openThen(() => watermarkTool()) },
   ] },
-  { t: "Convert", tiles: [
-    { icon: "image", t: "Photos to PDF", s: "Pictures or scans", run: () => imagesFlow() },
-    { icon: "office", t: "Office to PDF", s: "Word, Excel, PowerPoint, text", run: () => officeFlow() },
-    { f: "convert", icon: "word", t: "PDF to Word", s: "Editable .docx", run: () => openThen(() => convertTool("word")) },
-    { f: "convert", icon: "excel", t: "PDF to Excel", s: "Tables as .xlsx", run: () => openThen(() => convertTool("excel")) },
-    { f: "convert", icon: "ppt", t: "PDF to PowerPoint", s: "One slide per page", run: () => openThen(() => convertTool("ppt")) },
-    { f: "convert", icon: "image", t: "PDF to images", s: "JPG or PNG", run: () => openThen(() => convertTool("images")) },
+  { t: T("Convert"), tiles: [
+    { icon: "image", t: T("Photos to PDF"), s: T("Pictures or scans"), run: () => imagesFlow() },
+    { icon: "office", t: T("Office to PDF"), s: T("Word, Excel, PowerPoint, text"), run: () => officeFlow() },
+    { f: "convert", icon: "word", t: T("PDF to Word"), s: "Editable .docx", run: () => openThen(() => convertTool("word")) },
+    { f: "convert", icon: "excel", t: T("PDF to Excel"), s: "Tables as .xlsx", run: () => openThen(() => convertTool("excel")) },
+    { f: "convert", icon: "ppt", t: T("PDF to PowerPoint"), s: T("One slide per page"), run: () => openThen(() => convertTool("ppt")) },
+    { f: "convert", icon: "image", t: T("PDF to images"), s: T("JPG or PNG"), run: () => openThen(() => convertTool("images")) },
   ] },
-  { t: "Pages", tiles: [
-    { icon: "merge", t: "Merge PDFs", s: "Join several files", run: () => mergeFlow() },
-    { icon: "thumbs", t: "Organize pages", s: "Move, rotate, delete", run: () => openThen(() => openOrganize()) },
-    { f: "split", icon: "split", t: "Split", s: "Into smaller PDFs", run: () => openThen(() => splitTool()) },
+  { t: T("Pages"), tiles: [
+    { icon: "merge", t: T("Merge PDFs"), s: T("Join several files"), run: () => mergeFlow() },
+    { icon: "thumbs", t: T("Organize pages"), s: T("Move, rotate, delete"), run: () => openThen(() => openOrganize()) },
+    { f: "split", icon: "split", t: T("Split"), s: T("Into smaller PDFs"), run: () => openThen(() => splitTool()) },
   ] },
-  { t: "Optimize and protect", tiles: [
-    { f: "compress", icon: "compress", t: "Compress", s: "Make the file smaller", run: () => openThen(() => compressTool()) },
-    { f: "ocr", icon: "ocr", t: "OCR", s: "Make scans searchable", run: () => openThen(() => ocrTool()) },
-    { f: "protect", icon: "lock", t: "Protect", s: "Add a password", run: () => openThen(() => protectTool()) },
-    { f: "protect", icon: "unlock", t: "Unlock", s: "Remove the password", run: () => openThen(() => unlockTool()) },
-    { f: "read", icon: "speaker", t: "Read aloud", s: "Listen to a PDF", run: () => openThen(() => startReading()) },
+  { t: T("Optimize and protect"), tiles: [
+    { f: "compress", icon: "compress", t: T("Compress"), s: T("Make the file smaller"), run: () => openThen(() => compressTool()) },
+    { f: "ocr", icon: "ocr", t: "OCR", s: T("Make scans searchable"), run: () => openThen(() => ocrTool()) },
+    { f: "protect", icon: "lock", t: T("Protect"), s: T("Add a password"), run: () => openThen(() => protectTool()) },
+    { f: "protect", icon: "unlock", t: T("Unlock"), s: T("Remove the password"), run: () => openThen(() => unlockTool()) },
+    { f: "read", icon: "speaker", t: T("Read aloud"), s: T("Listen to a PDF"), run: () => openThen(() => startReading()) },
   ] },
 ];
 const TILES = GROUPS.flatMap(g => g.tiles);
@@ -184,8 +195,8 @@ function drawRecent() {
   $("recent").classList.toggle("thumbs", thumbs);
   const where = (f) => f.path ? esc(f.path.replace(/[\\/][^\\/]*$/, "")) : (f.size ? fmtSize(f.size) : "");
   $("recent").innerHTML = list.slice(0, thumbs ? 12 : 8).map((f, k) => thumbs
-    ? `<button class="rec card" data-k="${k}" title="${esc(f.path || f.name)}"><span class="rt">${f.thumb ? `<img src="${f.thumb}" alt="">` : icon("pdf")}</span><b>${esc(f.name)}</b><small class="${f.path && !f.page ? "" : "ltr"}">${f.page ? "Page " + (f.page + 1) : where(f)}</small></button>`
-    : `<button class="rec" data-k="${k}" title="${esc(f.path || f.name)}">${icon("pdf")}<span><b>${esc(f.name)}</b><small class="${f.path && !f.page ? "" : "ltr"}">${f.page ? "Page " + (f.page + 1) : where(f)}&lrm;</small></span></button>`).join("");
+    ? `<button class="rec card" data-k="${k}" title="${esc(f.path || f.name)}"><span class="rt">${f.thumb ? `<img src="${f.thumb}" alt="">` : icon("pdf")}</span><b>${esc(f.name)}</b><small class="${f.path && !f.page ? "" : "ltr"}">${f.page ? T("Page {0}{1}", f.page, 1) : where(f)}</small></button>`
+    : `<button class="rec" data-k="${k}" title="${esc(f.path || f.name)}">${icon("pdf")}<span><b>${esc(f.name)}</b><small class="${f.path && !f.page ? "" : "ltr"}">${f.page ? T("Page {0}{1}", f.page, 1) : where(f)}&lrm;</small></span></button>`).join("");
 }
 /** Put a file at the top of Recent. On the phone `bytes` is the copy that will be reopened. */
 async function addRecent(f, thumb = null, bytes = null) {
@@ -249,11 +260,11 @@ $("recent").onclick = async (e) => {
     return;
   }
   const rec = await recentStore.get(f.key);
-  if (!rec || !rec.bytes) { recentSave(list.filter(x => x.key !== f.key)); drawRecent(); toast("That copy is gone. Open the file again."); return; }
+  if (!rec || !rec.bytes) { recentSave(list.filter(x => x.key !== f.key)); drawRecent(); toast(T("That copy is gone. Open the file again.")); return; }
   await openFile({ name: f.name, size: f.size, recentKey: f.key, canSave: false }, new Uint8Array(rec.bytes));
 };
 $("recentClear") && ($("recentClear").onclick = async () => {
-  if (!(await confirmBox("Clear Recent?", PHONE ? "The copies PdfEditor kept are deleted too. Your files stay where they are." : "Only the list is cleared. Your files stay where they are.", "Clear"))) return;
+  if (!(await confirmBox(T("Clear Recent?"), PHONE ? T("The copies PdfEditor kept are deleted too. Your files stay where they are.") : T("Only the list is cleared. Your files stay where they are."), T("Clear")))) return;
   if (!D) for (const f of recentList()) recentStore.drop(f.key);
   recentSave([]);
   drawRecent();
@@ -270,7 +281,7 @@ async function openThen(after) {
 async function openFile(f, given = null) {
   const e = ext(f.name);
   if (e && e !== "pdf" && (C.OFFICE_EXT.includes(e) || C.NATIVE_EXT.includes(e))) {
-    const pdf = await task("Converting " + f.name + "…", async () => C.fileToPdf(await readFile(f), f.name));
+    const pdf = await task(T("Converting {0}…", f.name), async () => C.fileToPdf(await readFile(f), f.name));
     releaseFile(f);
     if (!pdf) return false;
     return openBytes(pdf, baseName(f.name) + ".pdf", null);
@@ -279,7 +290,7 @@ async function openFile(f, given = null) {
   const k = placeKey(f);
   const open = k && TABS.find(t => t.doc.file && placeKey(t.doc.file) === k);
   if (open && (f.path || f.recentKey)) { switchTab(open); releaseFile(f); return true; }
-  let bytes = given || await task("Opening…", () => readFile(f));
+  let bytes = given || await task(T("Opening…"), () => readFile(f));
   if (!bytes) return false;
   // phone: keep a copy for Recent (the open call hands the bytes over to the PDF engine)
   if (!D && !f.recentKey) f.recentKey = f.name + ":" + (f.size || 0);   // stays the same after saving
@@ -289,7 +300,7 @@ async function openFile(f, given = null) {
     await addRecent(f, null, keep);
     recentThumb(S.doc);
     const last = P.lastPage && storeGet("lastPages", {})[k];
-    if (last && last.page > 0 && last.page < S.doc.pages.length) { requestAnimationFrame(() => goToPage(last.page, false)); toast(`Back where you left it: page ${last.page + 1}.`); }
+    if (last && last.page > 0 && last.page < S.doc.pages.length) { requestAnimationFrame(() => goToPage(last.page, false)); toast(T("Back where you left it: page {0}.", last.page + 1)); }
   }
   return ok;
 }
@@ -298,11 +309,11 @@ async function openBytes(bytes, name, file, password = null) {
   // with tabs the open document stays open; without, it is closed first (asking to save)
   if (password === null && !(P.tabs && S.doc) && !(await confirmLeave())) { if (file) releaseFile(file); return false; }
   const copy = bytes.slice();
-  let r = await task("Opening…", () => call("open", bytes, name, password));
+  let r = await task(T("Opening…"), () => call("open", bytes, name, password));
   if (!r) { if (file) releaseFile(file); return false; }
   if (r.needsPassword) {
-    const v = await form("Password needed", [{ name: "pw", label: "Password", type: "password", placeholder: "Password" }], "Open",
-      password ? "Wrong password, try again." : `“${name}” is protected.`);
+    const v = await form(T("Password needed"), [{ name: "pw", label: T("Password"), type: "password", placeholder: T("Password") }], T("Open"),
+      password ? T("Wrong password, try again.") : T("“{0}” is protected.", name));
     if (!v) { if (file) releaseFile(file); return false; }
     return openBytes(copy, name, file, v.pw);
   }
@@ -323,7 +334,7 @@ async function openBytes(bytes, name, file, password = null) {
   buildPages();
   $("scroller").scrollTop = 0;
   updateUndo();
-  if (r.forms) banner("This document has fillable fields.", "Fill in", () => setMode("sign"));
+  if (r.forms) banner(T("This document has fillable fields."), T("Fill in"), () => setMode("sign"));
   else hideBanner();
   drawTabs();
   drawSide();
@@ -351,10 +362,10 @@ function closeDoc(silent = false) {
 
 async function confirmLeave() {
   if (!S.doc || !S.dirty) return true;
-  const v = await choose(`Save changes to “${S.doc.name}”?`, [
-    { value: "save", label: "Save", icon: "save" },
-    { value: "discard", label: "Don't save", icon: "trash" },
-    { value: "cancel", label: "Cancel", icon: "close" },
+  const v = await choose(T("Save changes to “{0}”?", S.doc.name), [
+    { value: "save", label: T("Save"), icon: "save" },
+    { value: "discard", label: T("Don't save"), icon: "trash" },
+    { value: "cancel", label: T("Cancel"), icon: "close" },
   ]);
   if (v === "save") return await saveDoc(false);
   return v === "discard";
@@ -363,15 +374,15 @@ async function confirmLeave() {
 async function saveDoc(asNew) {
   if (!S.doc) return false;
   const d = S.doc;
-  const bytes = await task("Saving…", () => call("save", d.id, {}));
+  const bytes = await task(T("Saving…"), () => call("save", d.id, {}));
   if (!bytes) return false;
   if (!asNew && d.file && d.file.token && d.canSave) {
-    if (await saveOver(bytes, d.file.token)) { S.dirty = false; markDirty(); toast("Saved."); const t = tabOf(d); if (t) recovery.drop(t.key); keepRecentCopy(d, bytes); return true; }
-    toast("Could not overwrite the file. Choose where to save it.");
+    if (await saveOver(bytes, d.file.token)) { S.dirty = false; markDirty(); toast(T("Saved.")); const t = tabOf(d); if (t) recovery.drop(t.key); keepRecentCopy(d, bytes); return true; }
+    toast(T("Could not overwrite the file. Choose where to save it."));
   }
   const r = await saveAs(bytes, d.name.toLowerCase().endsWith(".pdf") ? d.name : d.name + ".pdf", MIME.pdf);
   if (r.ok) {
-    S.dirty = false; toast("Saved" + (r.name ? ": " + r.name : "."));
+    S.dirty = false; toast(T("Saved") + (r.name ? ": " + r.name : "."));
     if (r.name) { d.name = r.name; $("docTitle").textContent = r.name; }
     if (r.path) { d.file = { name: r.name, path: r.path, token: r.path, canSave: true }; d.canSave = true; addRecent(d.file); recentThumb(d); }
     const t = tabOf(d); if (t) recovery.drop(t.key);
@@ -645,8 +656,8 @@ function refreshVisibleOverlays() { if (!S.doc) return; const [a, b] = visibleRa
 
 // ================================================================== modes & tools
 const MODES = [
-  { id: "view", label: "View" }, { id: "comment", label: "Comment" }, { id: "edit", label: "Edit" },
-  { id: "sign", label: "Fill & Sign" }, { id: "pages", label: "Pages" }, { id: "tools", label: "Tools" },
+  { id: "view", label: T("View") }, { id: "comment", label: T("Comment") }, { id: "edit", label: T("Edit") },
+  { id: "sign", label: T("Fill & Sign") }, { id: "pages", label: T("Pages") }, { id: "tools", label: T("Tools") },
 ];
 $("modes").innerHTML = MODES.map(m => `<button class="mode" data-m="${m.id}">${m.label}</button>`).join("");
 $("modes").onclick = (e) => { const b = e.target.closest(".mode"); if (b) setMode(b.dataset.m); };
@@ -654,79 +665,79 @@ $("modes").onclick = (e) => { const b = e.target.closest(".mode"); if (b) setMod
 // kind: "draw" (drag on the page), "tap" (tap to place), "action" (runs at once)
 const TOOLS = {
   view: [
-    { id: "read", icon: "speaker", label: "Read aloud", kind: "action", run: () => startReading() },
-    { id: "reflow", icon: "book", label: "Reading", kind: "action", run: () => openReadingMode() },
-    { id: "night", icon: "moon", label: "Night", kind: "action", run: () => toggleNight() },
-    { id: "toc", icon: "bookmark", label: "Bookmarks", kind: "action", run: () => toggleSide() },
-    { id: "spread", icon: "layers", label: "Two pages", kind: "action", run: () => toggleSpread() },
-    { id: "compare", icon: "split", label: "Compare", kind: "action", run: () => compareTool() },
-    { id: "print", icon: "print", label: "Print", kind: "action", run: () => printTool() },
-    { id: "goto", icon: "pages", label: "Go to page", kind: "action", run: () => askGoTo() },
-    { id: "fit", icon: "fit_width", label: "Fit width", kind: "action", run: () => setZoom(1) },
-    { id: "copytext", icon: "copy", label: "Copy text", kind: "draw", hint: "Drag over the text to select it." },
-    { id: "info", icon: "info", label: "Properties", kind: "action", run: () => propertiesTool() },
+    { id: "read", icon: "speaker", label: T("Read aloud"), kind: "action", run: () => startReading() },
+    { id: "reflow", icon: "book", label: T("Reading"), kind: "action", run: () => openReadingMode() },
+    { id: "night", icon: "moon", label: T("Night"), kind: "action", run: () => toggleNight() },
+    { id: "toc", icon: "bookmark", label: T("Bookmarks"), kind: "action", run: () => toggleSide() },
+    { id: "spread", icon: "layers", label: T("Two pages"), kind: "action", run: () => toggleSpread() },
+    { id: "compare", icon: "split", label: T("Compare"), kind: "action", run: () => compareTool() },
+    { id: "print", icon: "print", label: T("Print"), kind: "action", run: () => printTool() },
+    { id: "goto", icon: "pages", label: T("Go to page"), kind: "action", run: () => askGoTo() },
+    { id: "fit", icon: "fit_width", label: T("Fit width"), kind: "action", run: () => setZoom(1) },
+    { id: "copytext", icon: "copy", label: T("Copy text"), kind: "draw", hint: T("Drag over the text to select it.") },
+    { id: "info", icon: "info", label: T("Properties"), kind: "action", run: () => propertiesTool() },
   ],
   comment: [
-    { id: "select", icon: "cursor", label: "Select", kind: "draw", hint: "Tap a comment to edit, move or delete it." },
-    { id: "highlight", icon: "highlight", label: "Highlight", kind: "draw", hint: "Drag over the text." },
-    { id: "underline", icon: "underline", label: "Underline", kind: "draw", hint: "Drag over the text." },
-    { id: "strike", icon: "strike", label: "Strike out", kind: "draw", hint: "Drag over the text." },
-    { id: "squiggly", icon: "squiggly", label: "Squiggly", kind: "draw", hint: "Drag over the text." },
-    { id: "pen", icon: "pen", label: "Draw", kind: "draw", hint: "Draw with your finger. Tap Draw again to scroll." },
-    { id: "rect", icon: "rect", label: "Rectangle", kind: "draw", hint: "Drag to draw a rectangle." },
-    { id: "ellipse", icon: "ellipse", label: "Ellipse", kind: "draw", hint: "Drag to draw an ellipse." },
-    { id: "arrow", icon: "arrow", label: "Arrow", kind: "draw", hint: "Drag to draw an arrow." },
-    { id: "line", icon: "line", label: "Line", kind: "draw", hint: "Drag to draw a line." },
-    { id: "note", icon: "note", label: "Note", kind: "tap", hint: "Tap where the note goes." },
-    { id: "textbox", icon: "textbox", label: "Text box", kind: "tap", hint: "Tap where the text box goes." },
-    { id: "stamp", icon: "stamp", label: "Stamp", kind: "tap", hint: "Tap where the stamp goes." },
-    { id: "eraser", icon: "eraser", label: "Eraser", kind: "tap", hint: "Tap a comment to delete it." },
-    { id: "color", icon: "color", label: "Color", kind: "action", run: () => colorTool() },
-    { id: "exportnotes", icon: "text_file", label: "Export notes", kind: "action", run: () => exportNotesTool() },
+    { id: "select", icon: "cursor", label: T("Select"), kind: "draw", hint: T("Tap a comment to edit, move or delete it.") },
+    { id: "highlight", icon: "highlight", label: T("Highlight"), kind: "draw", hint: T("Drag over the text.") },
+    { id: "underline", icon: "underline", label: T("Underline"), kind: "draw", hint: T("Drag over the text.") },
+    { id: "strike", icon: "strike", label: T("Strike out"), kind: "draw", hint: T("Drag over the text.") },
+    { id: "squiggly", icon: "squiggly", label: T("Squiggly"), kind: "draw", hint: T("Drag over the text.") },
+    { id: "pen", icon: "pen", label: T("Draw"), kind: "draw", hint: T("Draw with your finger. Tap Draw again to scroll.") },
+    { id: "rect", icon: "rect", label: T("Rectangle"), kind: "draw", hint: T("Drag to draw a rectangle.") },
+    { id: "ellipse", icon: "ellipse", label: T("Ellipse"), kind: "draw", hint: T("Drag to draw an ellipse.") },
+    { id: "arrow", icon: "arrow", label: T("Arrow"), kind: "draw", hint: T("Drag to draw an arrow.") },
+    { id: "line", icon: "line", label: T("Line"), kind: "draw", hint: T("Drag to draw a line.") },
+    { id: "note", icon: "note", label: T("Note"), kind: "tap", hint: T("Tap where the note goes.") },
+    { id: "textbox", icon: "textbox", label: T("Text box"), kind: "tap", hint: T("Tap where the text box goes.") },
+    { id: "stamp", icon: "stamp", label: T("Stamp"), kind: "tap", hint: T("Tap where the stamp goes.") },
+    { id: "eraser", icon: "eraser", label: T("Eraser"), kind: "tap", hint: T("Tap a comment to delete it.") },
+    { id: "color", icon: "color", label: T("Color"), kind: "action", run: () => colorTool() },
+    { id: "exportnotes", icon: "text_file", label: T("Export notes"), kind: "action", run: () => exportNotesTool() },
   ],
   edit: [
-    { id: "edittext", icon: "edit", label: "Edit text", kind: "tap", hint: "Tap a paragraph to change it." },
-    { id: "addtext", icon: "add_text", label: "Add text", kind: "tap", hint: "Tap where the text goes." },
-    { id: "addimage", icon: "add_image", label: "Add picture", kind: "tap", hint: "Tap where the picture goes." },
-    { id: "redact", icon: "redact", label: "Redact", kind: "draw", hint: "Drag over what must disappear." },
-    { id: "applyredact", icon: "redact_apply", label: "Apply redaction", kind: "action", run: () => applyRedactions() },
-    { id: "watermark", icon: "watermark", label: "Watermark", kind: "action", run: () => watermarkTool() },
-    { id: "pagenum", icon: "page_number", label: "Page numbers", kind: "action", run: () => pageNumbersTool() },
+    { id: "edittext", icon: "edit", label: T("Edit text"), kind: "tap", hint: T("Tap a paragraph to change it.") },
+    { id: "addtext", icon: "add_text", label: T("Add text"), kind: "tap", hint: T("Tap where the text goes.") },
+    { id: "addimage", icon: "add_image", label: T("Add picture"), kind: "tap", hint: T("Tap where the picture goes.") },
+    { id: "redact", icon: "redact", label: T("Redact"), kind: "draw", hint: T("Drag over what must disappear.") },
+    { id: "applyredact", icon: "redact_apply", label: T("Apply redaction"), kind: "action", run: () => applyRedactions() },
+    { id: "watermark", icon: "watermark", label: T("Watermark"), kind: "action", run: () => watermarkTool() },
+    { id: "pagenum", icon: "page_number", label: T("Page numbers"), kind: "action", run: () => pageNumbersTool() },
   ],
   sign: [
-    { id: "signature", icon: "sign", label: "Signature", kind: "tap", hint: "Tap where to sign." },
-    { id: "initials", icon: "pen", label: "Initials", kind: "tap", hint: "Tap where to put your initials." },
-    { id: "filltext", icon: "add_text", label: "Text", kind: "tap", hint: "Tap where to write." },
-    { id: "check", icon: "check", label: "Check", kind: "tap", hint: "Tap to put a check mark." },
-    { id: "cross", icon: "cross", label: "Cross", kind: "tap", hint: "Tap to put a cross." },
-    { id: "dot", icon: "dot", label: "Dot", kind: "tap", hint: "Tap to put a dot." },
-    { id: "date", icon: "date", label: "Date", kind: "tap", hint: "Tap where the date goes." },
-    { id: "flatten", icon: "flatten", label: "Flatten", kind: "action", run: () => flattenTool() },
+    { id: "signature", icon: "sign", label: T("Signature"), kind: "tap", hint: T("Tap where to sign.") },
+    { id: "initials", icon: "pen", label: T("Initials"), kind: "tap", hint: T("Tap where to put your initials.") },
+    { id: "filltext", icon: "add_text", label: T("Text"), kind: "tap", hint: T("Tap where to write.") },
+    { id: "check", icon: "check", label: T("Check"), kind: "tap", hint: T("Tap to put a check mark.") },
+    { id: "cross", icon: "cross", label: T("Cross"), kind: "tap", hint: T("Tap to put a cross.") },
+    { id: "dot", icon: "dot", label: T("Dot"), kind: "tap", hint: T("Tap to put a dot.") },
+    { id: "date", icon: "date", label: T("Date"), kind: "tap", hint: T("Tap where the date goes.") },
+    { id: "flatten", icon: "flatten", label: T("Flatten"), kind: "action", run: () => flattenTool() },
   ],
   pages: [
-    { id: "organize", icon: "thumbs", label: "Organize", kind: "action", run: () => openOrganize() },
-    { id: "rotl", icon: "rotate_left", label: "Rotate left", kind: "action", run: () => rotateCurrent(-90) },
-    { id: "rotr", icon: "rotate_right", label: "Rotate right", kind: "action", run: () => rotateCurrent(90) },
-    { id: "blank", icon: "insert_blank", label: "Blank page", kind: "action", run: () => insertBlank(currentPage() + 1) },
-    { id: "insertfile", icon: "insert", label: "Insert file", kind: "action", run: () => insertFileTool(currentPage() + 1) },
-    { id: "crop", icon: "crop", label: "Crop", kind: "draw", hint: "Drag the area to keep." },
-    { id: "extract", icon: "extract", label: "Extract", kind: "action", run: () => extractTool() },
-    { id: "split", icon: "split", label: "Split", kind: "action", run: () => splitTool() },
-    { id: "delpage", icon: "trash", label: "Delete page", kind: "action", run: () => deletePages([currentPage()]) },
+    { id: "organize", icon: "thumbs", label: T("Organize"), kind: "action", run: () => openOrganize() },
+    { id: "rotl", icon: "rotate_left", label: T("Rotate left"), kind: "action", run: () => rotateCurrent(-90) },
+    { id: "rotr", icon: "rotate_right", label: T("Rotate right"), kind: "action", run: () => rotateCurrent(90) },
+    { id: "blank", icon: "insert_blank", label: T("Blank page"), kind: "action", run: () => insertBlank(currentPage() + 1) },
+    { id: "insertfile", icon: "insert", label: T("Insert file"), kind: "action", run: () => insertFileTool(currentPage() + 1) },
+    { id: "crop", icon: "crop", label: T("Crop"), kind: "draw", hint: T("Drag the area to keep.") },
+    { id: "extract", icon: "extract", label: T("Extract"), kind: "action", run: () => extractTool() },
+    { id: "split", icon: "split", label: T("Split"), kind: "action", run: () => splitTool() },
+    { id: "delpage", icon: "trash", label: T("Delete page"), kind: "action", run: () => deletePages([currentPage()]) },
   ],
   tools: [
-    { id: "compress", icon: "compress", label: "Compress", kind: "action", run: () => compressTool() },
+    { id: "compress", icon: "compress", label: T("Compress"), kind: "action", run: () => compressTool() },
     { id: "ocr", icon: "ocr", label: "OCR", kind: "action", run: () => ocrTool() },
-    { id: "toword", icon: "word", label: "To Word", kind: "action", run: () => convertTool("word") },
-    { id: "toexcel", icon: "excel", label: "To Excel", kind: "action", run: () => convertTool("excel") },
-    { id: "toppt", icon: "ppt", label: "To PowerPoint", kind: "action", run: () => convertTool("ppt") },
-    { id: "toimg", icon: "image", label: "To images", kind: "action", run: () => convertTool("images") },
-    { id: "totxt", icon: "text_file", label: "To text", kind: "action", run: () => convertTool("text") },
-    { id: "protect", icon: "lock", label: "Protect", kind: "action", run: () => protectTool() },
-    { id: "unlock", icon: "unlock", label: "Unlock", kind: "action", run: () => unlockTool() },
-    { id: "merge", icon: "merge", label: "Merge", kind: "action", run: () => insertFileTool(S.doc.pages.length) },
-    { id: "flat", icon: "flatten", label: "Flatten", kind: "action", run: () => flattenTool() },
-    { id: "props", icon: "info", label: "Properties", kind: "action", run: () => propertiesTool() },
+    { id: "toword", icon: "word", label: T("To Word"), kind: "action", run: () => convertTool("word") },
+    { id: "toexcel", icon: "excel", label: T("To Excel"), kind: "action", run: () => convertTool("excel") },
+    { id: "toppt", icon: "ppt", label: T("To PowerPoint"), kind: "action", run: () => convertTool("ppt") },
+    { id: "toimg", icon: "image", label: T("To images"), kind: "action", run: () => convertTool("images") },
+    { id: "totxt", icon: "text_file", label: T("To text"), kind: "action", run: () => convertTool("text") },
+    { id: "protect", icon: "lock", label: T("Protect"), kind: "action", run: () => protectTool() },
+    { id: "unlock", icon: "unlock", label: T("Unlock"), kind: "action", run: () => unlockTool() },
+    { id: "merge", icon: "merge", label: T("Merge"), kind: "action", run: () => insertFileTool(S.doc.pages.length) },
+    { id: "flat", icon: "flatten", label: T("Flatten"), kind: "action", run: () => flattenTool() },
+    { id: "props", icon: "info", label: T("Properties"), kind: "action", run: () => propertiesTool() },
   ],
 };
 
@@ -759,7 +770,7 @@ function setMode(m) {
   updateDrawing();
   hint(null);
   refreshVisibleOverlays();
-  if (m === "sign" && S.doc && S.doc.forms) hint("Tap a blue field to fill it in.", 3000);
+  if (m === "sign" && S.doc && S.doc.forms) hint(T("Tap a blue field to fill it in."), 3000);
 }
 function renderToolstrip() {
   const list = TOOLS[S.mode];
@@ -949,15 +960,15 @@ async function finishGesture() {
   const id = S.doc.id;
   try {
     if (t === "pen") {
-      if (G.pts.length > 1) await apply("Drawing…", "addInk", [i, [G.pts.map(q => [q[0], q[1]])], S.color, S.width, 1, ""], [i]);
+      if (G.pts.length > 1) await apply(T("Drawing…"), "addInk", [i, [G.pts.map(q => [q[0], q[1]])], S.color, S.width, 1, ""], [i]);
       return;
     }
     if (["highlight", "underline", "strike", "squiggly"].includes(t)) {
       await markSelection(i, p0, p1);
       const rects = lineRects(selWords);
       selWords = [];
-      if (!rects.length) { toast("No text here. Use Draw or a shape for pictures."); refreshOverlay(i); return; }
-      await apply("Adding…", "addMarkup", [i, t, rects, t === "highlight" ? S.hlColor : S.color, 1, ""], [i]);
+      if (!rects.length) { toast(T("No text here. Use Draw or a shape for pictures.")); refreshOverlay(i); return; }
+      await apply(T("Adding…"), "addMarkup", [i, t, rects, t === "highlight" ? S.hlColor : S.color, 1, ""], [i]);
       return;
     }
     if (t === "copytext") {
@@ -970,30 +981,30 @@ async function finishGesture() {
     }
     if (["rect", "ellipse", "arrow", "line"].includes(t)) {
       if (!moved) return;
-      await apply("Adding…", "addShape", [i, t, p0, p1, S.color, S.width, null, ""], [i]);
+      await apply(T("Adding…"), "addShape", [i, t, p0, p1, S.color, S.width, null, ""], [i]);
       return;
     }
     if (t === "redact") {
       if (!moved) return;
-      await apply("Marking…", "addRedaction", [i, rectOf(p0, p1)], [i]);
-      banner("Marked areas are not removed until you apply the redaction.", "Apply now", () => applyRedactions());
+      await apply(T("Marking…"), "addRedaction", [i, rectOf(p0, p1)], [i]);
+      banner(T("Marked areas are not removed until you apply the redaction."), T("Apply now"), () => applyRedactions());
       return;
     }
     if (t === "crop") {
       if (!moved) return;
       const r = rectOf(p0, p1);
-      const v = await choose("Crop", [{ value: "one", label: "This page", icon: "crop" }, { value: "all", label: "All pages", icon: "pages" }]);
+      const v = await choose(T("Crop"), [{ value: "one", label: T("This page"), icon: "crop" }, { value: "all", label: T("All pages"), icon: "pages" }]);
       if (!v) return;
       const pages = v === "all" ? S.doc.pages.map((_, k) => k) : [i];
-      await apply("Cropping…", "cropPages", [pages, r], pages);
+      await apply(T("Cropping…"), "cropPages", [pages, r], pages);
       selectTool(null);
       return;
     }
     if (t === "select") {
       if (G.move && moved && S.sel) {
         const dx = p1[0] - p0[0], dy = p1[1] - p0[1];
-        const ok = await apply("Moving…", "moveAnnot", [i, S.sel.index, dx, dy], [i]);
-        if (ok === false) toast("Highlights stay on their text.");
+        const ok = await apply(T("Moving…"), "moveAnnot", [i, S.sel.index, dx, dy], [i]);
+        if (ok === false) toast(T("Highlights stay on their text."));
         return;
       }
       if (!moved) await tapSelect(i, p0);
@@ -1021,37 +1032,37 @@ async function tapSelect(i, pt) {
 }
 async function annotActions(i, a) {
   const items = [];
-  if (["Text", "FreeText"].includes(a.type) || a.contents) items.push({ value: "text", label: a.type === "FreeText" ? "Edit text" : "Edit note", icon: "edit", sub: a.contents ? a.contents.slice(0, 80) : "" });
-  items.push({ value: "color", label: "Change color", icon: "color" });
-  if (!["Highlight", "Underline", "StrikeOut", "Squiggly"].includes(a.type)) items.push({ value: "move", label: "Move", icon: "hand", sub: "Drag the blue box" });
+  if (["Text", "FreeText"].includes(a.type) || a.contents) items.push({ value: "text", label: a.type === "FreeText" ? T("Edit text") : T("Edit note"), icon: "edit", sub: a.contents ? a.contents.slice(0, 80) : "" });
+  items.push({ value: "color", label: T("Change color"), icon: "color" });
+  if (!["Highlight", "Underline", "StrikeOut", "Squiggly"].includes(a.type)) items.push({ value: "move", label: T("Move"), icon: "hand", sub: T("Drag the blue box") });
   items.push({ value: "delete", label: "Delete", icon: "trash" });
   const v = await choose(typeName(a.type) + (a.author ? " · " + a.author : ""), items);
-  if (v === "delete") { await apply("Deleting…", "deleteAnnot", [i, a.index], [i]); }
+  if (v === "delete") { await apply(T("Deleting…"), "deleteAnnot", [i, a.index], [i]); }
   else if (v === "color") {
     const c = await pickColor(a.color || S.color);
-    if (c) await apply("Changing…", "setAnnotColor", [i, a.index, c], [i]);
+    if (c) await apply(T("Changing…"), "setAnnotColor", [i, a.index, c], [i]);
   } else if (v === "text") {
-    const r = await form(typeName(a.type), [{ name: "t", type: "textarea", value: a.contents }], "Save");
-    if (r) await apply("Saving…", "setAnnotText", [i, a.index, r.t], [i]);
-  } else if (v === "move") hint("Drag the blue box to move it.");
+    const r = await form(typeName(a.type), [{ name: "t", type: "textarea", value: a.contents }], T("Save"));
+    if (r) await apply(T("Saving…"), "setAnnotText", [i, a.index, r.t], [i]);
+  } else if (v === "move") hint(T("Drag the blue box to move it."));
   else { S.sel = null; refreshOverlay(i); }
 }
 function typeName(t) {
-  return ({ Text: "Note", FreeText: "Text box", Highlight: "Highlight", Underline: "Underline", StrikeOut: "Strike out", Squiggly: "Squiggly",
-    Ink: "Drawing", Square: "Rectangle", Circle: "Ellipse", Line: "Line", Stamp: "Stamp", Redact: "Redaction mark" })[t] || t;
+  return ({ Text: T("Note"), FreeText: T("Text box"), Highlight: T("Highlight"), Underline: T("Underline"), StrikeOut: T("Strike out"), Squiggly: T("Squiggly"),
+    Ink: T("Drawing"), Square: T("Rectangle"), Circle: T("Ellipse"), Line: T("Line"), Stamp: T("Stamp"), Redact: T("Redaction mark") })[t] || t;
 }
 
 async function textActions(i, text) {
-  const v = await choose("Selected text", [
-    { value: "copy", label: "Copy", icon: "copy", sub: text.slice(0, 120) },
-    { value: "speak", label: "Read aloud", icon: "speaker" },
-    { value: "search", label: "Find in document", icon: "search" },
+  const v = await choose(T("Selected text"), [
+    { value: "copy", label: T("Copy"), icon: "copy", sub: text.slice(0, 120) },
+    { value: "speak", label: T("Read aloud"), icon: "speaker" },
+    { value: "search", label: T("Find in document"), icon: "search" },
   ]);
   if (v === "copy") {
-    try { await navigator.clipboard.writeText(text); toast("Copied."); }
+    try { await navigator.clipboard.writeText(text); toast(T("Copied.")); }
     catch (_) {
       const ta = document.createElement("textarea"); ta.value = text; document.body.appendChild(ta); ta.select();
-      document.execCommand("copy"); ta.remove(); toast("Copied.");
+      document.execCommand("copy"); ta.remove(); toast(T("Copied."));
     }
   } else if (v === "speak") speakText(text);
   else if (v === "search") { openSearch(); $("searchInput").value = text.slice(0, 60); runSearch(); }
@@ -1061,55 +1072,55 @@ async function textActions(i, text) {
 async function tapTool(t, i, pt) {
   const id = S.doc.id, p = S.doc.pages[i];
   if (t === "note") {
-    const r = await form("Note", [{ name: "t", type: "textarea", placeholder: "Write a note" }], "Add");
-    if (r && r.t.trim()) await apply("Adding…", "addNote", [i, [pt[0] - 10, pt[1] - 10], r.t, S.hlColor, ""], [i]);
+    const r = await form(T("Note"), [{ name: "t", type: "textarea", placeholder: T("Write a note") }], T("Add"));
+    if (r && r.t.trim()) await apply(T("Adding…"), "addNote", [i, [pt[0] - 10, pt[1] - 10], r.t, S.hlColor, ""], [i]);
   } else if (t === "textbox") {
-    const r = await form("Text box", [{ name: "t", type: "textarea", placeholder: "Text" }, { name: "size", label: "Size", type: "number", value: 12, min: 4, max: 96 }], "Add");
+    const r = await form(T("Text box"), [{ name: "t", type: "textarea", placeholder: T("Text") }, { name: "size", label: T("Size"), type: "number", value: 12, min: 4, max: 96 }], T("Add"));
     if (r && r.t.trim()) {
       const size = r.size || 12, lines = r.t.split("\n");
       const longest = Math.max(...lines.map(l => l.length));
       const w = Math.min(p.w - pt[0] - 4, Math.max(60, longest * size * 0.55 + 10)), h = lines.length * size * 1.3 + 8;
-      await apply("Adding…", "addTextBox", [i, [pt[0], pt[1], pt[0] + w, pt[1] + h], r.t, size, S.color, ""], [i]);
+      await apply(T("Adding…"), "addTextBox", [i, [pt[0], pt[1], pt[0] + w, pt[1] + h], r.t, size, S.color, ""], [i]);
     }
   } else if (t === "stamp" && S.pending && S.pending.stamp) {
     const w = 150, h = 42;
-    await apply("Adding…", "addStamp", [i, [pt[0] - w / 2, pt[1] - h / 2, pt[0] + w / 2, pt[1] + h / 2], null, S.pending.stamp, ""], [i]);
+    await apply(T("Adding…"), "addStamp", [i, [pt[0] - w / 2, pt[1] - h / 2, pt[0] + w / 2, pt[1] + h / 2], null, S.pending.stamp, ""], [i]);
   } else if (t === "eraser") {
     const a = await annotAt(i, pt);
-    if (a) await apply("Deleting…", "deleteAnnot", [i, a.index], [i]);
-    else toast("No comment here.");
+    if (a) await apply(T("Deleting…"), "deleteAnnot", [i, a.index], [i]);
+    else toast(T("No comment here."));
   } else if (t === "edittext") {
     const blocks = await cached(i, "blocks", "textBlocks");
     const b = blocks.find(b => inRect(pt, b.rect, 3));
-    if (!b) { toast("Tap on a paragraph."); return; }
-    const r = await form("Edit text", [
+    if (!b) { toast(T("Tap on a paragraph.")); return; }
+    const r = await form(T("Edit text"), [
       { name: "t", type: "textarea", value: b.text, rows: Math.min(10, b.lines.length + 1) },
-      { name: "size", label: "Size", type: "number", value: Math.round(b.size * 10) / 10, min: 3, max: 120 },
-      { name: "color", label: "Color", type: "color", value: b.color || "#000000", options: ["#000000", "#1d2026", "#5d6470", "#e0383e", "#1c7ed6", "#2b8a3e", "#ffffff"] },
-      { name: "bold", type: "check", text: "Bold", value: b.bold },
-    ], "Save", "The paragraph is rewritten with a standard font.");
-    if (r) await apply("Saving…", "replaceText", [i, b.rect, r.t, r.size || b.size, r.color || "#000000", r.bold ? "Helvetica-Bold" : "Helvetica"], [i]);
+      { name: "size", label: T("Size"), type: "number", value: Math.round(b.size * 10) / 10, min: 3, max: 120 },
+      { name: "color", label: T("Color"), type: "color", value: b.color || "#000000", options: ["#000000", "#1d2026", "#5d6470", "#e0383e", "#1c7ed6", "#2b8a3e", "#ffffff"] },
+      { name: "bold", type: "check", text: T("Bold"), value: b.bold },
+    ], T("Save"), T("The paragraph is rewritten with a standard font."));
+    if (r) await apply(T("Saving…"), "replaceText", [i, b.rect, r.t, r.size || b.size, r.color || "#000000", r.bold ? "Helvetica-Bold" : "Helvetica"], [i]);
   } else if (t === "addtext" || t === "filltext") {
-    const r = await form(t === "filltext" ? "Text" : "Add text", [
-      { name: "t", type: "textarea", placeholder: "Text", rows: 3 },
-      { name: "size", label: "Size", type: "number", value: t === "filltext" ? 11 : 12, min: 3, max: 120 },
-      { name: "color", label: "Color", type: "color", value: "#000000", options: ["#000000", "#e0383e", "#1c7ed6", "#2b8a3e", "#5d6470", "#ffffff"] },
-      { name: "bold", type: "check", text: "Bold", value: false },
-    ], "Add");
-    if (r && r.t.trim()) await apply("Adding…", "addText", [i, pt[0], pt[1] + (r.size || 12) * 0.35, r.t, r.size || 12, r.color, r.bold ? "Helvetica-Bold" : "Helvetica"], [i]);
+    const r = await form(t === "filltext" ? T("Text") : T("Add text"), [
+      { name: "t", type: "textarea", placeholder: T("Text"), rows: 3 },
+      { name: "size", label: T("Size"), type: "number", value: t === "filltext" ? 11 : 12, min: 3, max: 120 },
+      { name: "color", label: T("Color"), type: "color", value: "#000000", options: ["#000000", "#e0383e", "#1c7ed6", "#2b8a3e", "#5d6470", "#ffffff"] },
+      { name: "bold", type: "check", text: T("Bold"), value: false },
+    ], T("Add"));
+    if (r && r.t.trim()) await apply(T("Adding…"), "addText", [i, pt[0], pt[1] + (r.size || 12) * 0.35, r.t, r.size || 12, r.color, r.bold ? "Helvetica-Bold" : "Helvetica"], [i]);
   } else if ((t === "addimage" || t === "signature" || t === "initials") && S.pending && S.pending.image) {
     const img = S.pending.image;
     const w = t === "addimage" ? Math.min(220, p.w * 0.45) : t === "initials" ? 60 : 150;
     const h = w * img.h / img.w;
     const r = [pt[0] - w / 2, pt[1] - h / 2, pt[0] + w / 2, pt[1] + h / 2];
-    await apply("Adding…", "addImage", [i, r, img.bytes.slice()], [i]);
+    await apply(T("Adding…"), "addImage", [i, r, img.bytes.slice()], [i]);
     if (t === "addimage") selectTool(null);
   } else if (t === "check" || t === "cross" || t === "dot") {
     const s = 12;
-    await apply("Adding…", "drawSymbol", [i, [pt[0] - s / 2, pt[1] - s / 2, pt[0] + s / 2, pt[1] + s / 2], t, "#000000"], [i]);
+    await apply(T("Adding…"), "drawSymbol", [i, [pt[0] - s / 2, pt[1] - s / 2, pt[0] + s / 2, pt[1] + s / 2], t, "#000000"], [i]);
   } else if (t === "date") {
     const d = new Date().toLocaleDateString(navigator.language || "en-GB");
-    await apply("Adding…", "addText", [i, pt[0], pt[1] + 4, d, 11, "#000000", "Helvetica"], [i]);
+    await apply(T("Adding…"), "addText", [i, pt[0], pt[1] + 4, d, 11, "#000000", "Helvetica"], [i]);
   }
 }
 
@@ -1139,7 +1150,7 @@ $("pages").addEventListener("click", async (e) => {
   const l = ls.find(l => inRect(pt, l.rect, 2));
   if (l) {
     if (l.page >= 0) goToPage(l.page);
-    else if (l.uri && /^(https?|mailto|tel):/i.test(l.uri)) { if (await confirmBox("Open link?", l.uri, "Open")) openUrl(l.uri); }
+    else if (l.uri && /^(https?|mailto|tel):/i.test(l.uri)) { if (await confirmBox(T("Open link?"), l.uri, T("Open"))) openUrl(l.uri); }
     return;
   }
   // notes and other comments
@@ -1155,7 +1166,7 @@ $("pages").addEventListener("click", async (e) => {
 async function fillField(i, w) {
   const t = w.type;
   if (t === "checkbox" || t === "radiobutton") {
-    await apply("Saving…", "setWidget", [i, w.index, ""], [i]);
+    await apply(T("Saving…"), "setWidget", [i, w.index, ""], [i]);
     return;
   }
   if (t === "signature") {
@@ -1165,57 +1176,57 @@ async function fillField(i, w) {
     const k = Math.min(bw / sig.w, bh / sig.h);
     const iw = sig.w * k, ih = sig.h * k;
     const x = r[0] + (bw - iw) / 2, y = r[1] + (bh - ih) / 2;
-    await apply("Signing…", "addImage", [i, [x, y, x + iw, y + ih], sig.bytes.slice()], [i]);
+    await apply(T("Signing…"), "addImage", [i, [x, y, x + iw, y + ih], sig.bytes.slice()], [i]);
     return;
   }
   let v;
   if (t === "combobox" || t === "listbox") {
     const opts = (w.options || []).map(o => Array.isArray(o) ? o[o.length - 1] : o);
-    v = await choose(w.name || "Choose", opts.map(o => ({ value: String(o), label: String(o), icon: String(o) === w.value ? "check" : "dot" })));
+    v = await choose(w.name || T("Choose"), opts.map(o => ({ value: String(o), label: String(o), icon: String(o) === w.value ? "check" : "dot" })));
     if (v == null) return;
   } else {
-    const r = await form(w.name || "Field", [{ name: "v", type: w.multiline ? "textarea" : "text", value: w.value || "" }], "OK");
+    const r = await form(w.name || T("Field"), [{ name: "v", type: w.multiline ? "textarea" : "text", value: w.value || "" }], "OK");
     if (!r) return;
     v = r.v;
   }
-  await apply("Saving…", "setWidget", [i, w.index, v], [i]);
+  await apply(T("Saving…"), "setWidget", [i, w.index, v], [i]);
 }
 
 // ================================================================== pickers: color, stamp, picture, signature
 function pickColor(value) {
-  return form("Color", [{ name: "c", type: "color", value, options: PALETTE }], "OK").then(r => r && r.c);
+  return form(T("Color"), [{ name: "c", type: "color", value, options: PALETTE }], "OK").then(r => r && r.c);
 }
 async function colorTool() {
-  const r = await form("Color & line", [
-    { name: "c", label: "Pen & shapes", type: "color", value: S.color },
-    { name: "h", label: "Highlight", type: "color", value: S.hlColor, options: ["#ffd43b", "#69db7c", "#4dabf7", "#f783ac", "#ff922b"] },
-    { name: "w", label: "Line width", type: "range", min: 1, max: 12, step: 0.5, value: S.width },
+  const r = await form(T("Color & line"), [
+    { name: "c", label: T("Pen & shapes"), type: "color", value: S.color },
+    { name: "h", label: T("Highlight"), type: "color", value: S.hlColor, options: ["#ffd43b", "#69db7c", "#4dabf7", "#f783ac", "#ff922b"] },
+    { name: "w", label: T("Line width"), type: "range", min: 1, max: 12, step: 0.5, value: S.width },
   ], "OK");
   if (!r) return;
   S.color = r.c || S.color; S.hlColor = r.h || S.hlColor; S.width = r.w || S.width;
   storeSet("color", S.color); storeSet("hlColor", S.hlColor); storeSet("width", S.width);
   renderToolstrip();
 }
-const STAMPS = ["Approved", "Draft", "Confidential", "Final", "Not Approved", "For Comment", "Expired", "Top Secret", "Departmental", "For Public Release"];
+const STAMPS = [T("Approved"), T("Draft"), T("Confidential"), T("Final"), T("Not Approved"), T("For Comment"), T("Expired"), T("Top Secret"), T("Departmental"), T("For Public Release")];
 async function chooseStamp() {
   const mine = storeGet("stamps", []);
-  const v = await choose("Stamp", [
-    ...mine.map(s => ({ value: "m:" + s, label: s, icon: "stamp", sub: "Your stamp" })),
+  const v = await choose(T("Stamp"), [
+    ...mine.map(s => ({ value: "m:" + s, label: s, icon: "stamp", sub: T("Your stamp") })),
     ...STAMPS.map(s => ({ value: s, label: s, icon: "stamp" })),
-    { value: "+new", label: "New stamp…", icon: "plus", sub: "Your own text, saved for next time" },
-    ...(mine.length ? [{ value: "+del", label: "Delete one of your stamps", icon: "trash" }] : []),
+    { value: "+new", label: T("New stamp…"), icon: "plus", sub: T("Your own text, saved for next time") },
+    ...(mine.length ? [{ value: "+del", label: T("Delete one of your stamps"), icon: "trash" }] : []),
   ]);
   if (!v) return null;
   if (v === "+new") {
-    const r = await form("New stamp", [{ name: "t", label: "Text", type: "text", placeholder: "e.g. Checked by Gabriele", required: true }], "Save");
+    const r = await form(T("New stamp"), [{ name: "t", label: T("Text"), type: "text", placeholder: T("e.g. Checked by Gabriele"), required: true }], T("Save"));
     if (!r || !r.t.trim()) return null;
     const t = r.t.trim().slice(0, 40);
     storeSet("stamps", [t, ...mine.filter(x => x !== t)].slice(0, 20));
     return t;
   }
   if (v === "+del") {
-    const d = await choose("Delete which stamp?", mine.map(s => ({ value: s, label: s, icon: "trash" })));
-    if (d) { storeSet("stamps", mine.filter(x => x !== d)); toast("Deleted."); }
+    const d = await choose(T("Delete which stamp?"), mine.map(s => ({ value: s, label: s, icon: "trash" })));
+    if (d) { storeSet("stamps", mine.filter(x => x !== d)); toast(T("Deleted.")); }
     return null;
   }
   return v.startsWith("m:") ? v.slice(2) : v;
@@ -1244,20 +1255,20 @@ async function chooseSignature(kind) {
   const key = kind === "initials" ? "initials" : "signatures";
   const saved = storeGet(key, []);
   if (saved.length) {
-    const items = saved.map((s, k) => ({ value: "s" + k, label: kind === "initials" ? "Initials " + (k + 1) : "Signature " + (k + 1),
+    const items = saved.map((s, k) => ({ value: "s" + k, label: kind === "initials" ? T("Initials {0}{1}", k, 1) : T("Signature {0}{1}", k, 1),
       html: `<img src="${s.url}" style="height:38px;max-width:140px;background:#fff;border-radius:6px;padding:2px">` }));
-    items.push({ value: "new", label: "New " + (kind === "initials" ? "initials" : "signature"), icon: "plus" });
-    items.push({ value: "manage", label: "Delete saved", icon: "trash" });
-    const v = await choose(kind === "initials" ? "Initials" : "Signature", items);
+    items.push({ value: "new", label: T("New {0}", (kind === "initials" ? "initials" : "signature")), icon: "plus" });
+    items.push({ value: "manage", label: T("Delete saved"), icon: "trash" });
+    const v = await choose(kind === "initials" ? T("Initials") : T("Signature"), items);
     if (!v) return null;
     if (v === "manage") {
-      const d = await choose("Delete which one?", saved.map((s, k) => ({ value: k, label: "Delete " + (k + 1), html: `<img src="${s.url}" style="height:34px;background:#fff;border-radius:6px">` })));
-      if (d != null) { saved.splice(d, 1); storeSet(key, saved); toast("Deleted."); }
+      const d = await choose(T("Delete which one?"), saved.map((s, k) => ({ value: k, label: "Delete " + (k + 1), html: `<img src="${s.url}" style="height:34px;background:#fff;border-radius:6px">` })));
+      if (d != null) { saved.splice(d, 1); storeSet(key, saved); toast(T("Deleted.")); }
       return null;
     }
     if (v !== "new") return dataUrlToSig(saved[+v.slice(1)].url);
   }
-  const url = await drawPad(kind === "initials" ? "Draw your initials" : "Draw your signature");
+  const url = await drawPad(kind === "initials" ? T("Draw your initials") : T("Draw your signature"));
   if (!url) return null;
   if (url.remember) { saved.unshift({ url: url.url }); storeSet(key, saved.slice(0, 6)); }
   return dataUrlToSig(url.url);
@@ -1296,7 +1307,7 @@ function drawPad(title) {
     card.querySelector("[data-clear]").onclick = () => { g.clearRect(0, 0, cv.width, cv.height); any = false; };
     card.querySelector("[data-no]").onclick = () => closeSheet(null);
     card.querySelector("[data-ok]").onclick = () => {
-      if (!any) { toast("Draw first."); return; }
+      if (!any) { toast(T("Draw first.")); return; }
       closeSheet({ url: trimCanvas(cv), remember: card.querySelector("[data-rem]").checked });
     };
   });
@@ -1317,21 +1328,21 @@ function trimCanvas(cv) {
 
 // ================================================================== edit tools
 async function applyRedactions() {
-  const n = await apply("Removing content…", "applyRedactions", [], "all");
+  const n = await apply(T("Removing content…"), "applyRedactions", [], "all");
   hideBanner();
-  if (n === 0) toast("Nothing is marked. Use Redact to mark areas first.");
-  else if (n) toast(`${n} area(s) removed for good. Save to keep the change.`);
+  if (n === 0) toast(T("Nothing is marked. Use Redact to mark areas first."));
+  else if (n) toast(T("{0} area(s) removed for good. Save to keep the change.", n));
 }
 async function askPages(title) {
   const n = S.doc.pages.length;
   if (n === 1) return [0];
-  const r = await form(title, [{ name: "which", label: "Pages", type: "seg", value: "all", options: [{ value: "all", label: "All" }, { value: "cur", label: "This page" }, { value: "range", label: "Range" }] },
-    { name: "range", label: "Range", type: "text", placeholder: "e.g. 1-3, 5", value: "" }], "Next");
+  const r = await form(title, [{ name: "which", label: T("Pages"), type: "seg", value: "all", options: [{ value: "all", label: T("All") }, { value: "cur", label: T("This page") }, { value: "range", label: T("Range") }] },
+    { name: "range", label: T("Range"), type: "text", placeholder: T("e.g. 1-3, 5"), value: "" }], T("Next"));
   if (!r) return null;
   if (r.which === "all") return [...Array(n).keys()];
   if (r.which === "cur") return [currentPage()];
   const pages = parseRange(r.range, n);
-  if (!pages.length) { toast("Write the pages like 1-3, 5."); return null; }
+  if (!pages.length) { toast(T("Write the pages like 1-3, 5.")); return null; }
   return pages;
 }
 function parseRange(s, n) {
@@ -1345,45 +1356,45 @@ function parseRange(s, n) {
   return [...out].sort((a, b) => a - b);
 }
 async function watermarkTool() {
-  const r = await form("Watermark", [
-    { name: "text", label: "Text", type: "text", value: "CONFIDENTIAL" },
-    { name: "size", label: "Size", type: "number", value: 60, min: 8, max: 300 },
-    { name: "color", label: "Color", type: "color", value: "#e0383e", options: ["#e0383e", "#1d2026", "#5d6470", "#1c7ed6", "#2b8a3e"] },
-    { name: "opacity", label: "Opacity", type: "range", min: 5, max: 100, step: 5, value: 25, fmt: v => v + "%" },
-    { name: "angle", label: "Angle", type: "seg", value: "45", options: [{ value: "0", label: "0°" }, { value: "45", label: "45°" }, { value: "90", label: "90°" }] },
-    { name: "tile", type: "check", text: "Repeat across the page", value: false },
-  ], "Next");
+  const r = await form(T("Watermark"), [
+    { name: "text", label: T("Text"), type: "text", value: "CONFIDENTIAL" },
+    { name: "size", label: T("Size"), type: "number", value: 60, min: 8, max: 300 },
+    { name: "color", label: T("Color"), type: "color", value: "#e0383e", options: ["#e0383e", "#1d2026", "#5d6470", "#1c7ed6", "#2b8a3e"] },
+    { name: "opacity", label: T("Opacity"), type: "range", min: 5, max: 100, step: 5, value: 25, fmt: v => v + "%" },
+    { name: "angle", label: T("Angle"), type: "seg", value: "45", options: [{ value: "0", label: "0°" }, { value: "45", label: "45°" }, { value: "90", label: "90°" }] },
+    { name: "tile", type: "check", text: T("Repeat across the page"), value: false },
+  ], T("Next"));
   if (!r || !r.text.trim()) return;
-  const pages = await askPages("Watermark pages");
+  const pages = await askPages(T("Watermark pages"));
   if (!pages) return;
-  await apply("Adding watermark…", "watermark", [pages, r.text, r.size || 60, r.color, (r.opacity || 25) / 100, +r.angle, r.tile], pages);
+  await apply(T("Adding watermark…"), "watermark", [pages, r.text, r.size || 60, r.color, (r.opacity || 25) / 100, +r.angle, r.tile], pages);
 }
 async function pageNumbersTool() {
-  const r = await form("Page numbers", [
-    { name: "fmt", label: "Format", type: "select", value: "{n}", options: [{ value: "{n}", label: "1" }, { value: "{n} / {total}", label: "1 / 10" }, { value: "Page {n}", label: "Page 1" }, { value: "Page {n} of {total}", label: "Page 1 of 10" }, { value: "- {n} -", label: "- 1 -" }] },
-    { name: "pos", label: "Position", type: "select", value: "bottom-center", options: [
-      { value: "bottom-center", label: "Bottom center" }, { value: "bottom-right", label: "Bottom right" }, { value: "bottom-left", label: "Bottom left" },
-      { value: "top-center", label: "Top center" }, { value: "top-right", label: "Top right" }, { value: "top-left", label: "Top left" }] },
-    { name: "start", label: "Start at", type: "number", value: 1, min: 0 },
-    { name: "size", label: "Size", type: "number", value: 11, min: 5, max: 40 },
-  ], "Next");
+  const r = await form(T("Page numbers"), [
+    { name: "fmt", label: T("Format"), type: "select", value: "{n}", options: [{ value: "{n}", label: "1" }, { value: "{n} / {total}", label: "1 / 10" }, { value: "Page {n}", label: T("Page 1") }, { value: "Page {n} of {total}", label: T("Page 1 of 10") }, { value: "- {n} -", label: "- 1 -" }] },
+    { name: "pos", label: T("Position"), type: "select", value: "bottom-center", options: [
+      { value: "bottom-center", label: T("Bottom center") }, { value: "bottom-right", label: T("Bottom right") }, { value: "bottom-left", label: T("Bottom left") },
+      { value: "top-center", label: T("Top center") }, { value: "top-right", label: T("Top right") }, { value: "top-left", label: T("Top left") }] },
+    { name: "start", label: T("Start at"), type: "number", value: 1, min: 0 },
+    { name: "size", label: T("Size"), type: "number", value: 11, min: 5, max: 40 },
+  ], T("Next"));
   if (!r) return;
-  const pages = await askPages("Number which pages");
+  const pages = await askPages(T("Number which pages"));
   if (!pages) return;
-  await apply("Numbering…", "pageNumbers", [pages, r.fmt, r.pos, r.start ?? 1, r.size || 11, "#000000", 28], pages);
+  await apply(T("Numbering…"), "pageNumbers", [pages, r.fmt, r.pos, r.start ?? 1, r.size || 11, "#000000", 28], pages);
 }
 async function flattenTool() {
-  if (!(await confirmBox("Flatten", "Comments and form fields become part of the page and can no longer be changed.", "Flatten"))) return;
-  await apply("Flattening…", "flatten", [], "all");
+  if (!(await confirmBox(T("Flatten"), T("Comments and form fields become part of the page and can no longer be changed."), T("Flatten")))) return;
+  await apply(T("Flattening…"), "flatten", [], "all");
 }
 
 // ================================================================== pages
-async function rotateCurrent(delta) { const i = currentPage(); await apply("Rotating…", "rotatePages", [[i], delta], [i]); }
-async function insertBlank(at) { await apply("Adding page…", "insertBlank", [at], "all"); goToPage(at); }
+async function rotateCurrent(delta) { const i = currentPage(); await apply(T("Rotating…"), "rotatePages", [[i], delta], [i]); }
+async function insertBlank(at) { await apply(T("Adding page…"), "insertBlank", [at], "all"); goToPage(at); }
 async function deletePages(pages) {
-  if (pages.length >= S.doc.pages.length) { toast("A PDF must keep at least one page."); return false; }
-  if (!(await confirmBox(`Delete ${pages.length === 1 ? "page " + (pages[0] + 1) : pages.length + " pages"}?`, "", "Delete"))) return false;
-  await apply("Deleting…", "deletePages", [pages], "all");
+  if (pages.length >= S.doc.pages.length) { toast(T("A PDF must keep at least one page.")); return false; }
+  if (!(await confirmBox(T("Delete {0}?", pages.length === 1 ? "page " + (pages[0] + 1) : pages.length + " pages"), "", "Delete"))) return false;
+  await apply(T("Deleting…"), "deletePages", [pages], "all");
   return true;
 }
 async function insertFileTool(at) {
@@ -1396,38 +1407,38 @@ async function insertFileTool(at) {
       let pw = null;
       for (;;) {
         try {
-          await task("Inserting " + f.name + "…", async () => { const inf = await call("insertFile", S.doc.id, at, bytes.slice(), f.name.endsWith(".pdf") ? f.name : "x.pdf", pw); await changed("all", inf); });
+          await task(T("Inserting {0}…", f.name), async () => { const inf = await call("insertFile", S.doc.id, at, bytes.slice(), f.name.endsWith(".pdf") ? f.name : "x.pdf", pw); await changed("all", inf); });
           break;
         } catch (e) {
           if (!/NEEDS_PASSWORD/.test(e.message)) throw e;
-          const r = await form("Password needed", [{ name: "pw", label: "Password", type: "password" }], "OK", f.name);
+          const r = await form(T("Password needed"), [{ name: "pw", label: T("Password"), type: "password" }], "OK", f.name);
           if (!r) break;
           pw = r.pw;
         }
       }
     } catch (e) { showError(e); } finally { releaseFile(f); }
   }
-  toast("Pages added.");
+  toast(T("Pages added."));
 }
 async function extractTool(pages) {
-  pages = pages || await askPages("Extract pages");
+  pages = pages || await askPages(T("Extract pages"));
   if (!pages) return;
-  const bytes = await task("Extracting…", () => call("extract", S.doc.id, pages));
-  if (bytes) await deliver(bytes, `${baseName(S.doc.name)}-pages.pdf`, MIME.pdf, "Extracted pages");
+  const bytes = await task(T("Extracting…"), () => call("extract", S.doc.id, pages));
+  if (bytes) await deliver(bytes, `${baseName(S.doc.name)}-pages.pdf`, MIME.pdf, T("Extracted pages"));
 }
 async function splitTool() {
   const n = S.doc.pages.length;
-  const r = await form("Split", [
-    { name: "how", label: "Split", type: "seg", value: "every", options: [{ value: "every", label: "Every N pages" }, { value: "ranges", label: "By ranges" }] },
+  const r = await form(T("Split"), [
+    { name: "how", label: T("Split"), type: "seg", value: "every", options: [{ value: "every", label: T("Every N pages") }, { value: "ranges", label: T("By ranges") }] },
     { name: "n", label: "N", type: "number", value: 1, min: 1, max: n },
-    { name: "ranges", label: "Ranges", type: "text", placeholder: "e.g. 1-3; 4-6; 7-" },
-  ], "Split");
+    { name: "ranges", label: T("Ranges"), type: "text", placeholder: T("e.g. 1-3; 4-6; 7-") },
+  ], T("Split"));
   if (!r) return;
   let groups = [];
   if (r.how === "every") { const k = Math.max(1, r.n || 1); for (let a = 0; a < n; a += k) groups.push([...Array(Math.min(k, n - a)).keys()].map(x => x + a)); }
   else groups = String(r.ranges || "").split(";").map(s => parseRange(s, n)).filter(g => g.length);
-  if (!groups.length) { toast("Nothing to split."); return; }
-  const out = await task("Splitting…", async () => {
+  if (!groups.length) { toast(T("Nothing to split.")); return; }
+  const out = await task(T("Splitting…"), async () => {
     const files = [];
     for (const [k, g] of groups.entries()) {
       checkCancel();
@@ -1436,7 +1447,7 @@ async function splitTool() {
     }
     return files.length === 1 ? files[0] : { name: baseName(S.doc.name) + "-split.zip", bytes: await C.zip(files) };
   }, { cancellable: true, progress: true });
-  if (out) await deliver(out.bytes, out.name, out.name.endsWith(".zip") ? MIME.zip : MIME.pdf, `${groups.length} file(s)`);
+  if (out) await deliver(out.bytes, out.name, out.name.endsWith(".zip") ? MIME.zip : MIME.pdf, T("{0} file(s)", groups.length));
 }
 
 // ---- organize screen (thumbnails)
@@ -1487,16 +1498,16 @@ $("orgAll").onclick = () => {
 $("orgBack").onclick = () => closeOrganize();
 function closeOrganize() { show("viewer"); layout(); }
 const ORG_ACTIONS = [
-  { id: "left", icon: "left", label: "Move left", need: 1 }, { id: "right", icon: "right", label: "Move right", need: 1 },
-  { id: "rotl", icon: "rotate_left", label: "Rotate", need: 1 }, { id: "rotr", icon: "rotate_right", label: "Rotate", need: 1 },
-  { id: "dup", icon: "duplicate", label: "Duplicate", need: 1 }, { id: "extract", icon: "extract", label: "Extract", need: 1 },
-  { id: "del", icon: "trash", label: "Delete", need: 1 }, { id: "blank", icon: "insert_blank", label: "Blank page", need: 0 },
-  { id: "file", icon: "insert", label: "Insert file", need: 0 },
-  { id: "copyto", icon: "copy", label: "Copy to tab", need: 1, tabs: true },
+  { id: "left", icon: "left", label: T("Move left"), need: 1 }, { id: "right", icon: "right", label: T("Move right"), need: 1 },
+  { id: "rotl", icon: "rotate_left", label: T("Rotate"), need: 1 }, { id: "rotr", icon: "rotate_right", label: T("Rotate"), need: 1 },
+  { id: "dup", icon: "duplicate", label: T("Duplicate"), need: 1 }, { id: "extract", icon: "extract", label: T("Extract"), need: 1 },
+  { id: "del", icon: "trash", label: "Delete", need: 1 }, { id: "blank", icon: "insert_blank", label: T("Blank page"), need: 0 },
+  { id: "file", icon: "insert", label: T("Insert file"), need: 0 },
+  { id: "copyto", icon: "copy", label: T("Copy to tab"), need: 1, tabs: true },
 ];
 function updateOrgBar() {
-  $("orgTitle").textContent = ORG.sel.size ? `${ORG.sel.size} selected` : `${S.doc.pages.length} pages`;
-  $("orgAll").textContent = ORG.sel.size === S.doc.pages.length ? "Select none" : "Select all";
+  $("orgTitle").textContent = ORG.sel.size ? T("{0} selected", ORG.sel.size) : T("{0} pages", S.doc.pages.length);
+  $("orgAll").textContent = ORG.sel.size === S.doc.pages.length ? T("Select none") : T("Select all");
   $("orgActions").innerHTML = ORG_ACTIONS.filter(a => (!a.tabs || (TABS.length > 1 && on("copyto")))).map(a => `<button class="tool" data-a="${a.id}" ${a.need && !ORG.sel.size ? "disabled style=opacity:.4" : ""}>${icon(a.icon)}<span>${a.label}</span></button>`).join("");
 }
 $("orgActions").onclick = async (e) => {
@@ -1513,21 +1524,21 @@ $("orgActions").onclick = async (e) => {
       const set = new Set(sel);
       if (b.dataset.a === "left") { for (let k = 1; k < n; k++) if (set.has(order[k]) && !set.has(order[k - 1])) [order[k - 1], order[k]] = [order[k], order[k - 1]]; }
       else { for (let k = n - 2; k >= 0; k--) if (set.has(order[k]) && !set.has(order[k + 1])) [order[k + 1], order[k]] = [order[k], order[k + 1]]; }
-      await task("Moving…", async () => { const inf = await call("reorder", id, order); await changed("all", inf); });
+      await task(T("Moving…"), async () => { const inf = await call("reorder", id, order); await changed("all", inf); });
       keepSel = sel.map(i => order.indexOf(i));
       break;
     }
     case "rotl": case "rotr":
-      await task("Rotating…", async () => { const inf = await call("rotatePages", id, sel, b.dataset.a === "rotl" ? -90 : 90); await changed(sel, inf); });
+      await task(T("Rotating…"), async () => { const inf = await call("rotatePages", id, sel, b.dataset.a === "rotl" ? -90 : 90); await changed(sel, inf); });
       keepSel = sel; break;
-    case "dup": await task("Duplicating…", async () => { const inf = await call("duplicatePages", id, sel); await changed("all", inf); }); break;
+    case "dup": await task(T("Duplicating…"), async () => { const inf = await call("duplicatePages", id, sel); await changed("all", inf); }); break;
     case "extract": await extractTool(sel); return;
     case "del": if (!(await deletePages(sel))) return; break;
-    case "blank": await task("Adding…", async () => { const inf = await call("insertBlank", id, after); await changed("all", inf); }); break;
+    case "blank": await task(T("Adding…"), async () => { const inf = await call("insertBlank", id, after); await changed("all", inf); }); break;
     case "file": await insertFileTool(after); break;
     case "copyto": {
       const others = TABS.filter(t => t.doc !== S.doc);
-      const v = await choose("Copy the pages to…", others.map((t, k) => ({ value: k, label: t.doc.name, icon: "pdf", sub: "At the end" })));
+      const v = await choose(T("Copy the pages to…"), others.map((t, k) => ({ value: k, label: t.doc.name, icon: "pdf", sub: T("At the end") })));
       if (v != null) await copyPagesTo(sel, others[v]);
       keepSel = sel; break;
     }
@@ -1539,15 +1550,15 @@ $("orgActions").onclick = async (e) => {
 
 // ================================================================== tools: compress, OCR, conversions, security
 async function compressTool() {
-  const v = await choose("Compress", [
-    { value: "lossless", label: "No quality loss", sub: "Removes metadata, trims fonts, packs the file tighter. Pages look exactly the same.", icon: "check" },
-    { value: "rec", label: "Recommended", sub: "Pictures at good quality, text untouched", icon: "compress" },
-    { value: "strong", label: "Strong", sub: "Smaller pictures, still readable", icon: "compress" },
-    { value: "max", label: "Smallest", sub: "Every page becomes a picture (text can no longer be selected)", icon: "image" },
+  const v = await choose(T("Compress"), [
+    { value: "lossless", label: T("No quality loss"), sub: T("Removes metadata, trims fonts, packs the file tighter. Pages look exactly the same."), icon: "check" },
+    { value: "rec", label: T("Recommended"), sub: T("Pictures at good quality, text untouched"), icon: "compress" },
+    { value: "strong", label: T("Strong"), sub: T("Smaller pictures, still readable"), icon: "compress" },
+    { value: "max", label: T("Smallest"), sub: T("Every page becomes a picture (text can no longer be selected)"), icon: "image" },
   ]);
   if (!v) return;
   const d = S.doc;
-  const res = await task("Compressing…", async () => {
+  const res = await task(T("Compressing…"), async () => {
     const before = (await call("save", d.id, {})).length;
     if (v === "max") {
       const bytes = await call("rasterize", d.id, 110, 55);
@@ -1560,33 +1571,33 @@ async function compressTool() {
   });
   if (!res) return;
   if (res.bytes) {
-    if (res.bytes.length >= res.before) { toast("This PDF is already as small as it can get."); return; }
+    if (res.bytes.length >= res.before) { toast(T("This PDF is already as small as it can get.")); return; }
     await deliver(res.bytes, `${baseName(d.name)}-compressed.pdf`, MIME.pdf, `${fmtSize(res.before)} → ${fmtSize(res.bytes.length)}`);
     return;
   }
   await changed("all");
   const pctv = Math.round((1 - res.after / res.before) * 100);
   if (res.after < res.before * 0.97) {
-    alertBox("Compressed", `${fmtSize(res.before)} → ${fmtSize(res.after)} (−${pctv}%). Save the document to keep the smaller file.`);
+    alertBox(T("Compressed"), T("{0} → {1} (−{2}%). Save the document to keep the smaller file.", fmtSize(res.before), fmtSize(res.after), pctv));
   } else {
-    alertBox("Already small", `There is not much to gain here (${fmtSize(res.before)}). ${res.lossless ? "Try “Recommended” if the file has photos, or “Smallest” for scans." : "Try “Smallest” if the file is a scan."}`);
+    alertBox(T("Already small"), T("There is not much to gain here ({0}). {1}", fmtSize(res.before), res.lossless ? T("Try “Recommended” if the file has photos, or “Smallest” for scans.") : T("Try “Smallest” if the file is a scan.")));
   }
 }
 
 async function ocrTool() {
   const d = S.doc;
-  const r = await form("Recognize text (OCR)", [
-    { name: "lang", label: "Language", type: "seg", value: storeGet("ocrLang", "eng+ita"), options: [{ value: "eng", label: "English" }, { value: "ita", label: "Italian" }, { value: "eng+ita", label: "Both" }] },
-    { name: "all", type: "check", text: "Also pages that already have text", value: false },
-  ], "Start", "Scanned pages get an invisible text layer: you can then search, select and copy the text.");
+  const r = await form(T("Recognize text (OCR)"), [
+    { name: "lang", label: T("Language"), type: "seg", value: storeGet("ocrLang", "eng+ita"), options: [{ value: "eng", label: T("English") }, { value: "ita", label: T("Italian") }, { value: "eng+ita", label: T("Both") }] },
+    { name: "all", type: "check", text: T("Also pages that already have text"), value: false },
+  ], T("Start"), T("Scanned pages get an invisible text layer: you can then search, select and copy the text."));
   if (!r) return;
   storeSet("ocrLang", r.lang);
-  const done = await task("Preparing OCR…", async () => {
+  const done = await task(T("Preparing OCR…"), async () => {
     const n = d.pages.length;
     let count = 0;
     for (let i = 0; i < n; i++) {
       checkCancel();
-      progress(i / n, `Reading page ${i + 1} of ${n}…`);
+      progress(i / n, T("Reading page {0} of {1}…", i + 1, n));
       if (!r.all) { const t = (await call("pageText", d.id, i)).trim(); if (t.length > 20) continue; }
       const words = await C.ocrPage(d.id, i, d.pages[i], r.lang);
       checkCancel();
@@ -1596,8 +1607,8 @@ async function ocrTool() {
   }, { cancellable: true, progress: true });
   if (done === undefined) return;
   await changed("all");
-  if (done) toast(`Text recognized on ${done} page(s). Save to keep it.`);
-  else toast("No pages needed OCR (they already have text).");
+  if (done) toast(T("Text recognized on {0} page(s). Save to keep it.", done));
+  else toast(T("No pages needed OCR (they already have text)."));
 }
 
 async function convertTool(kind) {
@@ -1605,82 +1616,82 @@ async function convertTool(kind) {
   const n = d.pages.length;
   const base = baseName(d.name);
   if (kind === "images") {
-    const r = await form("PDF to images", [
-      { name: "fmt", label: "Format", type: "seg", value: "jpg", options: [{ value: "jpg", label: "JPG" }, { value: "png", label: "PNG" }] },
-      { name: "dpi", label: "Quality", type: "seg", value: "150", options: [{ value: "96", label: "Low" }, { value: "150", label: "Medium" }, { value: "300", label: "High" }] },
-    ], "Next");
+    const r = await form(T("PDF to images"), [
+      { name: "fmt", label: T("Format"), type: "seg", value: "jpg", options: [{ value: "jpg", label: "JPG" }, { value: "png", label: "PNG" }] },
+      { name: "dpi", label: T("Quality"), type: "seg", value: "150", options: [{ value: "96", label: T("Low") }, { value: "150", label: T("Medium") }, { value: "300", label: T("High") }] },
+    ], T("Next"));
     if (!r) return;
-    const pages = await askPages("Which pages");
+    const pages = await askPages(T("Which pages"));
     if (!pages) return;
-    const out = await task("Making images…", async () => {
+    const out = await task(T("Making images…"), async () => {
       const imgs = [];
       for (const [k, i] of pages.entries()) {
-        checkCancel(); progress(k / pages.length, `Page ${i + 1}`);
+        checkCancel(); progress(k / pages.length, T("Page {0}", i + 1));
         imgs.push({ name: `${base}-${i + 1}.${r.fmt}`, bytes: r.fmt === "png" ? await call("renderPNG", d.id, i, +r.dpi / 72) : await call("renderJPEG", d.id, i, +r.dpi / 72, 88) });
       }
       return imgs.length === 1 ? imgs[0] : { name: base + "-images.zip", bytes: await C.zip(imgs) };
     }, { cancellable: true, progress: true });
-    if (out) await deliver(out.bytes, out.name, out.name.endsWith(".zip") ? MIME.zip : MIME[r.fmt], "Images ready");
+    if (out) await deliver(out.bytes, out.name, out.name.endsWith(".zip") ? MIME.zip : MIME[r.fmt], T("Images ready"));
     return;
   }
   let opts = {};
   if (kind === "excel") {
-    const r = await form("PDF to Excel", [{ name: "one", label: "Sheets", type: "seg", value: "page", options: [{ value: "page", label: "One per page" }, { value: "one", label: "All in one" }] }], "Convert",
-      "Tables are rebuilt from the position of the text.");
+    const r = await form(T("PDF to Excel"), [{ name: "one", label: T("Sheets"), type: "seg", value: "page", options: [{ value: "page", label: T("One per page") }, { value: "one", label: T("All in one") }] }], T("Convert"),
+      T("Tables are rebuilt from the position of the text."));
     if (!r) return;
     opts.one = r.one === "one";
   }
   const pageList = d.pages;
-  const names = { word: ["docx", "Word"], excel: ["xlsx", "Excel"], ppt: ["pptx", "PowerPoint"], text: ["txt", "Text"] };
+  const names = { word: ["docx", T("Word")], excel: ["xlsx", T("Excel")], ppt: ["pptx", "PowerPoint"], text: ["txt", T("Text")] };
   const [e, label] = names[kind];
-  const bytes = await task(`Converting to ${label}…`, async () => {
+  const bytes = await task(T("Converting to {0}…", label), async () => {
     if (kind === "word") return C.toWord(d.id, pageList);
     if (kind === "excel") return C.toExcel(d.id, pageList, opts.one);
     if (kind === "ppt") return C.toPowerPoint(d.id, pageList);
     return C.toText(d.id, n);
   }, { cancellable: true, progress: true });
-  if (bytes) await deliver(bytes, `${base}.${e}`, MIME[e], `${label} file ready`);
+  if (bytes) await deliver(bytes, `${base}.${e}`, MIME[e], T("{0} file ready", label));
 }
 
 async function protectTool() {
   const d = S.doc;
-  const r = await form("Protect with a password", [
-    { name: "pw", label: "Password", type: "password", required: true },
-    { name: "pw2", label: "Repeat", type: "password", validate: (v, all) => v !== all.pw ? "The passwords are different." : null },
-    { name: "print", type: "check", text: "Allow printing", value: true },
-    { name: "copy", type: "check", text: "Allow copying text", value: true },
-    { name: "edit", type: "check", text: "Allow changes and comments", value: false },
-  ], "Protect");
+  const r = await form(T("Protect with a password"), [
+    { name: "pw", label: T("Password"), type: "password", required: true },
+    { name: "pw2", label: T("Repeat"), type: "password", validate: (v, all) => v !== all.pw ? T("The passwords are different.") : null },
+    { name: "print", type: "check", text: T("Allow printing"), value: true },
+    { name: "copy", type: "check", text: T("Allow copying text"), value: true },
+    { name: "edit", type: "check", text: T("Allow changes and comments"), value: false },
+  ], T("Protect"));
   if (!r) return;
   // PDF permission bits: print 4 (+2048 high quality), modify 8, copy 16 (+512 accessibility), comments 32, forms 256, assemble 1024
   let p = -3904;
   if (r.print) p += 4 + 2048;
   if (r.copy) p += 16 + 512;
   if (r.edit) p += 8 + 32 + 256 + 1024;
-  const bytes = await task("Encrypting…", () => call("save", d.id, { encrypt: true, userPassword: r.pw, ownerPassword: r.pw + "#owner" + Math.random().toString(36).slice(2, 8), permissions: p }));
-  if (bytes) await deliver(bytes, `${baseName(d.name)}-protected.pdf`, MIME.pdf, "Protected PDF (AES-256)");
+  const bytes = await task(T("Encrypting…"), () => call("save", d.id, { encrypt: true, userPassword: r.pw, ownerPassword: r.pw + "#owner" + Math.random().toString(36).slice(2, 8), permissions: p }));
+  if (bytes) await deliver(bytes, `${baseName(d.name)}-protected.pdf`, MIME.pdf, T("Protected PDF (AES-256)"));
 }
 async function unlockTool() {
   const d = S.doc;
-  if (!d.encrypted) { toast("This PDF has no password to remove."); return; }
-  const bytes = await task("Removing password…", () => call("save", d.id, { decrypt: true }));
-  if (bytes) await deliver(bytes, `${baseName(d.name)}-unlocked.pdf`, MIME.pdf, "PDF without password");
+  if (!d.encrypted) { toast(T("This PDF has no password to remove.")); return; }
+  const bytes = await task(T("Removing password…"), () => call("save", d.id, { decrypt: true }));
+  if (bytes) await deliver(bytes, `${baseName(d.name)}-unlocked.pdf`, MIME.pdf, T("PDF without password"));
 }
 
 async function propertiesTool() {
   const d = S.doc;
   const m = await call("metadata", d.id);
   const size = (await call("save", d.id, {})).length;
-  const r = await form("Properties", [
+  const r = await form(T("Properties"), [
     { name: "info", type: "info", html: `${esc(d.name)}<br>${d.pages.length} page(s) · ${fmtSize(size)} · ${esc(m.format)} · Encryption: ${esc(m.encryption)}<br>
       Page size: ${Math.round(d.pages[0].w / 72 * 25.4)} × ${Math.round(d.pages[0].h / 72 * 25.4)} mm${m.Producer ? "<br>Made with: " + esc(m.Producer) : ""}` },
-    { name: "Title", label: "Title", value: m.Title }, { name: "Author", label: "Author", value: m.Author },
-    { name: "Subject", label: "Subject", value: m.Subject }, { name: "Keywords", label: "Keywords", value: m.Keywords },
-  ], "Save", "");
+    { name: "Title", label: T("Title"), value: m.Title }, { name: "Author", label: T("Author"), value: m.Author },
+    { name: "Subject", label: T("Subject"), value: m.Subject }, { name: "Keywords", label: T("Keywords"), value: m.Keywords },
+  ], T("Save"), "");
   if (!r) return;
   const meta = {};
-  for (const k of ["Title", "Author", "Subject", "Keywords"]) if ((r[k] || "") !== (m[k] || "")) meta[k] = r[k] || "";
-  if (Object.keys(meta).length) await apply("Saving…", "setMetadata", [meta], []);
+  for (const k of [T("Title"), T("Author"), T("Subject"), T("Keywords")]) if ((r[k] || "") !== (m[k] || "")) meta[k] = r[k] || "";
+  if (Object.keys(meta).length) await apply(T("Saving…"), "setMetadata", [meta], []);
 }
 
 // ================================================================== home flows: merge, photos, office
@@ -1716,7 +1727,7 @@ async function fileListSheet(title, files, extra = []) {
     }));
     card.querySelector("[data-no]").onclick = () => { list.forEach(releaseFile); closeSheet(null); };
     card.querySelector("[data-ok]").onclick = () => {
-      if (!list.length) { toast("Add at least one file."); return; }
+      if (!list.length) { toast(T("Add at least one file.")); return; }
       const vals = {};
       card.querySelectorAll(".seg[data-k]").forEach(g => { vals[g.dataset.k] = g.dataset.v; });
       closeSheet({ list, ...vals });
@@ -1730,20 +1741,20 @@ async function mergeFlow(given = null) {
   const files = given || await pickFiles(mimes, true);
   if (!files.length) return;
   files.mimes = mimes;
-  const extra = []; extra.okLabel = "Merge";
-  const r = await sheetFiles("Merge PDFs", files, extra);
+  const extra = []; extra.okLabel = T("Merge");
+  const r = await sheetFiles(T("Merge PDFs"), files, extra);
   if (!r) return;
-  const bytes = await task("Merging…", async () => {
+  const bytes = await task(T("Merging…"), async () => {
     const items = [];
     for (const [k, f] of r.list.entries()) {
-      checkCancel(); progress(k / r.list.length, "Reading " + f.name);
+      checkCancel(); progress(k / r.list.length, T("Reading {0}", f.name));
       let b = await readFile(f);
       if (/^image\//.test(f.mime || "") || ["jpg", "jpeg", "png", "webp", "heic"].includes(ext(f.name))) {
         b = await call("imagesToPdf", [{ bytes: await normalizeImage(b, f.mime, f.name), name: f.name }], "A4", 0);
         items.push({ bytes: b, name: "image.pdf" });
       } else items.push({ bytes: b, name: f.name.toLowerCase().endsWith(".pdf") ? f.name : f.name + ".pdf", password: null });
     }
-    progress(0.95, "Merging…");
+    progress(0.95, T("Merging…"));
     return await mergeWithPasswords(items);
   }, { cancellable: true, progress: true });
   r.list.forEach(releaseFile);
@@ -1756,9 +1767,9 @@ async function mergeWithPasswords(items) {
       const m = /NEEDS_PASSWORD:(.*)/.exec(e.message);
       if (!m) throw e;
       idle();
-      const r = await form("Password needed", [{ name: "pw", label: "Password", type: "password" }], "OK", m[1]);
-      if (!r) throw new Error("Merge stopped: “" + m[1] + "” is protected.");
-      busy("Merging…");
+      const r = await form(T("Password needed"), [{ name: "pw", label: T("Password"), type: "password" }], "OK", m[1]);
+      if (!r) throw new Error(T("Merge stopped: “{0}” is protected.", m[1]));
+      busy(T("Merging…"));
       items.find(i => i.name === m[1]).password = r.pw;
     }
   }
@@ -1774,19 +1785,19 @@ async function imagesFlow(given) {
     { html: `<div class="row"><label>Page size</label><div class="seg" data-k="size" data-v="A4"><button data-val="fit">Fit picture</button><button data-val="A4" class="on">A4</button><button data-val="Letter">Letter</button></div></div>` },
     { html: `<div class="row"><label>Margin</label><div class="seg" data-k="margin" data-v="0"><button data-val="0" class="on">None</button><button data-val="20">Small</button><button data-val="40">Large</button></div></div>` },
   ];
-  extra.okLabel = "Make PDF";
-  const r = await fileListSheet("Photos to PDF", files, extra);
+  extra.okLabel = T("Make PDF");
+  const r = await fileListSheet(T("Photos to PDF"), files, extra);
   if (!r) return;
-  const bytes = await task("Making the PDF…", async () => {
+  const bytes = await task(T("Making the PDF…"), async () => {
     const items = [];
     for (const [k, f] of r.list.entries()) {
-      checkCancel(); progress(k / r.list.length, `Picture ${k + 1} of ${r.list.length}`);
+      checkCancel(); progress(k / r.list.length, T("Picture {0} of {1}", k + 1, r.list.length));
       items.push({ bytes: await normalizeImage(await readFile(f), f.mime, f.name), name: f.name });
     }
     return await call("imagesToPdf", items, r.size || "A4", +(r.margin || 0));
   }, { cancellable: true, progress: true });
   r.list.forEach(releaseFile);
-  if (bytes) await openBytes(bytes, (r.list.length === 1 ? baseName(r.list[0].name) : "Photos") + ".pdf", null);
+  if (bytes) await openBytes(bytes, (r.list.length === 1 ? baseName(r.list[0].name) : T("Photos")) + ".pdf", null);
 }
 
 async function officeFlow() {
@@ -1837,7 +1848,7 @@ async function runSearch() {
       showHit();
     }
   }
-  if (!S.search.hits.length) { $("searchCount").textContent = "0"; toast("Not found."); return; }
+  if (!S.search.hits.length) { $("searchCount").textContent = "0"; toast(T("Not found.")); return; }
   if (S.search.cur < 0) { S.search.cur = 0; showHit(); }
   $("searchCount").textContent = `${S.search.cur + 1}/${S.search.hits.length}`;
   refreshVisibleOverlays();
@@ -1865,23 +1876,23 @@ function toggleNight() {
   S.night = !S.night;
   $("pages").classList.toggle("night", S.night);
   scheduleRender();
-  toast(S.night ? "Night mode on." : "Night mode off.");
+  toast(S.night ? T("Night mode on.") : T("Night mode off."));
 }
 async function showToc() {
   const toc = S.doc.toc || [];
-  if (!toc.length) { toast("This PDF has no table of contents."); return; }
-  const v = await choose("Contents", toc.map((t, k) => ({ value: k, label: " ".repeat((t.level - 1) * 3) + t.title, sub: t.page >= 0 ? "Page " + (t.page + 1) : "" })));
+  if (!toc.length) { toast(T("This PDF has no table of contents.")); return; }
+  const v = await choose(T("Contents"), toc.map((t, k) => ({ value: k, label: " ".repeat((t.level - 1) * 3) + t.title, sub: t.page >= 0 ? T("Page {0}{1}", t.page, 1) : "" })));
   if (v != null && toc[v].page >= 0) goToPage(toc[v].page);
 }
 async function askGoTo() {
-  const r = await form("Go to page", [{ name: "p", label: `Page (1–${S.doc.pages.length})`, type: "number", value: currentPage() + 1, min: 1, max: S.doc.pages.length }], "Go");
+  const r = await form(T("Go to page"), [{ name: "p", label: T("Page (1–{0})", S.doc.pages.length), type: "number", value: currentPage() + 1, min: 1, max: S.doc.pages.length }], T("Go"));
   if (r && r.p) goToPage(r.p - 1, false);
 }
 
 // ---- reading mode (reflowed text)
 async function openReadingMode() {
   const d = S.doc;
-  const html = await task("Preparing…", async () => {
+  const html = await task(T("Preparing…"), async () => {
     const parts = [];
     for (let i = 0; i < d.pages.length; i++) {
       checkCancel(); progress(i / d.pages.length);
@@ -1930,7 +1941,7 @@ function speakText(text) {
 }
 async function readPage() {
   if (!R.on || !S.doc) return;
-  if (R.page >= S.doc.pages.length) { stopReading(); toast("Finished reading."); return; }
+  if (R.page >= S.doc.pages.length) { stopReading(); toast(T("Finished reading.")); return; }
   goToPage(R.page);
   R.chunks = splitChunks(await call("pageText", S.doc.id, R.page));
   R.k = 0;
@@ -1943,13 +1954,13 @@ function speakChunk() {
   const text = R.chunks[R.k];
   const lang = R.lang === "it" ? "it-IT" : "en-US";
   if (A && A.speak) {
-    if (!A.speak(text, R.rate, lang)) { toast("Text-to-speech is not available on this phone."); stopReading(); }
+    if (!A.speak(text, R.rate, lang)) { toast(T("Text-to-speech is not available on this phone.")); stopReading(); }
   } else if (window.speechSynthesis) {
     const u = new SpeechSynthesisUtterance(text);
     u.lang = lang; u.rate = R.rate;
     u.onend = () => GPE.onSpeakDone();
     speechSynthesis.speak(u);
-  } else { toast("Text-to-speech is not available."); stopReading(); }
+  } else { toast(T("Text-to-speech is not available.")); stopReading(); }
 }
 GPE.onSpeakDone = () => {
   if (!R.on || R.paused) return;
@@ -1971,7 +1982,7 @@ function drawReadbar() {
   b.classList.remove("hidden");
   b.innerHTML = `<button class="icon-btn" data-a="pp">${icon(R.paused ? "play" : "pause")}</button>
     <button class="icon-btn" data-a="prev">${icon("left")}</button><button class="icon-btn" data-a="next">${icon("right")}</button>
-    <span>${R.single ? "Selection" : "Page " + (R.page + 1)}</span>
+    <span>${R.single ? T("Selection") : T("Page {0}{1}", R.page, 1)}</span>
     <button class="text-btn" data-a="lang">${R.lang.toUpperCase()}</button>
     <input type="range" min="0.5" max="2" step="0.1" value="${R.rate}" title="Speed">
     <button class="icon-btn" data-a="stop">${icon("close")}</button>`;
@@ -2016,7 +2027,7 @@ $("moreBtn").onclick = async () => {
   switch (v) {
     case "save": await saveDoc(false); break;
     case "saveas": await saveDoc(true); break;
-    case "share": { const b = await task("Preparing…", () => call("save", S.doc.id, {})); if (b) share(b, S.doc.name.endsWith(".pdf") ? S.doc.name : S.doc.name + ".pdf", MIME.pdf); break; }
+    case "share": { const b = await task(T("Preparing…"), () => call("save", S.doc.id, {})); if (b) share(b, S.doc.name.endsWith(".pdf") ? S.doc.name : S.doc.name + ".pdf", MIME.pdf); break; }
     case "read": startReading(); break;
     case "reflow": openReadingMode(); break;
     case "night": toggleNight(); break;
@@ -2026,9 +2037,9 @@ $("moreBtn").onclick = async () => {
     case "settings": settingsSheet(); break;
     case "close": goBack(); break;
     case "theme": {
-      const t = await choose("Appearance", [
-        { value: "auto", label: "System", sub: "Follow the device setting", icon: "layers" },
-        { value: "light", label: "Light", icon: "sun" }, { value: "dark", label: "Dark", icon: "moon" }]);
+      const t = await choose(T("Appearance"), [
+        { value: "auto", label: T("System"), sub: T("Follow the device setting"), icon: "layers" },
+        { value: "light", label: T("Light"), icon: "sun" }, { value: "dark", label: T("Dark"), icon: "moon" }]);
       if (t) setTheme(t);
       break;
     }
@@ -2107,7 +2118,7 @@ window.addEventListener("drop", (e) => {
   e.preventDefault();
   dragDepth = 0; $("dropveil").classList.remove("on");
   if (busyState.on || sheetOpen()) return;
-  if (D && !on("dropfiles")) { toast("Dropping files is switched off in Settings › Features."); return; }
+  if (D && !on("dropfiles")) { toast(T("Dropping files is switched off in Settings › Features.")); return; }
   const files = droppedFiles(e.dataTransfer.files);
   if (files.length) dropFiles(files);
 });
@@ -2215,14 +2226,14 @@ document.addEventListener("drop", async (e) => {
   copyPagesTo(JSON.parse(e.dataTransfer.getData("pe/pages")), t);
 }, true);
 async function copyPagesTo(pages, t) {
-  const ok = await task("Copying pages…", async () => {
+  const ok = await task(T("Copying pages…"), async () => {
     const bytes = await call("extract", S.doc.id, pages);
     const inf = await call("insertFile", t.doc.id, t.doc.pages.length, bytes, "pages.pdf");
     Object.assign(t.doc, inf);
     t.dirty = true;
     return true;
   });
-  if (ok) { drawTabs(); toast(`${pages.length} page${pages.length === 1 ? "" : "s"} copied to the end of “${t.doc.name}”.`); }
+  if (ok) { drawTabs(); toast((pages.length === 1 ? T("1 page copied to the end of “{0}”.", t.doc.name) : T("{0} pages copied to the end of “{1}”.", pages.length, t.doc.name))); }
 }
 
 // ================================================================== dropping files on the window
@@ -2232,18 +2243,18 @@ async function dropFiles(files) {
   const pdfs = files.filter(f => ext(f.name) === "pdf");
   if (!pdfs.length || (files.length === 1 && !S.doc)) { incoming.handler(files, "open"); return; }
   const many = pdfs.length > 1;
-  const v = await choose(many ? `${pdfs.length} PDFs` : pdfs[0].name, [
-    { value: "open", label: many ? (P.tabs ? "Open each in its own tab" : "Open the first one") : (P.tabs ? "Open in a new tab" : "Open it"), icon: "open" },
-    ...(many ? [{ value: "merge", label: "Merge them into one PDF", icon: "merge", sub: "You can change the order first" }] : []),
-    ...(S.doc ? [{ value: "add", label: `Add to the end of “${S.doc.name}”`, icon: "insert" }] : []),
+  const v = await choose(many ? T("{0} PDFs", pdfs.length) : pdfs[0].name, [
+    { value: "open", label: many ? (P.tabs ? T("Open each in its own tab") : T("Open the first one")) : (P.tabs ? T("Open in a new tab") : T("Open it")), icon: "open" },
+    ...(many ? [{ value: "merge", label: T("Merge them into one PDF"), icon: "merge", sub: T("You can change the order first") }] : []),
+    ...(S.doc ? [{ value: "add", label: T("Add to the end of “{0}”", S.doc.name), icon: "insert" }] : []),
   ]);
   if (v === "open") { if (P.tabs) { for (const f of pdfs) await openFile(f); } else await openFile(pdfs[0]); }
   else if (v === "merge") await mergeFlow(pdfs);
   else if (v === "add") {
-    await task("Adding…", async () => {
+    await task(T("Adding…"), async () => {
       for (const f of pdfs) { const b = await readFile(f); const inf = await call("insertFile", S.doc.id, S.doc.pages.length, b, f.name); await changed("all", inf); releaseFile(f); }
     });
-    toast("Added at the end.");
+    toast(T("Added at the end."));
   } else pdfs.forEach(releaseFile);
 }
 
@@ -2255,7 +2266,7 @@ function toggleSpread() {
   S.zoom = 1;
   layout();
   goToPage(p, false);
-  toast(S.spread ? "Two pages side by side." : "One page at a time.");
+  toast(S.spread ? T("Two pages side by side.") : T("One page at a time."));
 }
 
 // ================================================================== bookmarks panel (add, rename, move, delete)
@@ -2284,7 +2295,7 @@ function markSideCurrent() {
   $("sideList").querySelectorAll(".bm").forEach(el => el.classList.toggle("cur", +el.dataset.k === best));
 }
 async function saveOutline(list) {
-  const inf = await task("Saving bookmarks…", () => call("setOutline", S.doc.id, list));
+  const inf = await task(T("Saving bookmarks…"), () => call("setOutline", S.doc.id, list));
   if (!inf) return;
   S.doc.toc = inf.toc;
   await changed([], inf);
@@ -2293,7 +2304,7 @@ async function saveOutline(list) {
 $("sideAdd") && ($("sideAdd").onclick = async () => {
   if (!S.doc) return;
   const p = currentPage();
-  const r = await form("New bookmark", [{ name: "t", label: "Name", type: "text", value: `Page ${p + 1}`, required: true }], "Add", `It points to page ${p + 1}.`);
+  const r = await form(T("New bookmark"), [{ name: "t", label: T("Name"), type: "text", value: `Page ${p + 1}`, required: true }], T("Add"), T("It points to page {0}.", p + 1));
   if (!r) return;
   const toc = [...(S.doc.toc || [])];
   let at = toc.findIndex(b => b.page > p);
@@ -2313,14 +2324,14 @@ $("sideList") && ($("sideList").onclick = async (e) => {
   if (!more) return;
   const k = +more.dataset.more, b = toc[k];
   const v = await choose(b.title, [
-    { value: "rename", label: "Rename", icon: "edit" },
-    { value: "here", label: `Point it to this page (${currentPage() + 1})`, icon: "bookmark" },
-    { value: "up", label: "Move up", icon: "up" }, { value: "down", label: "Move down", icon: "down" },
-    { value: "in", label: "Move inside the one above", icon: "right" }, { value: "out", label: "Move out one level", icon: "left" },
+    { value: "rename", label: T("Rename"), icon: "edit" },
+    { value: "here", label: T("Point it to this page ({0})", currentPage() + 1), icon: "bookmark" },
+    { value: "up", label: T("Move up"), icon: "up" }, { value: "down", label: T("Move down"), icon: "down" },
+    { value: "in", label: T("Move inside the one above"), icon: "right" }, { value: "out", label: T("Move out one level"), icon: "left" },
     { value: "del", label: "Delete", icon: "trash" },
   ]);
   if (!v) return;
-  if (v === "rename") { const r = await form("Rename bookmark", [{ name: "t", label: "Name", type: "text", value: b.title, required: true }], "OK"); if (!r) return; b.title = r.t.trim(); }
+  if (v === "rename") { const r = await form(T("Rename bookmark"), [{ name: "t", label: T("Name"), type: "text", value: b.title, required: true }], "OK"); if (!r) return; b.title = r.t.trim(); }
   else if (v === "here") b.page = currentPage();
   else if (v === "up" && k > 0) [toc[k - 1], toc[k]] = [toc[k], toc[k - 1]];
   else if (v === "down" && k < toc.length - 1) [toc[k + 1], toc[k]] = [toc[k], toc[k + 1]];
@@ -2335,7 +2346,7 @@ $("sideList") && $("sideList").addEventListener("dblclick", async (e) => {
   if (!el) return;
   const toc = [...(S.doc.toc || [])].map(b => ({ ...b }));
   const b = toc[+el.dataset.k];
-  const r = await form("Rename bookmark", [{ name: "t", label: "Name", type: "text", value: b.title, required: true }], "OK");
+  const r = await form(T("Rename bookmark"), [{ name: "t", label: T("Name"), type: "text", value: b.title, required: true }], "OK");
   if (r) { b.title = r.t.trim(); saveOutline(toc); }
 });
 
@@ -2377,19 +2388,19 @@ async function offerRecovery() {
   const list = (await recovery.list()) || [];
   if (!list.length) return;
   const when = (t) => new Date(t).toLocaleString(undefined, { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
-  const v = await choose("Recover unsaved work?", [
-    ...list.map((r, k) => ({ value: "o" + k, label: r.name, sub: `Changes kept ${when(r.at)}`, icon: "restore" })),
-    { value: "drop", label: "Throw them away", icon: "trash" },
-  ], "PdfEditor closed before these changes were saved.");
+  const v = await choose(T("Recover unsaved work?"), [
+    ...list.map((r, k) => ({ value: "o" + k, label: r.name, sub: T("Changes kept {0}", when(r.at)), icon: "restore" })),
+    { value: "drop", label: T("Throw them away"), icon: "trash" },
+  ], T("PdfEditor closed before these changes were saved."));
   if (!v) return;
-  if (v === "drop") { await recovery.clear(); toast("Removed."); return; }
+  if (v === "drop") { await recovery.clear(); toast(T("Removed.")); return; }
   const r = list[+v.slice(1)];
   const file = D && r.path ? { name: r.name, path: r.path, token: r.path, canSave: true } : null;
   if (await openBytes(new Uint8Array(r.bytes), r.name, file)) {
     S.dirty = true; markDirty();
     await recovery.drop(r.key);
     const t = tabOf(S.doc); if (t) { t.dirty = true; recovery.put({ ...r, key: t.key }); }
-    toast("Recovered. Save it to keep the changes.");
+    toast(T("Recovered. Save it to keep the changes."));
   }
 }
 
@@ -2397,7 +2408,7 @@ async function offerRecovery() {
 async function exportNotesTool() {
   if (!S.doc) return;
   const d = S.doc;
-  const text = await task("Collecting highlights and notes…", async () => {
+  const text = await task(T("Collecting highlights and notes…"), async () => {
     const out = [];
     for (let i = 0; i < d.pages.length; i++) {
       checkCancel(); progress(i / d.pages.length);
@@ -2411,39 +2422,39 @@ async function exportNotesTool() {
           const r = a.rect;
           const inside = ws.filter(w => { const cx = (w.x0 + w.x1) / 2, cy = (w.y0 + w.y1) / 2; return cx >= r[0] && cx <= r[2] && cy >= r[1] && cy <= r[3]; });
           const t = inside.map(w => w.text).join(" ").trim();
-          const kind = { Highlight: "Highlight", Underline: "Underlined", StrikeOut: "Struck out", Squiggly: "Squiggly" }[a.type];
-          if (t || a.contents) lines.push(`  • ${kind}: ${t || "(no text)"}${a.contents ? `\n    Comment: ${a.contents}` : ""}`);
+          const kind = { Highlight: T("Highlight"), Underline: T("Underlined"), StrikeOut: T("Struck out"), Squiggly: T("Squiggly") }[a.type];
+          if (t || a.contents) lines.push(`  • ${kind}: ${t || T("(no text)")}${a.contents ? T("\n    Comment: {0}", a.contents) : ""}`);
         } else if (a.contents && a.contents.trim()) {
-          const kind = { Text: "Note", FreeText: "Text box", Stamp: "Stamp" }[a.type] || a.type;
+          const kind = { Text: T("Note"), FreeText: T("Text box"), Stamp: T("Stamp") }[a.type] || a.type;
           lines.push(`  • ${kind}: ${a.contents.trim()}`);
         }
       }
-      if (lines.length) out.push(`Page ${i + 1}\n${lines.join("\n")}`);
+      if (lines.length) out.push(T("Page {0}\n{1}", i + 1, lines.join("\n")));
     }
-    return out.length ? `${d.name}\nHighlights and notes, exported ${new Date().toLocaleString()}\n\n${out.join("\n\n")}\n` : "";
+    return out.length ? T("{0}\nHighlights and notes, exported {1}\n\n{2}\n", d.name, new Date().toLocaleString(), out.join("\n\n")) : "";
   }, { cancellable: true, progress: true });
   if (text == null) return;
-  if (!text) { toast("There are no highlights or notes in this PDF."); return; }
-  await deliver(new TextEncoder().encode(text), baseName(d.name) + " - notes.txt", "text/plain", "Highlights and notes");
+  if (!text) { toast(T("There are no highlights or notes in this PDF.")); return; }
+  await deliver(new TextEncoder().encode(text), baseName(d.name) + " - notes.txt", "text/plain", T("Highlights and notes"));
 }
 
 // ================================================================== print: some pages, or several on one sheet
 async function printTool() {
   if (!S.doc) return;
   const n = S.doc.pages.length, cur = currentPage();
-  const r = await form("Print", [
-    { name: "which", label: "Pages", type: "seg", value: "all", options: [{ value: "all", label: `All ${n}` }, { value: "cur", label: `This one (${cur + 1})` }, { value: "range", label: "Choose" }] },
-    { name: "range", label: "Which", type: "text", placeholder: "e.g. 1-3, 7, 10-" },
-    { name: "per", label: "Per sheet", type: "seg", value: String(P.printPerSheet || 1), options: ["1", "2", "4", "6", "9"] },
-  ], D ? "Print…" : "Make the PDF", "Several pages per sheet saves paper (2 = side by side, 4 = two by two).");
+  const r = await form(T("Print"), [
+    { name: "which", label: T("Pages"), type: "seg", value: "all", options: [{ value: "all", label: T("All {0}", n) }, { value: "cur", label: T("This one ({0})", cur + 1) }, { value: "range", label: T("Choose") }] },
+    { name: "range", label: T("Which"), type: "text", placeholder: T("e.g. 1-3, 7, 10-") },
+    { name: "per", label: T("Per sheet"), type: "seg", value: String(P.printPerSheet || 1), options: ["1", "2", "4", "6", "9"] },
+  ], D ? T("Print…") : T("Make the PDF"), T("Several pages per sheet saves paper (2 = side by side, 4 = two by two)."));
   if (!r) return;
   const list = r.which === "cur" ? [cur] : r.which === "range" ? parseRange(r.range, n) : [...Array(n).keys()];
-  if (!list.length) { toast("No pages to print."); return; }
+  if (!list.length) { toast(T("No pages to print.")); return; }
   const per = +r.per || 1;
   P.printPerSheet = per; savePrefs();
   const d = S.doc;
   if (D && D.printImages) {
-    const imgs = await task("Preparing the pages…", async () => {
+    const imgs = await task(T("Preparing the pages…"), async () => {
       const out = [];
       for (const [k, i] of list.entries()) {
         checkCancel(); progress(k / list.length);
@@ -2454,17 +2465,17 @@ async function printTool() {
       }
       return out;
     }, { cancellable: true, progress: true });
-    if (imgs) { const ok = await D.printImages(imgs, per, d.name); if (!ok) toast("Printing didn't start."); }
+    if (imgs) { const ok = await D.printImages(imgs, per, d.name); if (!ok) toast(T("Printing didn't start.")); }
     return;
   }
   // phone: a PDF with the chosen pages (and layout), to send to the printer app
-  const bytes = await task("Preparing…", async () => {
+  const bytes = await task(T("Preparing…"), async () => {
     if (per === 1) return call("extract", d.id, list);
     const items = [];
     for (const [k, i] of list.entries()) { checkCancel(); progress(k / list.length); items.push({ bytes: await call("renderJPEG", d.id, i, 130 / 72, 82), name: "p.jpg" }); }
     return call("nUp", items, per);
   }, { cancellable: true, progress: true });
-  if (bytes) await deliver(bytes, baseName(d.name) + "-print.pdf", MIME.pdf, "Ready to print");
+  if (bytes) await deliver(bytes, baseName(d.name) + "-print.pdf", MIME.pdf, T("Ready to print"));
 }
 
 // ================================================================== compare two versions
@@ -2472,20 +2483,20 @@ const CMP = { a: null, b: null, page: 0, pages: 0, changes: [], aName: "", bName
 async function compareTool() {
   if (!S.doc) return;
   const others = TABS.filter(t => t.doc !== S.doc);
-  const v = await choose(`Compare “${S.doc.name}” with…`, [
-    ...others.map((t, k) => ({ value: "t" + k, label: t.doc.name, sub: "Open in a tab", icon: "pdf" })),
-    { value: "file", label: "Another file…", icon: "open" },
-  ], "Words that were added are marked green, removed ones red.");
+  const v = await choose(T("Compare “{0}” with…", S.doc.name), [
+    ...others.map((t, k) => ({ value: "t" + k, label: t.doc.name, sub: T("Open in a tab"), icon: "pdf" })),
+    { value: "file", label: T("Another file…"), icon: "open" },
+  ], T("Words that were added are marked green, removed ones red."));
   if (!v) return;
   let b = null, tmp = null;
   if (v === "file") {
     const f = (await pickFiles("application/pdf", false))[0];
     if (!f) return;
-    const bytes = await task("Opening…", () => readFile(f));
+    const bytes = await task(T("Opening…"), () => readFile(f));
     releaseFile(f);
     if (!bytes) return;
-    const r = await task("Opening…", () => call("open", bytes, f.name, null));
-    if (!r || r.needsPassword) { toast("That PDF can't be opened here."); return; }
+    const r = await task(T("Opening…"), () => call("open", bytes, f.name, null));
+    if (!r || r.needsPassword) { toast(T("That PDF can't be opened here.")); return; }
     tmp = r.id; b = { id: r.id, name: f.name, pages: r.pages };
   } else { const t = others[+v.slice(1)]; b = t.doc; }
   Object.assign(CMP, { a: S.doc, b, tmp, page: 0, pages: Math.max(S.doc.pages.length, b.pages.length), changes: [] });
@@ -2506,7 +2517,7 @@ $("cmpPrev") && ($("cmpPrev").onclick = () => cmpStep(-1));
 $("cmpNext") && ($("cmpNext").onclick = () => cmpStep(1));
 $("cmpNextChange") && ($("cmpNextChange").onclick = () => {
   const next = CMP.changes.find(p => p > CMP.page) ?? CMP.changes[0];
-  if (next == null) { toast(CMP.done ? "No differences in the text." : "Still looking…"); return; }
+  if (next == null) { toast(CMP.done ? T("No differences in the text.") : T("Still looking…")); return; }
   CMP.page = next; drawCompare();
 });
 /** Which words differ: longest common sequence of the words of both pages. */
@@ -2541,7 +2552,7 @@ async function findChanges() {
 }
 function drawCmpInfo() {
   const n = CMP.changes.length;
-  $("cmpInfo").textContent = `Page ${CMP.page + 1} of ${CMP.pages} · ` + (n ? `${n} page${n === 1 ? "" : "s"} with differences` : CMP.done ? "no differences in the text" : "looking for differences…");
+  $("cmpInfo").textContent = T("Page {0} of {1} · ", CMP.page + 1, CMP.pages) + (n ? (n === 1 ? T("1 page with differences") : T("{0} pages with differences", n)) : CMP.done ? T("no differences in the text") : T("looking for differences…"));
 }
 let cmpGen = 0;
 async function drawCompare() {
@@ -2561,8 +2572,8 @@ async function drawCompare() {
   };
   const d = await pageDiff(k).catch(() => ({ wa: [], wb: [], del: [], add: [] }));
   if (my !== cmpGen) return;
-  $("cmpLabelA").textContent = `${CMP.a.name}${d.del.length ? ` · ${d.del.length} removed` : ""}`;
-  $("cmpLabelB").textContent = `${CMP.b.name}${d.add.length ? ` · ${d.add.length} added` : ""}`;
+  $("cmpLabelA").textContent = `${CMP.a.name}${d.del.length ? T(" · {0} removed", d.del.length) : ""}`;
+  $("cmpLabelB").textContent = `${CMP.b.name}${d.add.length ? T(" · {0} added", d.add.length) : ""}`;
   await side(CMP.a, d.wa, d.del, "del", $("cmpA"));
   await side(CMP.b, d.wb, d.add, "add", $("cmpB"));
 }
@@ -2570,33 +2581,33 @@ async function drawCompare() {
 // ================================================================== keyboard shortcuts
 const tool = (m, id) => () => { if (!S.doc) return; if (S.mode !== m) setMode(m); selectTool(S.tool && S.tool.id === id ? null : id); };
 const SHORTCUTS = [
-  { key: "V", label: "Select comments", run: tool("comment", "select"), id: "select" },
-  { key: "H", label: "Highlight", run: tool("comment", "highlight"), id: "highlight" },
-  { key: "U", label: "Underline", run: tool("comment", "underline"), id: "underline" },
-  { key: "K", label: "Strike out", run: tool("comment", "strike"), id: "strike" },
-  { key: "P", label: "Draw (pen)", run: tool("comment", "pen"), id: "pen" },
-  { key: "R", label: "Rectangle", run: tool("comment", "rect"), id: "rect" },
-  { key: "O", label: "Ellipse", run: tool("comment", "ellipse"), id: "ellipse" },
-  { key: "A", label: "Arrow", run: tool("comment", "arrow"), id: "arrow" },
-  { key: "L", label: "Line", run: tool("comment", "line"), id: "line" },
-  { key: "N", label: "Note", run: tool("comment", "note"), id: "note" },
-  { key: "X", label: "Text box", run: tool("comment", "textbox"), id: "textbox" },
-  { key: "M", label: "Stamp", run: tool("comment", "stamp"), id: "stamp" },
-  { key: "E", label: "Eraser", run: tool("comment", "eraser"), id: "eraser" },
-  { key: "T", label: "Edit text", run: tool("edit", "edittext"), id: "edittext" },
-  { key: "I", label: "Add picture", run: tool("edit", "addimage"), id: "addimage" },
-  { key: "D", label: "Redact", run: tool("edit", "redact"), id: "redact" },
-  { key: "S", label: "Signature", run: tool("sign", "signature"), id: "signature" },
-  { key: "C", label: "Copy text", run: tool("view", "copytext"), id: "copytext" },
-  { key: "G", label: "Pages view (organize)", run: () => S.doc && openOrganize(), id: "organize" },
-  { key: "Ctrl+O", mod: true, label: "Open a PDF" }, { key: "Ctrl+T", mod: true, label: "Open in a new tab" },
-  { key: "Ctrl+Tab", mod: true, label: "Next tab (Shift: previous)" }, { key: "Ctrl+W", mod: true, label: "Close tab" },
-  { key: "Ctrl+S", mod: true, label: "Save (Shift: save as)" }, { key: "Ctrl+P", mod: true, label: "Print" },
-  { key: "Ctrl+F", mod: true, label: "Find" }, { key: "Ctrl+G", mod: true, label: "Go to page" },
-  { key: "Ctrl+B", mod: true, label: "Bookmarks panel" }, { key: "Ctrl+1 / Ctrl+2", mod: true, label: "One page / two pages side by side" },
-  { key: "Ctrl+Shift+N", mod: true, label: "Night mode" }, { key: "Ctrl+Z / Ctrl+Y", mod: true, label: "Undo / redo" },
-  { key: "Ctrl + / − / 0", mod: true, label: "Zoom in / out / fit" }, { key: "Esc", mod: true, label: "Stop the tool, close search" },
-  { key: "?", mod: true, label: "This list" },
+  { key: "V", label: T("Select comments"), run: tool("comment", "select"), id: "select" },
+  { key: "H", label: T("Highlight"), run: tool("comment", "highlight"), id: "highlight" },
+  { key: "U", label: T("Underline"), run: tool("comment", "underline"), id: "underline" },
+  { key: "K", label: T("Strike out"), run: tool("comment", "strike"), id: "strike" },
+  { key: "P", label: T("Draw (pen)"), run: tool("comment", "pen"), id: "pen" },
+  { key: "R", label: T("Rectangle"), run: tool("comment", "rect"), id: "rect" },
+  { key: "O", label: T("Ellipse"), run: tool("comment", "ellipse"), id: "ellipse" },
+  { key: "A", label: T("Arrow"), run: tool("comment", "arrow"), id: "arrow" },
+  { key: "L", label: T("Line"), run: tool("comment", "line"), id: "line" },
+  { key: "N", label: T("Note"), run: tool("comment", "note"), id: "note" },
+  { key: "X", label: T("Text box"), run: tool("comment", "textbox"), id: "textbox" },
+  { key: "M", label: T("Stamp"), run: tool("comment", "stamp"), id: "stamp" },
+  { key: "E", label: T("Eraser"), run: tool("comment", "eraser"), id: "eraser" },
+  { key: "T", label: T("Edit text"), run: tool("edit", "edittext"), id: "edittext" },
+  { key: "I", label: T("Add picture"), run: tool("edit", "addimage"), id: "addimage" },
+  { key: "D", label: T("Redact"), run: tool("edit", "redact"), id: "redact" },
+  { key: "S", label: T("Signature"), run: tool("sign", "signature"), id: "signature" },
+  { key: "C", label: T("Copy text"), run: tool("view", "copytext"), id: "copytext" },
+  { key: "G", label: T("Pages view (organize)"), run: () => S.doc && openOrganize(), id: "organize" },
+  { key: "Ctrl+O", mod: true, label: T("Open a PDF") }, { key: "Ctrl+T", mod: true, label: T("Open in a new tab") },
+  { key: "Ctrl+Tab", mod: true, label: T("Next tab (Shift: previous)") }, { key: "Ctrl+W", mod: true, label: T("Close tab") },
+  { key: "Ctrl+S", mod: true, label: T("Save (Shift: save as)") }, { key: "Ctrl+P", mod: true, label: T("Print") },
+  { key: "Ctrl+F", mod: true, label: T("Find") }, { key: "Ctrl+G", mod: true, label: T("Go to page") },
+  { key: "Ctrl+B", mod: true, label: T("Bookmarks panel") }, { key: "Ctrl+1 / Ctrl+2", mod: true, label: T("One page / two pages side by side") },
+  { key: "Ctrl+Shift+N", mod: true, label: T("Night mode") }, { key: "Ctrl+Z / Ctrl+Y", mod: true, label: T("Undo / redo") },
+  { key: "Ctrl + / − / 0", mod: true, label: T("Zoom in / out / fit") }, { key: "Esc", mod: true, label: T("Stop the tool, close search") },
+  { key: "?", mod: true, label: T("This list") },
 ];
 const SHORTCUT_OF = Object.fromEntries(SHORTCUTS.filter(x => x.id).map(x => [x.id, x.key]));
 function shortcutsSheet() {
@@ -2607,33 +2618,33 @@ function shortcutsSheet() {
 
 // ================================================================== settings, one section per topic
 const SETTINGS = [
-  { id: "general", label: "General", icon: "settings", items: [
-    { k: "tabs", label: "Open several PDFs in tabs", sub: "Off: opening a PDF closes the one you're reading." },
-    { k: "lastPage", label: "Reopen each PDF where you left it" },
-    { k: "recentPhone", label: "Recent files on the home screen", sub: "PdfEditor keeps a copy of the last 8 PDFs you opened, so they open again with one tap. Saving updates the copy.", phone: true },
-    { k: "recentThumbs", label: "Show a small picture in Recent" },
-    { k: "openWith", label: "“Open with PdfEditor” in the right-click menu", sub: "Also lists PdfEditor among the apps for PDFs.", desk: true, act: "openWith" },
-    { btn: "default", label: "Make PdfEditor the default PDF app…", desk: true },
+  { id: "general", label: T("General"), icon: "settings", items: [
+    { k: "tabs", label: T("Open several PDFs in tabs"), sub: T("Off: opening a PDF closes the one you're reading.") },
+    { k: "lastPage", label: T("Reopen each PDF where you left it") },
+    { k: "recentPhone", label: T("Recent files on the home screen"), sub: T("PdfEditor keeps a copy of the last 8 PDFs you opened, so they open again with one tap. Saving updates the copy."), phone: true },
+    { k: "recentThumbs", label: T("Show a small picture in Recent") },
+    { k: "openWith", label: T("“Open with PdfEditor” in the right-click menu"), sub: T("Also lists PdfEditor among the apps for PDFs."), desk: true, act: "openWith" },
+    { btn: "default", label: T("Make PdfEditor the default PDF app…"), desk: true },
   ] },
-  { id: "reading", label: "Reading", icon: "book", items: [
-    { k: "nightDefault", label: "Open PDFs in night mode", sub: "Dark pages, light text. Switch any time with Ctrl+Shift+N." },
-    { k: "spreadDefault", label: "Open PDFs with two pages side by side" },
-    { k: "readRate", label: "Reading-aloud speed", type: "range", min: 0.6, max: 1.8, step: 0.1, fmt: v => (+v).toFixed(1) + "×" },
+  { id: "reading", label: T("Reading"), icon: "book", items: [
+    { k: "nightDefault", label: T("Open PDFs in night mode"), sub: T("Dark pages, light text. Switch any time with Ctrl+Shift+N.") },
+    { k: "spreadDefault", label: T("Open PDFs with two pages side by side") },
+    { k: "readRate", label: T("Reading-aloud speed"), type: "range", min: 0.6, max: 1.8, step: 0.1, fmt: v => (+v).toFixed(1) + "×" },
   ] },
-  { id: "editing", label: "Editing", icon: "edit", items: [
-    { k: "quickColors", label: "Colour dots while highlighting or drawing" },
-    { k: "shortcuts", label: "One-letter keyboard shortcuts (H, P, N…)", desk: true },
-    { btn: "keys", label: "See all shortcuts", desk: true },
-    { btn: "stamps", label: "Your saved stamps" },
-    { btn: "sigs", label: "Your saved signatures" },
+  { id: "editing", label: T("Editing"), icon: "edit", items: [
+    { k: "quickColors", label: T("Colour dots while highlighting or drawing") },
+    { k: "shortcuts", label: T("One-letter keyboard shortcuts (H, P, N…)"), desk: true },
+    { btn: "keys", label: T("See all shortcuts"), desk: true },
+    { btn: "stamps", label: T("Your saved stamps") },
+    { btn: "sigs", label: T("Your saved signatures") },
   ] },
-  { id: "features", label: "Features", icon: "layers", note: "Switch off what you don't use: its buttons, menu entries and shortcuts disappear.",
+  { id: "features", label: T("Features"), icon: "layers", note: T("Switch off what you don't use: its buttons, menu entries and shortcuts disappear."),
     items: FEATURES.map(x => ({ k: "f_" + x.f, label: x.label, sub: x.sub, desk: x.desk })) },
-  { id: "saving", label: "Saving", icon: "save", items: [
-    { k: "autosave", label: "Keep a recovery copy of unsaved changes", sub: "If PdfEditor or the computer stops, you're offered your work back next time." },
-    { k: "autosaveMin", label: "Every", type: "range", min: 1, max: 10, step: 1, fmt: v => v + " min" },
-    { k: "cleanMeta", label: "Compress: remove metadata", sub: "Used by every Compress option." },
-    { k: "cleanFonts", label: "Compress: trim fonts to the letters used" },
+  { id: "saving", label: T("Saving"), icon: "save", items: [
+    { k: "autosave", label: T("Keep a recovery copy of unsaved changes"), sub: T("If PdfEditor or the computer stops, you're offered your work back next time.") },
+    { k: "autosaveMin", label: T("Every"), type: "range", min: 1, max: 10, step: 1, fmt: v => v + " min" },
+    { k: "cleanMeta", label: T("Compress: remove metadata"), sub: T("Used by every Compress option.") },
+    { k: "cleanFonts", label: T("Compress: trim fonts to the letters used") },
   ] },
 ];
 let setTab = "general";
@@ -2652,7 +2663,7 @@ function settingsSheet() {
       c.onchange = async () => {
         P[c.dataset.k] = c.checked; savePrefs();
         const it = sec.items.find(x => x.k === c.dataset.k);
-        if (it && it.act === "openWith" && D && D.openWith) { const ok = await D.openWith(c.checked); toast(c.checked ? (ok ? "Added to the right-click menu." : "Couldn't add it.") : "Removed from the right-click menu."); }
+        if (it && it.act === "openWith" && D && D.openWith) { const ok = await D.openWith(c.checked); toast(c.checked ? (ok ? T("Added to the right-click menu.") : T("Couldn't add it.")) : T("Removed from the right-click menu.")); }
         if (c.dataset.k === "tabs") drawTabs();
         if (c.dataset.k === "recentThumbs") drawRecent();
         if (c.dataset.k === "recentPhone") { if (!c.checked) { for (const f of recentList()) recentStore.drop(f.key); recentSave([]); } drawRecent(); }
@@ -2668,14 +2679,14 @@ function settingsSheet() {
       b.onclick = async () => {
         const w = b.dataset.btn;
         if (w === "keys") { shortcutsSheet(); return; }
-        if (w === "default") { if (!P.openWith) { P.openWith = true; savePrefs(); if (D.openWith) await D.openWith(true); } D.openDefaultApps(); toast("In Windows Settings, choose PdfEditor for .pdf files."); return; }
+        if (w === "default") { if (!P.openWith) { P.openWith = true; savePrefs(); if (D.openWith) await D.openWith(true); } D.openDefaultApps(); toast(T("In Windows Settings, choose PdfEditor for .pdf files.")); return; }
         if (w === "stamps") { await chooseStamp(); return; }
         if (w === "sigs") { await chooseSignature("signature"); return; }
       };
     });
   };
   return sheet(`<h3>Settings</h3><div class="set-tabs" role="tablist"></div><div class="set-body"></div>
-    <p class="muted small set-ver">PdfEditor ${esc(D ? D.version : APP_VERSION)}</p>
+    <p class="muted small set-ver">PdfEditor ${esc(D ? D.version : APP_VERSION)}${D && D.openLog ? ` · <button class="link-btn" data-openlog>${esc(T("Open the log file"))}</button>` : A ? ` · <button class="link-btn" data-savelog>${esc(T("Save log"))}</button>` : ""}</p>
     <div class="btns"><button class="ok" data-ok>Done</button></div>`, card => { card.querySelector("[data-ok]").onclick = () => closeSheet(); draw(card); }, "wide-sheet");
 }
 $("settingsBtn") && ($("settingsBtn").onclick = () => settingsSheet());
@@ -2715,7 +2726,7 @@ $("grid").addEventListener("drop", async (e) => {
   const order = [...rest.slice(0, before), ...moving, ...rest.slice(before)];
   ORG.drag = null;
   if (order.every((v, k) => v === k)) return;
-  await task("Moving…", async () => { const inf = await call("reorder", S.doc.id, order); await changed("all", inf); });
+  await task(T("Moving…"), async () => { const inf = await call("reorder", S.doc.id, order); await changed("all", inf); });
   ORG.sel = new Set(moving.map(i => order.indexOf(i)));
   buildGrid();
   $("grid").querySelectorAll(".thumb").forEach(x => x.classList.toggle("on", ORG.sel.has(+x.dataset.i)));
@@ -2746,9 +2757,9 @@ async function checkUpdates() {
     const apk = (j.assets || []).find(a => /\.apk$/i.test(a.name));
     if (!apk || !newer(j.tag_name, current)) return;
     if (sheetOpen() || busyState.on) return;
-    const v = await choose("Update available", [
-      { value: "dl", label: "Download version " + verTuple(j.tag_name).join("."), sub: `You have ${current}. Open the downloaded file to install it.`, icon: "drop" },
-      { value: "later", label: "Later", icon: "close" },
+    const v = await choose(T("Update available"), [
+      { value: "dl", label: T("Download version {0}", verTuple(j.tag_name).join(".")), sub: T("You have {0}. Open the downloaded file to install it.", current), icon: "drop" },
+      { value: "later", label: T("Later"), icon: "close" },
     ]);
     if (v === "dl") openUrl(apk.browser_download_url);
   } catch (_) { /* offline: say nothing */ }

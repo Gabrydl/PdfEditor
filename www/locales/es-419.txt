@@ -1,0 +1,594 @@
+1|(presentación vacía)
+2|(no hay texto en esta página – prueba el OCR)
+3|(sin texto)
+4|1 página copiada al final de “{0}”.
+5|1 página con diferencias
+6|Un PDF debe conservar al menos una página.
+7|Agregar
+8|Agregar una contraseña
+9|Agrega al menos un archivo.
+10|Agregar archivos
+11|Agregar imagen
+12|Agregar o quitar una contraseña
+13|Agregar imagen
+14|Agregar texto
+15|Agregar al final de “{0}”
+16|Agregar, renombrar y mover marcadores
+17|Agregado al final.
+18|Agregado al menú del botón derecho.
+19|Agregando página…
+20|Agregando marca de agua…
+21|Agregando…
+22|Todas
+23|Todos los archivos
+24|Todo en uno
+25|Todas las páginas
+26|Las {0}
+27|Permitir cambios y comentarios
+28|Permitir copiar texto
+29|Permitir imprimir
+30|Ya es pequeño
+31|También incluye PdfEditor entre las aplicaciones para PDF.
+32|También las páginas que ya tienen texto
+33|Ángulo
+34|Anotar
+35|Otro archivo…
+36|Apariencia
+37|Aplicar ahora
+38|Aplicar censura
+39|Aplicar censuras
+40|Aprobado
+41|Flecha
+42|Como archivo de texto
+43|Al final
+44|Autor
+45|Atrás
+46|Donde lo dejaste: página {0}.
+47|Tapar datos privados
+48|Página en blanco
+49|Negrita
+50|Marcadores
+51|Panel de marcadores
+52|Ambos
+53|Abajo en el centro
+54|Abajo a la izquierda
+55|Abajo a la derecha
+56|Por rangos de páginas o cada N páginas
+57|Por rangos
+58|Cancelar
+59|Cancelado
+60|Cambiar color
+61|Cambiar texto, agregar texto e imágenes
+62|Cambios conservados {0}
+63|Cambiando…
+64|Marca de verificación
+65|Elegir
+66|Elegir un archivo de este dispositivo
+67|Páginas elegidas, varias por hoja
+68|Borrar
+69|¿Vaciar Recientes?
+70|Cerrar
+71|Cerrar (Ctrl+W)
+72|Cerrar documento
+73|Cerrar búsqueda
+74|Cerrar pestaña
+75|Recopilando resaltados y notas…
+76|Color
+77|Color y línea
+78|Color
+79|Puntos de color al resaltar o dibujar
+80|Comentario
+81|Comentario: {0}
+82|Los comentarios y los campos de formulario pasan a formar parte de la página y ya no se pueden cambiar.
+83|Comparar
+84|Comparar dos versiones
+85|Comparar “{0}” con…
+86|Comprimir
+87|Comprimir: eliminar metadatos
+88|Comprimir: reducir las fuentes a las letras usadas
+89|Comprimido
+90|Comprimiendo…
+91|Confidencial
+92|Índice
+93|Convertir
+94|Convirtiendo a {0}…
+95|Convirtiendo {0}…
+96|Copiado.
+97|Copiar
+98|Copiar páginas a otro PDF abierto
+99|Copiar texto
+100|Copiar las páginas a…
+101|Copiar a la pestaña
+102|Copiando páginas…
+103|No se pudo cargar {0}
+104|No se pudo sobrescribir el archivo. Elige dónde guardarlo.
+105|No se pudo leer {0}
+106|No se pudo guardar
+107|No se pudo escribir el archivo.
+108|No se pudo agregar.
+109|Recortar
+110|Recortando…
+111|Cruz
+112|Oscuro
+113|Páginas oscuras para leer
+114|Páginas oscuras, texto claro. Cámbialo cuando quieras con Ctrl+Mayús+N.
+115|Fecha
+116|Eliminar uno de tus sellos
+117|Eliminar página
+118|Eliminar páginas
+119|Eliminar guardada
+120|¿Cuál eliminar?
+121|¿Qué sello eliminar?
+122|¿Eliminar {0}?
+123|Eliminado.
+124|Eliminando…
+125|Interno
+126|Descartar
+127|Documento
+128|El documento no está abierto.
+129|No guardar
+130|Hecho
+131|Punto
+132|Descargar la versión {0}
+133|Borrador
+134|Arrastra sobre el texto para seleccionarlo.
+135|Arrastra sobre el texto.
+136|Arrastra sobre lo que debe desaparecer.
+137|Arrastra las páginas para reordenarlas
+138|Arrastra el área que quieres conservar.
+139|Arrastra el recuadro azul
+140|Arrastra el recuadro azul para moverlo.
+141|Arrastra para dibujar una línea.
+142|Arrastra para dibujar un rectángulo.
+143|Arrastra para dibujar una flecha.
+144|Arrastra para dibujar una elipse.
+145|Dibujar
+146|Dibujar (lápiz)
+147|Primero dibuja.
+148|Dibuja con el dedo. Toca Dibujar otra vez para desplazarte.
+149|Dibuja tus iniciales
+150|Dibuja tu firma
+151|Dibujo
+152|Dibujando…
+153|Suelta aquí un archivo o haz clic para buscarlo
+154|Suelta aquí un archivo o haz clic para elegir uno
+155|Suelta archivos en la ventana
+156|Suelta para abrir
+157|Soltar archivos está desactivado en Ajustes › Funciones.
+158|Duplicar
+159|Duplicar páginas
+160|Duplicando…
+161|Editar
+162|Editar PDF
+163|Editar y firmar
+164|Editar comentario
+165|Editar nota
+166|Editar texto
+167|.docx editable
+168|Edición
+169|Elipse
+170|Cifrando…
+171|Inglés
+172|Borrador
+173|Cada
+174|Cada N páginas
+175|Cada página se convierte en una imagen (el texto ya no se puede seleccionar)
+176|Todo para tus PDF, sin conexión.
+177|Excel
+178|Caducado
+179|Exportar resaltados y notas
+180|Exportar notas
+181|Extraer
+182|Extraer páginas
+183|Páginas extraídas
+184|Extrayendo…
+185|Funciones
+186|Campo
+187|Rellenar y firmar
+188|Rellenar y firmar
+189|Rellenar formulario
+190|Rellenar
+191|Definitivo
+192|Buscar
+193|Buscar en el documento
+194|Lectura terminada.
+195|Ajustar imagen
+196|Ajustar al ancho
+197|Acoplar
+198|Acoplando…
+199|Seguir el ajuste del dispositivo
+200|Para comentarios
+201|Para publicación
+202|Formato
+203|Formularios, firma, iniciales
+204|General
+205|Ir
+206|Ir a la página
+207|Alta
+208|Resaltar
+209|Resaltar, dibujar, notas
+210|Resaltados y notas
+211|Los resaltados se quedan sobre su texto.
+212|Si PdfEditor o la computadora se detienen, la próxima vez se te ofrece recuperar tu trabajo.
+213|Imágenes listas
+214|En Configuración de Windows, elige PdfEditor para los archivos .pdf.
+215|En la vista Páginas, y sobre una pestaña para copiarlas
+216|Iniciales
+217|Iniciales {0}{1}
+218|Insertar archivo
+219|Insertar página
+220|Insertar páginas
+221|Insertando {0}…
+222|En PDF más pequeños
+223|Apunta a la página {0}.
+224|Italiano
+225|JPG o PNG
+226|Unir varios archivos
+227|Guardar una copia de recuperación de los cambios sin guardar
+228|Atajos de teclado
+229|Palabras clave
+230|Idioma
+231|Grande
+232|Más tarde
+233|Carta
+234|Las letras funcionan mientras hay un PDF abierto y no estás escribiendo. Se pueden desactivar en Ajustes.
+235|Claro
+236|Claro / oscuro
+237|Línea
+238|Grosor de línea
+239|Escuchar un PDF
+240|Registro guardado: {0}
+241|Baja
+242|Hecho con:
+243|Crear PDF
+244|Hacer de PdfEditor la aplicación de PDF predeterminada…
+245|Hacer que los escaneos se puedan buscar
+246|Crear el PDF
+247|Hacer el archivo más pequeño
+248|Creando imágenes…
+249|Creando el PDF…
+250|Margen
+251|Marcar para censurar
+252|Las áreas marcadas no se eliminan hasta que aplicas la censura.
+253|Marcando…
+254|Media
+255|Unir
+256|Unir PDF
+257|Unión detenida: “{0}” está protegido.
+258|Unirlos en un solo PDF
+259|Uniendo…
+260|Más
+261|Mover
+262|Bajar
+263|Meter dentro del de arriba
+264|Mover a la izquierda
+265|Sacar un nivel
+266|Mover páginas
+267|Mover a la derecha
+268|Subir
+269|Mover, girar, eliminar
+270|Moviendo…
+271|Nombre
+272|Nuevo marcador
+273|Nuevo sello
+274|Nuevo sello…
+275|Nuevo {0}
+276|Siguiente
+277|Siguiente diferencia
+278|Página siguiente
+279|Siguiente resultado
+280|Pestaña siguiente (Mayús: anterior)
+281|Noche
+282|Modo noche
+283|Modo noche desactivado.
+284|Modo noche activado.
+285|Todavía no hay marcadores. Ve a una página y presiona
+286|Aquí no hay ningún comentario.
+287|No hay diferencias en el texto.
+288|No existe la página {0} en esta versión
+289|Ninguna página necesitaba OCR (ya tienen texto).
+290|No hay páginas para imprimir.
+291|Sin pérdida de calidad
+292|No hay espacio para escribir el archivo.
+293|Aquí no hay texto. Para imágenes usa Dibujar o una forma.
+294|Ninguno
+295|No aprobado
+296|No encontrado.
+297|Nota
+298|No hay nada marcado. Usa primero Censurar para marcar áreas.
+299|Nada que dividir.
+300|Qué páginas numerar
+301|Numerando…
+302|Desactivado: al abrir un PDF se cierra el que estás leyendo.
+303|De Office a PDF
+304|Una página / dos páginas lado a lado
+305|Una página cada vez.
+306|Una por página
+307|Una diapositiva por página
+308|Atajos de teclado de una letra (H, P, N…)
+309|Solo se vacía la lista. Tus archivos se quedan donde están.
+310|Opacidad
+311|Abrir
+312|Abrir los PDF en modo noche
+313|Abrir los PDF con dos páginas lado a lado
+314|Abrir un PDF
+315|Abrir otro PDF (Ctrl+T)
+316|Documentos abiertos
+317|Abrir cada uno en su pestaña
+318|Abrir en una pestaña nueva
+319|Abrir en una pestaña
+320|Abrirlo
+321|¿Abrir el enlace?
+322|Abrir ahora
+323|Abrir varios PDF en pestañas
+324|Abrir el primero
+325|Abrir el archivo de registro
+326|Abrir con PdfEditor
+327|Abrir con otra aplicación
+328|Abrirlos, unirlos o agregarlos al PDF abierto
+329|Abriendo…
+330|Optimizar y proteger
+331|Organizar
+332|Organizar páginas
+333|Error del motor de PDF: {0}
+334|PDF a Excel
+335|PDF a PowerPoint
+336|PDF a Word
+337|PDF a Word, Excel, PowerPoint, imágenes, texto
+338|PDF a imágenes
+339|PDF sin contraseña
+340|PDF, imágenes o archivos de Office
+341|Página
+342|Página (1–{0})
+343|Página 1
+344|Página 1 de 10
+345|Números de página
+346|Tamaño de página
+347|Tamaño de página: {0} × {1} mm
+348|Tamaño de página: {0} × {1} mm{2}
+349|Página {0}
+350|Página {0}\n{1}
+351|Página {0} de {1}
+352|Página {0} de {1} ·
+353|Página {0}{1}
+354|Páginas
+355|Páginas agregadas.
+356|Vista Páginas (organizar)
+357|Contraseña
+358|Se necesita la contraseña
+359|PdfEditor se cerró antes de guardar estos cambios.
+360|PdfEditor guarda una copia de los últimos 8 PDF que abriste, para que se abran de nuevo con un toque. Al guardar se actualiza la copia.
+362|PdfEditor {0}{1}
+363|Lápiz y formas
+364|Por hoja
+365|Fotos
+366|Fotos a PDF
+367|Imagen {0} de {1}
+368|Imágenes de buena calidad, texto intacto
+369|Imágenes o escaneos
+370|Hacer que apunte a esta página ({0})
+371|Posición
+372|Preparando el OCR…
+373|Preparando las páginas…
+374|Preparando…
+375|Página anterior
+376|Resultado anterior
+377|Imprimir
+378|La impresión no empezó.
+379|Imprimir…
+380|Propiedades
+381|Proteger
+382|Proteger con contraseña
+383|PDF protegido (AES-256)
+384|Calidad
+385|Rango
+386|Rangos
+387|Leer en voz alta
+388|Lectura
+389|Modo de lectura
+390|Leyendo la página {0} de {1}…
+391|Leyendo {0}
+392|Velocidad de lectura en voz alta
+393|Listo
+394|Listo para imprimir
+395|Recientes
+396|Archivos recientes en la pantalla de inicio
+397|Reconocer texto
+398|Reconocer texto (OCR)
+399|Recomendado
+400|¿Recuperar el trabajo sin guardar?
+401|Recuperado. Guárdalo para conservar los cambios.
+402|Rectángulo
+403|Censurar
+404|Marca de censura
+405|Rehacer
+406|Recordar en este celular
+407|Eliminar metadatos
+408|Quitar la contraseña
+409|Quitado del menú del botón derecho.
+410|Quitado.
+411|Elimina metadatos, reduce las fuentes, empaqueta mejor el archivo. Las páginas quedan exactamente igual.
+412|Eliminando contenido…
+413|Quitando la contraseña…
+414|Renombrar
+415|Renombrar marcador
+416|Reabrir cada PDF donde lo dejaste
+417|Repetir
+418|Repetir por toda la página
+419|Girar
+420|Girar a la izquierda
+421|Girar a la derecha
+422|Girando…
+423|Guardar
+424|Guardar (Mayús: guardar como)
+425|Guardar como…
+426|¿Guardar los cambios en “{0}”?
+427|Guardar registro
+428|Guardar en el celular
+429|Guardado
+430|Guardado.
+431|Guardando
+432|Guardando marcadores…
+433|Guardando…
+434|Las páginas escaneadas reciben una capa de texto invisible: luego puedes buscar, seleccionar y copiar el texto.
+435|Buscar
+436|Botón Buscar, Ctrl+F
+437|Ver todos los atajos
+438|Seleccionar
+439|Seleccionar todo
+440|Seleccionar comentarios
+441|No seleccionar nada
+442|Texto seleccionado
+443|Selección
+444|Ajustes
+445|Varias páginas por hoja ahorran papel (2 = lado a lado, 4 = dos por dos).
+446|Compartir
+447|Hojas
+448|Mostrar una miniatura en Recientes
+449|Firma
+450|Firma {0}{1}
+451|Firmando…
+452|Tamaño
+453|Diapositiva
+454|Diapositiva {0}
+455|Pequeño
+456|Imágenes más pequeñas, aún legibles
+457|Lo más pequeño
+458|Algo salió mal
+459|Velocidad
+460|Dividir
+461|Dividiendo…
+462|Ondulado
+463|Sello
+464|Inicio
+465|Empezar en
+466|Todavía buscando…
+467|Parar la herramienta, cerrar la búsqueda
+468|Detenido.
+469|Deteniendo…
+470|Tachar
+471|Fuerte
+472|Tachado
+473|Asunto
+474|Cambiar entre claro y oscuro
+475|Desactiva lo que no uses: sus botones, entradas de menú y atajos desaparecen.
+476|Sistema
+477|Las tablas se reconstruyen a partir de la posición del texto.
+478|Tablas como .xlsx
+479|Toca un campo azul para rellenarlo.
+480|Toca un comentario para eliminarlo.
+481|Toca un comentario para editarlo, moverlo o eliminarlo.
+482|Toca un párrafo para cambiarlo.
+483|Toca un párrafo.
+484|Toca para poner una marca de verificación.
+485|Toca para poner una cruz.
+486|Toca para poner un punto.
+487|Toca donde va la fecha.
+488|Toca donde va la nota.
+489|Toca donde va la imagen.
+490|Toca donde va el sello.
+491|Toca donde va el cuadro de texto.
+492|Toca donde va el texto.
+493|Toca donde poner tus iniciales.
+494|Toca donde firmar.
+495|Toca donde escribir.
+496|Texto
+497|Cuadro de texto
+498|Solo texto, letras más grandes
+499|Texto sobre cada página
+500|Texto reconocido en {0} página(s). Guarda para conservarlo.
+501|La lectura en voz alta no está disponible en este celular.
+502|La lectura en voz alta no está disponible.
+503|Ese PDF no se puede abrir aquí.
+504|Esa copia ya no está. Vuelve a abrir el archivo.
+505|El motor de PDF no arrancó.
+506|También se eliminan las copias que guardó PdfEditor. Tus archivos se quedan donde están.
+507|El párrafo se reescribe con una fuente estándar.
+508|Las contraseñas no coinciden.
+509|En este PDF no hay resaltados ni notas.
+510|Aquí no hay mucho que ganar ({0}). {1}
+511|Este PDF no tiene contraseña que quitar.
+512|Este PDF no tiene índice.
+513|Este PDF ya es tan pequeño como puede ser.
+514|Este comentario ya no existe.
+515|Este documento tiene campos rellenables.
+516|Este campo
+517|Esta lista
+518|Este ({0})
+519|Esta página
+520|Descartarlos
+521|Título
+522|A Excel
+523|A PowerPoint
+524|A Word
+525|A imágenes
+526|A texto
+527|Herramientas
+528|Alto secreto
+529|Arriba en el centro
+530|Arriba a la izquierda
+531|Arriba a la derecha
+532|Reducir fuentes
+533|Prueba “Recomendado” si el archivo tiene fotos, o “Lo más pequeño” para escaneos.
+534|Prueba “Lo más pequeño” si el archivo es un escaneo.
+535|Dos páginas
+536|Dos páginas lado a lado
+537|Dos páginas lado a lado.
+538|Subrayar
+539|Subrayado
+540|Deshacer
+541|Deshacer / rehacer
+542|Desbloquear
+543|Actualización disponible
+544|Usar
+545|Lo usan todas las opciones de Comprimir.
+546|Ver
+547|Marca de agua
+548|Poner marca de agua en las páginas
+549|Cuáles
+550|Qué páginas
+551|Word
+552|Word, Excel, PowerPoint, texto
+553|Las palabras agregadas se marcan en verde y las eliminadas en rojo.
+554|Trabajando…
+555|Funciona sin conexión. Tus archivos nunca salen de esta computadora.
+556|Escribe una nota
+557|Escribe las páginas así: 1-3, 5.
+558|Contraseña incorrecta, inténtalo de nuevo.
+559|Primero puedes cambiar el orden
+560|Tienes la {0}. Abre el archivo descargado para instalarla.
+561|Tus archivos nunca salen de este dispositivo.
+562|Tus archivos nunca salen de este celular.
+563|Tu propio texto, guardado para la próxima vez
+564|Tus firmas guardadas
+565|Tus sellos guardados
+566|Tu sello
+567|Acercar
+568|Acercar / alejar / ajustar
+569|Alejar
+570|p. ej. 1-3, 5
+571|p. ej. 1-3, 7, 10-
+572|p. ej. 1-3; 4-6; 7-
+573|p. ej. Revisado por Gabriele
+574|buscando diferencias…
+575|no hay diferencias en el texto
+576|página(s) · {0} · {1} · Cifrado:
+577|para marcarlo.
+578|{0}\nResaltados y notas, exportados el {1}\n\n{2}
+579|{0} - notas.txt
+580|{0} Agregar archivos
+581|{0} PDF
+582|{0} área(s) eliminada(s) para siempre. Guarda para conservar el cambio.
+583|{0} archivo listo
+584|{0} archivo(s)
+585|{0} es obligatorio.
+586|{0} página(s) · {1} · {2} · Cifrado: {3}
+587|{0} páginas
+588|{0} páginas copiadas al final de “{1}”.
+589|{0} páginas con diferencias
+590|{0} seleccionados
+591|{0} → {1} (−{2}%). Guarda el documento para conservar el archivo más pequeño.
+592|· {0} agregadas
+593|· {0} eliminadas
+594|“Abrir con PdfEditor” en el menú del botón derecho
+595|“{0}” está protegido.

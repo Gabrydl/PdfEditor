@@ -19,8 +19,8 @@ android {
         minSdk = 24
         targetSdk = 34
         // must stay above the APK already on the phone (100000), so it installs as an update
-        versionCode = (project.findProperty("appCode") as String?)?.toInt() ?: 100100
-        versionName = (project.findProperty("appVersion") as String?) ?: "1.5.1"
+        versionCode = (project.findProperty("appCode") as String?)?.toInt() ?: 100700
+        versionName = (project.findProperty("appVersion") as String?) ?: "1.7.0"
     }
 
     sourceSets["main"].assets.srcDir(wwwOut)

@@ -1,0 +1,594 @@
+1|(tyhjä esitys)
+2|(tällä sivulla ei ole tekstiä – kokeile tekstintunnistusta)
+3|(ei tekstiä)
+4|1 sivu kopioitu tiedoston ”{0}” loppuun.
+5|1 sivu, jossa eroja
+6|PDF:ssä on oltava vähintään yksi sivu.
+7|Lisää
+8|Lisää salasana
+9|Lisää vähintään yksi tiedosto.
+10|Lisää tiedostoja
+11|Lisää kuva
+12|Lisää tai poista salasana
+13|Lisää kuva
+14|Lisää tekstiä
+15|Lisää tiedoston ”{0}” loppuun
+16|Lisää, nimeä uudelleen ja siirrä kirjanmerkkejä
+17|Lisätty loppuun.
+18|Lisätty hiiren oikean painikkeen valikkoon.
+19|Lisätään sivua…
+20|Lisätään vesileimaa…
+21|Lisätään…
+22|Kaikki
+23|Kaikki tiedostot
+24|Kaikki yhdessä
+25|Kaikki sivut
+26|Kaikki {0}
+27|Salli muutokset ja kommentit
+28|Salli tekstin kopiointi
+29|Salli tulostus
+30|Jo pieni
+31|Lisää PdfEditorin myös PDF-sovellusten joukkoon.
+32|Myös sivut, joilla on jo tekstiä
+33|Kulma
+34|Merkinnät
+35|Toinen tiedosto…
+36|Ulkoasu
+37|Käytä nyt
+38|Käytä peittoa
+39|Käytä peittoja
+40|Hyväksytty
+41|Nuoli
+42|Tekstitiedostona
+43|Loppuun
+44|Tekijä
+45|Takaisin
+46|Siitä, mihin jäit: sivu {0}.
+47|Peitä yksityiset tiedot
+48|Tyhjä sivu
+49|Lihavointi
+50|Kirjanmerkit
+51|Kirjanmerkkipaneeli
+52|Molemmat
+53|Alhaalla keskellä
+54|Alhaalla vasemmalla
+55|Alhaalla oikealla
+56|Sivualueittain tai joka N:s sivu
+57|Alueittain
+58|Peruuta
+59|Peruttu
+60|Vaihda väri
+61|Muuta tekstiä, lisää tekstiä ja kuvia
+62|Muutokset säilytetty {0}
+63|Muutetaan…
+64|Rasti
+65|Valitse
+66|Valitse tiedosto tältä laitteelta
+67|Valitut sivut, useita arkille
+68|Tyhjennä
+69|Tyhjennetäänkö viimeisimmät?
+70|Sulje
+71|Sulje (Ctrl+W)
+72|Sulje asiakirja
+73|Sulje haku
+74|Sulje välilehti
+75|Kerätään korostuksia ja muistiinpanoja…
+76|Väri
+77|Väri ja viiva
+78|Väri
+79|Värinapit korostaessa tai piirtäessä
+80|Kommentti
+81|Kommentti: {0}
+82|Kommentit ja lomakekentät muuttuvat osaksi sivua eikä niitä voi enää muuttaa.
+83|Vertaa
+84|Vertaa kahta versiota
+85|Vertaa tiedostoa ”{0}” kohteeseen…
+86|Pakkaa
+87|Pakkaa: poista metatiedot
+88|Pakkaa: karsi fontit käytettyihin kirjaimiin
+89|Pakattu
+90|Pakataan…
+91|Luottamuksellinen
+92|Sisällys
+93|Muunna
+94|Muunnetaan muotoon {0}…
+95|Muunnetaan {0}…
+96|Kopioitu.
+97|Kopioi
+98|Kopioi sivut toiseen avoimeen PDF:ään
+99|Kopioi teksti
+100|Kopioi sivut kohteeseen…
+101|Kopioi välilehteen
+102|Kopioidaan sivuja…
+103|Kohdetta {0} ei voitu ladata
+104|Tiedostoa ei voitu korvata. Valitse, minne se tallennetaan.
+105|Kohdetta {0} ei voitu lukea
+106|Tallennus epäonnistui
+107|Tiedostoa ei voitu kirjoittaa.
+108|Ei voitu lisätä.
+109|Rajaa
+110|Rajataan…
+111|Risti
+112|Tumma
+113|Tummat sivut lukemiseen
+114|Tummat sivut, vaalea teksti. Vaihda milloin tahansa näppäimillä Ctrl+Vaihto+N.
+115|Päivämäärä
+116|Poista yksi leimoistasi
+117|Poista sivu
+118|Poista sivuja
+119|Poista tallennettu
+120|Mikä poistetaan?
+121|Mikä leima poistetaan?
+122|Poistetaanko {0}?
+123|Poistettu.
+124|Poistetaan…
+125|Sisäinen
+126|Sulje
+127|Asiakirja
+128|Asiakirja ei ole auki.
+129|Älä tallenna
+130|Valmis
+131|Piste
+132|Lataa versio {0}
+133|Luonnos
+134|Vedä tekstin yli valitaksesi sen.
+135|Vedä tekstin yli.
+136|Vedä sen yli, minkä on kadottava.
+137|Vedä sivuja järjestääksesi ne uudelleen
+138|Vedä säilytettävä alue.
+139|Vedä sinistä kehystä
+140|Vedä sinistä kehystä siirtääksesi sitä.
+141|Vedä piirtääksesi viivan.
+142|Vedä piirtääksesi suorakulmion.
+143|Vedä piirtääksesi nuolen.
+144|Vedä piirtääksesi ellipsin.
+145|Piirrä
+146|Piirrä (kynä)
+147|Piirrä ensin.
+148|Piirrä sormella. Napauta Piirrä uudelleen vierittääksesi.
+149|Piirrä nimikirjaimesi
+150|Piirrä allekirjoituksesi
+151|Piirros
+152|Piirretään…
+153|Pudota tiedosto tähän tai napsauta selataksesi
+154|Pudota tiedosto tähän tai napsauta valitaksesi
+155|Pudota tiedostoja ikkunaan
+156|Pudota avataksesi
+157|Tiedostojen pudotus on poissa käytöstä kohdassa Asetukset › Toiminnot.
+158|Monista
+159|Monista sivuja
+160|Monistetaan…
+161|Muokkaa
+162|Muokkaa PDF:ää
+163|Muokkaa ja allekirjoita
+164|Muokkaa kommenttia
+165|Muokkaa muistiinpanoa
+166|Muokkaa tekstiä
+167|Muokattava .docx
+168|Muokkaus
+169|Ellipsi
+170|Salataan…
+171|Englanti
+172|Pyyhekumi
+173|Joka
+174|Joka N:s sivu
+175|Jokaisesta sivusta tulee kuva (tekstiä ei voi enää valita)
+176|Kaikki PDF:ille, ilman verkkoa.
+177|Excel
+178|Vanhentunut
+179|Vie korostukset ja muistiinpanot
+180|Vie muistiinpanot
+181|Irrota
+182|Irrota sivuja
+183|Irrotetut sivut
+184|Irrotetaan…
+185|Toiminnot
+186|Kenttä
+187|Täytä ja allekirjoita
+188|Täytä ja allekirjoita
+189|Täytä lomake
+190|Täytä
+191|Lopullinen
+192|Etsi
+193|Etsi asiakirjasta
+194|Lukeminen valmis.
+195|Sovita kuva
+196|Sovita leveyteen
+197|Litistä
+198|Litistetään…
+199|Noudata laitteen asetusta
+200|Kommentoitavaksi
+201|Julkaistavaksi
+202|Muoto
+203|Lomakkeet, allekirjoitus, nimikirjaimet
+204|Yleiset
+205|Siirry
+206|Siirry sivulle
+207|Korkea
+208|Korosta
+209|Korosta, piirrä, muistiinpanot
+210|Korostukset ja muistiinpanot
+211|Korostukset pysyvät tekstinsä päällä.
+212|Jos PdfEditor tai tietokone pysähtyy, saat työsi takaisin seuraavalla kerralla.
+213|Kuvat valmiina
+214|Valitse Windowsin asetuksissa PdfEditor .pdf-tiedostoille.
+215|Sivut-näkymässä, ja välilehdelle kopioidaksesi ne
+216|Nimikirjaimet
+217|Nimikirjaimet {0}{1}
+218|Lisää tiedosto
+219|Lisää sivu
+220|Lisää sivuja
+221|Lisätään {0}…
+222|Pienemmiksi PDF:iksi
+223|Se osoittaa sivulle {0}.
+224|Italia
+225|JPG tai PNG
+226|Yhdistä useita tiedostoja
+227|Säilytä palautuskopio tallentamattomista muutoksista
+228|Pikanäppäimet
+229|Avainsanat
+230|Kieli
+231|Iso
+232|Myöhemmin
+233|Letter
+234|Kirjaimet toimivat, kun PDF on auki etkä kirjoita. Ne voi kytkeä pois Asetuksista.
+235|Vaalea
+236|Vaalea / tumma
+237|Viiva
+238|Viivan paksuus
+239|Kuuntele PDF
+240|Loki tallennettu: {0}
+241|Matala
+242|Tehty ohjelmalla:
+243|Tee PDF
+244|Tee PdfEditorista PDF-oletussovellus…
+245|Tee skannauksista haettavia
+246|Tee PDF
+247|Pienennä tiedostoa
+248|Luodaan kuvia…
+249|Luodaan PDF:ää…
+250|Marginaali
+251|Merkitse peitettäväksi
+252|Merkittyjä alueita ei poisteta ennen kuin käytät peittoa.
+253|Merkitään…
+254|Keskitaso
+255|Yhdistä
+256|Yhdistä PDF:t
+257|Yhdistäminen pysähtyi: ”{0}” on suojattu.
+258|Yhdistä ne yhdeksi PDF:ksi
+259|Yhdistetään…
+260|Lisää
+261|Siirrä
+262|Siirrä alas
+263|Siirrä yläpuolisen sisään
+264|Siirrä vasemmalle
+265|Siirrä tasoa ylemmäs
+266|Siirrä sivuja
+267|Siirrä oikealle
+268|Siirrä ylös
+269|Siirrä, kierrä, poista
+270|Siirretään…
+271|Nimi
+272|Uusi kirjanmerkki
+273|Uusi leima
+274|Uusi leima…
+275|Uusi: {0}
+276|Seuraava
+277|Seuraava ero
+278|Seuraava sivu
+279|Seuraava tulos
+280|Seuraava välilehti (Vaihto: edellinen)
+281|Yö
+282|Yötila
+283|Yötila pois.
+284|Yötila päällä.
+285|Ei vielä kirjanmerkkejä. Siirry sivulle ja paina
+286|Tässä ei ole kommenttia.
+287|Tekstissä ei ole eroja.
+288|Tässä versiossa ei ole sivua {0}
+289|Mikään sivu ei tarvinnut tekstintunnistusta (niillä on jo tekstiä).
+290|Ei tulostettavia sivuja.
+291|Ei laadun heikkenemistä
+292|Tiedoston kirjoittamiseen ei ole tilaa.
+293|Tässä ei ole tekstiä. Käytä kuville Piirrä-työkalua tai muotoa.
+294|Ei mitään
+295|Ei hyväksytty
+296|Ei löytynyt.
+297|Muistiinpano
+298|Mitään ei ole merkitty. Merkitse ensin alueet Peitä-työkalulla.
+299|Ei mitään jaettavaa.
+300|Mitkä sivut numeroidaan
+301|Numeroidaan…
+302|Pois: PDF:n avaaminen sulkee sen, jota luet.
+303|Office PDF:ksi
+304|Yksi sivu / kaksi sivua rinnakkain
+305|Yksi sivu kerrallaan.
+306|Yksi sivua kohden
+307|Yksi dia sivua kohden
+308|Yhden kirjaimen pikanäppäimet (H, P, N…)
+309|Vain lista tyhjennetään. Tiedostosi pysyvät paikallaan.
+310|Peittävyys
+311|Avaa
+312|Avaa PDF:t yötilassa
+313|Avaa PDF:t kahtena sivuna rinnakkain
+314|Avaa PDF
+315|Avaa toinen PDF (Ctrl+T)
+316|Avoimet asiakirjat
+317|Avaa jokainen omaan välilehteensä
+318|Avaa uuteen välilehteen
+319|Avaa välilehteen
+320|Avaa se
+321|Avataanko linkki?
+322|Avaa nyt
+323|Avaa useita PDF:iä välilehtiin
+324|Avaa ensimmäinen
+325|Avaa lokitiedosto
+326|Avaa PdfEditorilla
+327|Avaa toisella sovelluksella
+328|Avaa, yhdistä tai lisää ne avoimeen PDF:ään
+329|Avataan…
+330|Optimoi ja suojaa
+331|Järjestä
+332|Järjestä sivut
+333|PDF-moottorin virhe: {0}
+334|PDF Exceliksi
+335|PDF PowerPointiksi
+336|PDF Wordiksi
+337|PDF Wordiksi, Exceliksi, PowerPointiksi, kuviksi, tekstiksi
+338|PDF kuviksi
+339|PDF ilman salasanaa
+340|PDF, kuvat tai Office-tiedostot
+341|Sivu
+342|Sivu (1–{0})
+343|Sivu 1
+344|Sivu 1/10
+345|Sivunumerot
+346|Sivukoko
+347|Sivukoko: {0} × {1} mm
+348|Sivukoko: {0} × {1} mm{2}
+349|Sivu {0}
+350|Sivu {0}\n{1}
+351|Sivu {0}/{1}
+352|Sivu {0}/{1} ·
+353|Sivu {0}{1}
+354|Sivut
+355|Sivut lisätty.
+356|Sivut-näkymä (järjestä)
+357|Salasana
+358|Salasana tarvitaan
+359|PdfEditor sulkeutui ennen kuin nämä muutokset tallennettiin.
+360|PdfEditor säilyttää kopion 8 viimeksi avatusta PDF:stä, jotta ne aukeavat taas yhdellä napautuksella. Tallennus päivittää kopion.
+362|PdfEditor {0}{1}
+363|Kynä ja muodot
+364|Arkkia kohden
+365|Kuvat
+366|Kuvat PDF:ksi
+367|Kuva {0}/{1}
+368|Kuvat hyvällä laadulla, teksti ennallaan
+369|Kuvat tai skannaukset
+370|Osoita tälle sivulle ({0})
+371|Sijainti
+372|Valmistellaan tekstintunnistusta…
+373|Valmistellaan sivuja…
+374|Valmistellaan…
+375|Edellinen sivu
+376|Edellinen tulos
+377|Tulosta
+378|Tulostus ei alkanut.
+379|Tulosta…
+380|Ominaisuudet
+381|Suojaa
+382|Suojaa salasanalla
+383|Suojattu PDF (AES-256)
+384|Laatu
+385|Alue
+386|Alueet
+387|Lue ääneen
+388|Lukeminen
+389|Lukutila
+390|Luetaan sivua {0}/{1}…
+391|Luetaan {0}
+392|Ääneen lukemisen nopeus
+393|Valmis
+394|Valmis tulostettavaksi
+395|Viimeisimmät
+396|Viimeisimmät tiedostot aloitusnäytöllä
+397|Tunnista teksti
+398|Tunnista teksti (OCR)
+399|Suositeltu
+400|Palautetaanko tallentamaton työ?
+401|Palautettu. Tallenna säilyttääksesi muutokset.
+402|Suorakulmio
+403|Peitä
+404|Peittomerkintä
+405|Tee uudelleen
+406|Muista tässä puhelimessa
+407|Poista metatiedot
+408|Poista salasana
+409|Poistettu hiiren oikean painikkeen valikosta.
+410|Poistettu.
+411|Poistaa metatiedot, karsii fontit, pakkaa tiedoston tiiviimmin. Sivut näyttävät täsmälleen samoilta.
+412|Poistetaan sisältöä…
+413|Poistetaan salasanaa…
+414|Nimeä uudelleen
+415|Nimeä kirjanmerkki uudelleen
+416|Avaa jokainen PDF siitä, mihin jäit
+417|Toista
+418|Toista koko sivulla
+419|Kierrä
+420|Kierrä vasemmalle
+421|Kierrä oikealle
+422|Kierretään…
+423|Tallenna
+424|Tallenna (Vaihto: tallenna nimellä)
+425|Tallenna nimellä…
+426|Tallennetaanko muutokset tiedostoon ”{0}”?
+427|Tallenna loki
+428|Tallenna puhelimeen
+429|Tallennettu
+430|Tallennettu.
+431|Tallennetaan
+432|Tallennetaan kirjanmerkkejä…
+433|Tallennetaan…
+434|Skannatut sivut saavat näkymättömän tekstikerroksen: sen jälkeen voit hakea, valita ja kopioida tekstiä.
+435|Haku
+436|Hakupainike, Ctrl+F
+437|Näytä kaikki pikanäppäimet
+438|Valitse
+439|Valitse kaikki
+440|Valitse kommentit
+441|Poista valinnat
+442|Valittu teksti
+443|Valinta
+444|Asetukset
+445|Useampi sivu arkille säästää paperia (2 = rinnakkain, 4 = kaksi kertaa kaksi).
+446|Jaa
+447|Arkit
+448|Näytä pikkukuva Viimeisimmissä
+449|Allekirjoitus
+450|Allekirjoitus {0}{1}
+451|Allekirjoitetaan…
+452|Koko
+453|Dia
+454|Dia {0}
+455|Pieni
+456|Pienemmät kuvat, silti luettavia
+457|Pienin
+458|Jokin meni vikaan
+459|Nopeus
+460|Jaa osiin
+461|Jaetaan…
+462|Aaltoviiva
+463|Leima
+464|Alku
+465|Aloita kohdasta
+466|Etsitään vielä…
+467|Lopeta työkalu, sulje haku
+468|Pysäytetty.
+469|Pysäytetään…
+470|Yliviivaa
+471|Vahva
+472|Yliviivattu
+473|Aihe
+474|Vaihda vaalean ja tumman välillä
+475|Kytke pois se, mitä et käytä: sen painikkeet, valikkokohdat ja pikanäppäimet katoavat.
+476|Järjestelmä
+477|Taulukot rakennetaan uudelleen tekstin sijainnin perusteella.
+478|Taulukot .xlsx-muodossa
+479|Napauta sinistä kenttää täyttääksesi sen.
+480|Napauta kommenttia poistaaksesi sen.
+481|Napauta kommenttia muokataksesi, siirtääksesi tai poistaaksesi sen.
+482|Napauta kappaletta muuttaaksesi sitä.
+483|Napauta kappaletta.
+484|Napauta lisätäksesi rastin.
+485|Napauta lisätäksesi ristin.
+486|Napauta lisätäksesi pisteen.
+487|Napauta kohtaa, johon päivämäärä tulee.
+488|Napauta kohtaa, johon muistiinpano tulee.
+489|Napauta kohtaa, johon kuva tulee.
+490|Napauta kohtaa, johon leima tulee.
+491|Napauta kohtaa, johon tekstikenttä tulee.
+492|Napauta kohtaa, johon teksti tulee.
+493|Napauta kohtaa, johon nimikirjaimesi tulevat.
+494|Napauta kohtaa, johon allekirjoitat.
+495|Napauta kohtaa, johon kirjoitat.
+496|Teksti
+497|Tekstikenttä
+498|Vain tekstiä, isommat kirjaimet
+499|Teksti jokaisen sivun päälle
+500|Tekstiä tunnistettu {0} sivulla. Tallenna säilyttääksesi sen.
+501|Ääneen luku ei ole käytettävissä tässä puhelimessa.
+502|Ääneen luku ei ole käytettävissä.
+503|Tätä PDF:ää ei voi avata tässä.
+504|Kopiota ei ole enää. Avaa tiedosto uudelleen.
+505|PDF-moottori ei käynnistynyt.
+506|Myös PdfEditorin säilyttämät kopiot poistetaan. Tiedostosi pysyvät paikallaan.
+507|Kappale kirjoitetaan uudelleen vakiofontilla.
+508|Salasanat eroavat.
+509|Tässä PDF:ssä ei ole korostuksia eikä muistiinpanoja.
+510|Tässä ei ole paljon voitettavaa ({0}). {1}
+511|Tässä PDF:ssä ei ole poistettavaa salasanaa.
+512|Tässä PDF:ssä ei ole sisällysluetteloa.
+513|Tämä PDF on jo niin pieni kuin mahdollista.
+514|Tätä kommenttia ei enää ole.
+515|Tässä asiakirjassa on täytettäviä kenttiä.
+516|Tämä kenttä
+517|Tämä lista
+518|Tämä ({0})
+519|Tämä sivu
+520|Hylkää ne
+521|Otsikko
+522|Exceliksi
+523|PowerPointiksi
+524|Wordiksi
+525|Kuviksi
+526|Tekstiksi
+527|Työkalut
+528|Erittäin salainen
+529|Ylhäällä keskellä
+530|Ylhäällä vasemmalla
+531|Ylhäällä oikealla
+532|Karsi fontit
+533|Kokeile ”Suositeltu”, jos tiedostossa on kuvia, tai ”Pienin” skannauksille.
+534|Kokeile ”Pienin”, jos tiedosto on skannaus.
+535|Kaksi sivua
+536|Kaksi sivua rinnakkain
+537|Kaksi sivua rinnakkain.
+538|Alleviivaa
+539|Alleviivattu
+540|Kumoa
+541|Kumoa / tee uudelleen
+542|Avaa lukitus
+543|Päivitys saatavilla
+544|Käytä
+545|Kaikki Pakkaa-vaihtoehdot käyttävät tätä.
+546|Näkymä
+547|Vesileima
+548|Lisää sivuille vesileima
+549|Mitkä
+550|Mitkä sivut
+551|Word
+552|Word, Excel, PowerPoint, teksti
+553|Lisätyt sanat on merkitty vihreällä, poistetut punaisella.
+554|Käynnissä…
+555|Toimii ilman verkkoa. Tiedostosi eivät koskaan lähde tältä tietokoneelta.
+556|Kirjoita muistiinpano
+557|Kirjoita sivut näin: 1-3, 5.
+558|Väärä salasana, yritä uudelleen.
+559|Voit muuttaa järjestystä ensin
+560|Sinulla on {0}. Avaa ladattu tiedosto asentaaksesi sen.
+561|Tiedostosi eivät koskaan lähde tältä laitteelta.
+562|Tiedostosi eivät koskaan lähde tästä puhelimesta.
+563|Oma tekstisi, tallennettu seuraavaa kertaa varten
+564|Tallennetut allekirjoituksesi
+565|Tallennetut leimasi
+566|Leimasi
+567|Lähennä
+568|Lähennä / loitonna / sovita
+569|Loitonna
+570|esim. 1-3, 5
+571|esim. 1-3, 7, 10-
+572|esim. 1-3; 4-6; 7-
+573|esim. Tarkistanut Gabriele
+574|etsitään eroja…
+575|tekstissä ei ole eroja
+576|sivua · {0} · {1} · Salaus:
+577|merkitäksesi sen.
+578|{0}\nKorostukset ja muistiinpanot, viety {1}\n\n{2}
+579|{0} - muistiinpanot.txt
+580|{0} Lisää tiedostoja
+581|{0} PDF:ää
+582|{0} aluetta poistettu pysyvästi. Tallenna säilyttääksesi muutoksen.
+583|{0} tiedosto valmis
+584|{0} tiedostoa
+585|{0} on pakollinen.
+586|{0} sivua · {1} · {2} · Salaus: {3}
+587|{0} sivua
+588|{0} sivua kopioitu tiedoston ”{1}” loppuun.
+589|{0} sivua, joissa eroja
+590|{0} valittu
+591|{0} → {1} (−{2} %). Tallenna asiakirja säilyttääksesi pienemmän tiedoston.
+592|· {0} lisätty
+593|· {0} poistettu
+594|”Avaa PdfEditorilla” hiiren oikean painikkeen valikossa
+595|”{0}” on suojattu.

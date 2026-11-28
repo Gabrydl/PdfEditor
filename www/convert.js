@@ -1,4 +1,5 @@
 // Conversions that run in the page: PDF -> Word / Excel / PowerPoint / images / text, Office -> PDF, OCR.
+import { T } from "./i18n.js";
 import { call, loadScript, progress, checkCancel, u8ToB64, ext, baseName, esc } from "./ui.js";
 
 const LIB = "lib/";
@@ -45,7 +46,7 @@ export async function toWord(id, pages) {
   const first = pages[0];
   for (let i = 0; i < pages.length; i++) {
     checkCancel();
-    progress(i / pages.length, `Page ${i + 1} of ${pages.length}`);
+    progress(i / pages.length, T("Page {0} of {1}", i + 1, pages.length));
     const pg = pages[i];
     const ls = await call("lines", id, i);
     if (i > 0) children.push(new Paragraph({ children: [new PageBreak()] }));
@@ -136,12 +137,12 @@ export async function toExcel(id, pages, oneSheet = false) {
   let all = [];
   for (let i = 0; i < pages.length; i++) {
     checkCancel();
-    progress(i / pages.length, `Page ${i + 1} of ${pages.length}`);
+    progress(i / pages.length, T("Page {0} of {1}", i + 1, pages.length));
     const aoa = tableFromWords(await call("words", id, i));
     if (oneSheet) { if (all.length && aoa.length) all.push([]); all = all.concat(aoa); continue; }
     const ws = X.utils.aoa_to_sheet(aoa.length ? aoa : [[""]]);
     ws["!cols"] = widths(aoa);
-    X.utils.book_append_sheet(wb, ws, "Page " + (i + 1));
+    X.utils.book_append_sheet(wb, ws, T("Page {0}{1}", i, 1));
   }
   if (oneSheet) { const ws = X.utils.aoa_to_sheet(all.length ? all : [[""]]); ws["!cols"] = widths(all); X.utils.book_append_sheet(wb, ws, "PDF"); }
   return new Uint8Array(X.write(wb, { type: "array", bookType: "xlsx" }));
@@ -161,7 +162,7 @@ export async function toPowerPoint(id, pages) {
   pptx.layout = "PDF";
   for (let i = 0; i < pages.length; i++) {
     checkCancel();
-    progress(i / pages.length, `Page ${i + 1} of ${pages.length}`);
+    progress(i / pages.length, T("Page {0} of {1}", i + 1, pages.length));
     const pg = pages[i];
     const k = Math.min(W / (pg.w / 72), H / (pg.h / 72));
     const slide = pptx.addSlide();
@@ -186,7 +187,7 @@ export async function toImages(id, pages, dpi = 150, format = "jpg") {
   const out = [];
   for (let i = 0; i < pages.length; i++) {
     checkCancel();
-    progress(i / pages.length, `Page ${i + 1} of ${pages.length}`);
+    progress(i / pages.length, T("Page {0} of {1}", i + 1, pages.length));
     const bytes = format === "png" ? await call("renderPNG", id, i, dpi / 72) : await call("renderJPEG", id, i, dpi / 72, 88);
     out.push(bytes);
   }

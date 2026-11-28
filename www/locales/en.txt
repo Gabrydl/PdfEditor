@@ -1,0 +1,594 @@
+1|(empty presentation)
+2|(no text on this page – try OCR)
+3|(no text)
+4|1 page copied to the end of “{0}”.
+5|1 page with differences
+6|A PDF must keep at least one page.
+7|Add
+8|Add a password
+9|Add at least one file.
+10|Add files
+11|Add image
+12|Add or remove a password
+13|Add picture
+14|Add text
+15|Add to the end of “{0}”
+16|Add, rename and move bookmarks
+17|Added at the end.
+18|Added to the right-click menu.
+19|Adding page…
+20|Adding watermark…
+21|Adding…
+22|All
+23|All files
+24|All in one
+25|All pages
+26|All {0}
+27|Allow changes and comments
+28|Allow copying text
+29|Allow printing
+30|Already small
+31|Also lists PdfEditor among the apps for PDFs.
+32|Also pages that already have text
+33|Angle
+34|Annotate
+35|Another file…
+36|Appearance
+37|Apply now
+38|Apply redaction
+39|Apply redactions
+40|Approved
+41|Arrow
+42|As a text file
+43|At the end
+44|Author
+45|Back
+46|Back where you left it: page {0}.
+47|Black out private data
+48|Blank page
+49|Bold
+50|Bookmarks
+51|Bookmarks panel
+52|Both
+53|Bottom center
+54|Bottom left
+55|Bottom right
+56|By page ranges or every N pages
+57|By ranges
+58|Cancel
+59|Cancelled
+60|Change color
+61|Change text, add text and pictures
+62|Changes kept {0}
+63|Changing…
+64|Check
+65|Choose
+66|Choose a file from this device
+67|Chosen pages, several per sheet
+68|Clear
+69|Clear Recent?
+70|Close
+71|Close (Ctrl+W)
+72|Close document
+73|Close search
+74|Close tab
+75|Collecting highlights and notes…
+76|Color
+77|Color & line
+78|Colour
+79|Colour dots while highlighting or drawing
+80|Comment
+81|Comment: {0}
+82|Comments and form fields become part of the page and can no longer be changed.
+83|Compare
+84|Compare two versions
+85|Compare “{0}” with…
+86|Compress
+87|Compress: remove metadata
+88|Compress: trim fonts to the letters used
+89|Compressed
+90|Compressing…
+91|Confidential
+92|Contents
+93|Convert
+94|Converting to {0}…
+95|Converting {0}…
+96|Copied.
+97|Copy
+98|Copy pages to another open PDF
+99|Copy text
+100|Copy the pages to…
+101|Copy to tab
+102|Copying pages…
+103|Could not load {0}
+104|Could not overwrite the file. Choose where to save it.
+105|Could not read {0}
+106|Could not save
+107|Could not write the file.
+108|Couldn't add it.
+109|Crop
+110|Cropping…
+111|Cross
+112|Dark
+113|Dark pages for reading
+114|Dark pages, light text. Switch any time with Ctrl+Shift+N.
+115|Date
+116|Delete one of your stamps
+117|Delete page
+118|Delete pages
+119|Delete saved
+120|Delete which one?
+121|Delete which stamp?
+122|Delete {0}?
+123|Deleted.
+124|Deleting…
+125|Departmental
+126|Dismiss
+127|Document
+128|Document is not open.
+129|Don't save
+130|Done
+131|Dot
+132|Download version {0}
+133|Draft
+134|Drag over the text to select it.
+135|Drag over the text.
+136|Drag over what must disappear.
+137|Drag pages to reorder them
+138|Drag the area to keep.
+139|Drag the blue box
+140|Drag the blue box to move it.
+141|Drag to draw a line.
+142|Drag to draw a rectangle.
+143|Drag to draw an arrow.
+144|Drag to draw an ellipse.
+145|Draw
+146|Draw (pen)
+147|Draw first.
+148|Draw with your finger. Tap Draw again to scroll.
+149|Draw your initials
+150|Draw your signature
+151|Drawing
+152|Drawing…
+153|Drop a file here, or click to browse
+154|Drop a file here, or click to choose one
+155|Drop files on the window
+156|Drop to open
+157|Dropping files is switched off in Settings › Features.
+158|Duplicate
+159|Duplicate pages
+160|Duplicating…
+161|Edit
+162|Edit PDF
+163|Edit and sign
+164|Edit comment
+165|Edit note
+166|Edit text
+167|Editable .docx
+168|Editing
+169|Ellipse
+170|Encrypting…
+171|English
+172|Eraser
+173|Every
+174|Every N pages
+175|Every page becomes a picture (text can no longer be selected)
+176|Everything for PDFs, offline.
+177|Excel
+178|Expired
+179|Export highlights and notes
+180|Export notes
+181|Extract
+182|Extract pages
+183|Extracted pages
+184|Extracting…
+185|Features
+186|Field
+187|Fill & Sign
+188|Fill and sign
+189|Fill form
+190|Fill in
+191|Final
+192|Find
+193|Find in document
+194|Finished reading.
+195|Fit picture
+196|Fit width
+197|Flatten
+198|Flattening…
+199|Follow the device setting
+200|For Comment
+201|For Public Release
+202|Format
+203|Forms, signature, initials
+204|General
+205|Go
+206|Go to page
+207|High
+208|Highlight
+209|Highlight, draw, notes
+210|Highlights and notes
+211|Highlights stay on their text.
+212|If PdfEditor or the computer stops, you're offered your work back next time.
+213|Images ready
+214|In Windows Settings, choose PdfEditor for .pdf files.
+215|In the Pages view, and onto a tab to copy them
+216|Initials
+217|Initials {0}{1}
+218|Insert file
+219|Insert page
+220|Insert pages
+221|Inserting {0}…
+222|Into smaller PDFs
+223|It points to page {0}.
+224|Italian
+225|JPG or PNG
+226|Join several files
+227|Keep a recovery copy of unsaved changes
+228|Keyboard shortcuts
+229|Keywords
+230|Language
+231|Large
+232|Later
+233|Letter
+234|Letters work while a PDF is open and you're not typing. They can be switched off in Settings.
+235|Light
+236|Light / dark
+237|Line
+238|Line width
+239|Listen to a PDF
+240|Log saved: {0}
+241|Low
+242|Made with:
+243|Make PDF
+244|Make PdfEditor the default PDF app…
+245|Make scans searchable
+246|Make the PDF
+247|Make the file smaller
+248|Making images…
+249|Making the PDF…
+250|Margin
+251|Mark redaction
+252|Marked areas are not removed until you apply the redaction.
+253|Marking…
+254|Medium
+255|Merge
+256|Merge PDFs
+257|Merge stopped: “{0}” is protected.
+258|Merge them into one PDF
+259|Merging…
+260|More
+261|Move
+262|Move down
+263|Move inside the one above
+264|Move left
+265|Move out one level
+266|Move pages
+267|Move right
+268|Move up
+269|Move, rotate, delete
+270|Moving…
+271|Name
+272|New bookmark
+273|New stamp
+274|New stamp…
+275|New {0}
+276|Next
+277|Next difference
+278|Next page
+279|Next result
+280|Next tab (Shift: previous)
+281|Night
+282|Night mode
+283|Night mode off.
+284|Night mode on.
+285|No bookmarks yet. Go to a page and press
+286|No comment here.
+287|No differences in the text.
+288|No page {0} in this version
+289|No pages needed OCR (they already have text).
+290|No pages to print.
+291|No quality loss
+292|No space to write the file.
+293|No text here. Use Draw or a shape for pictures.
+294|None
+295|Not Approved
+296|Not found.
+297|Note
+298|Nothing is marked. Use Redact to mark areas first.
+299|Nothing to split.
+300|Number which pages
+301|Numbering…
+302|Off: opening a PDF closes the one you're reading.
+303|Office to PDF
+304|One page / two pages side by side
+305|One page at a time.
+306|One per page
+307|One slide per page
+308|One-letter keyboard shortcuts (H, P, N…)
+309|Only the list is cleared. Your files stay where they are.
+310|Opacity
+311|Open
+312|Open PDFs in night mode
+313|Open PDFs with two pages side by side
+314|Open a PDF
+315|Open another PDF (Ctrl+T)
+316|Open documents
+317|Open each in its own tab
+318|Open in a new tab
+319|Open in a tab
+320|Open it
+321|Open link?
+322|Open now
+323|Open several PDFs in tabs
+324|Open the first one
+325|Open the log file
+326|Open with PdfEditor
+327|Open with another app
+328|Open, merge or add them to the open PDF
+329|Opening…
+330|Optimize and protect
+331|Organize
+332|Organize pages
+333|PDF engine error: {0}
+334|PDF to Excel
+335|PDF to PowerPoint
+336|PDF to Word
+337|PDF to Word, Excel, PowerPoint, images, text
+338|PDF to images
+339|PDF without password
+340|PDF, pictures or Office files
+341|Page
+342|Page (1–{0})
+343|Page 1
+344|Page 1 of 10
+345|Page numbers
+346|Page size
+347|Page size: {0} × {1} mm
+348|Page size: {0} × {1} mm{2}
+349|Page {0}
+350|Page {0}\n{1}
+351|Page {0} of {1}
+352|Page {0} of {1} ·
+353|Page {0}{1}
+354|Pages
+355|Pages added.
+356|Pages view (organize)
+357|Password
+358|Password needed
+359|PdfEditor closed before these changes were saved.
+360|PdfEditor keeps a copy of the last 8 PDFs you opened, so they open again with one tap. Saving updates the copy.
+362|PdfEditor {0}{1}
+363|Pen & shapes
+364|Per sheet
+365|Photos
+366|Photos to PDF
+367|Picture {0} of {1}
+368|Pictures at good quality, text untouched
+369|Pictures or scans
+370|Point it to this page ({0})
+371|Position
+372|Preparing OCR…
+373|Preparing the pages…
+374|Preparing…
+375|Previous page
+376|Previous result
+377|Print
+378|Printing didn't start.
+379|Print…
+380|Properties
+381|Protect
+382|Protect with a password
+383|Protected PDF (AES-256)
+384|Quality
+385|Range
+386|Ranges
+387|Read aloud
+388|Reading
+389|Reading mode
+390|Reading page {0} of {1}…
+391|Reading {0}
+392|Reading-aloud speed
+393|Ready
+394|Ready to print
+395|Recent
+396|Recent files on the home screen
+397|Recognize text
+398|Recognize text (OCR)
+399|Recommended
+400|Recover unsaved work?
+401|Recovered. Save it to keep the changes.
+402|Rectangle
+403|Redact
+404|Redaction mark
+405|Redo
+406|Remember on this phone
+407|Remove metadata
+408|Remove the password
+409|Removed from the right-click menu.
+410|Removed.
+411|Removes metadata, trims fonts, packs the file tighter. Pages look exactly the same.
+412|Removing content…
+413|Removing password…
+414|Rename
+415|Rename bookmark
+416|Reopen each PDF where you left it
+417|Repeat
+418|Repeat across the page
+419|Rotate
+420|Rotate left
+421|Rotate right
+422|Rotating…
+423|Save
+424|Save (Shift: save as)
+425|Save as…
+426|Save changes to “{0}”?
+427|Save log
+428|Save to phone
+429|Saved
+430|Saved.
+431|Saving
+432|Saving bookmarks…
+433|Saving…
+434|Scanned pages get an invisible text layer: you can then search, select and copy the text.
+435|Search
+436|Search button, Ctrl+F
+437|See all shortcuts
+438|Select
+439|Select all
+440|Select comments
+441|Select none
+442|Selected text
+443|Selection
+444|Settings
+445|Several pages per sheet saves paper (2 = side by side, 4 = two by two).
+446|Share
+447|Sheets
+448|Show a small picture in Recent
+449|Signature
+450|Signature {0}{1}
+451|Signing…
+452|Size
+453|Slide
+454|Slide {0}
+455|Small
+456|Smaller pictures, still readable
+457|Smallest
+458|Something went wrong
+459|Speed
+460|Split
+461|Splitting…
+462|Squiggly
+463|Stamp
+464|Start
+465|Start at
+466|Still looking…
+467|Stop the tool, close search
+468|Stopped.
+469|Stopping…
+470|Strike out
+471|Strong
+472|Struck out
+473|Subject
+474|Switch between light and dark
+475|Switch off what you don't use: its buttons, menu entries and shortcuts disappear.
+476|System
+477|Tables are rebuilt from the position of the text.
+478|Tables as .xlsx
+479|Tap a blue field to fill it in.
+480|Tap a comment to delete it.
+481|Tap a comment to edit, move or delete it.
+482|Tap a paragraph to change it.
+483|Tap on a paragraph.
+484|Tap to put a check mark.
+485|Tap to put a cross.
+486|Tap to put a dot.
+487|Tap where the date goes.
+488|Tap where the note goes.
+489|Tap where the picture goes.
+490|Tap where the stamp goes.
+491|Tap where the text box goes.
+492|Tap where the text goes.
+493|Tap where to put your initials.
+494|Tap where to sign.
+495|Tap where to write.
+496|Text
+497|Text box
+498|Text only, bigger letters
+499|Text over every page
+500|Text recognized on {0} page(s). Save to keep it.
+501|Text-to-speech is not available on this phone.
+502|Text-to-speech is not available.
+503|That PDF can't be opened here.
+504|That copy is gone. Open the file again.
+505|The PDF engine did not start.
+506|The copies PdfEditor kept are deleted too. Your files stay where they are.
+507|The paragraph is rewritten with a standard font.
+508|The passwords are different.
+509|There are no highlights or notes in this PDF.
+510|There is not much to gain here ({0}). {1}
+511|This PDF has no password to remove.
+512|This PDF has no table of contents.
+513|This PDF is already as small as it can get.
+514|This comment no longer exists.
+515|This document has fillable fields.
+516|This field
+517|This list
+518|This one ({0})
+519|This page
+520|Throw them away
+521|Title
+522|To Excel
+523|To PowerPoint
+524|To Word
+525|To images
+526|To text
+527|Tools
+528|Top Secret
+529|Top center
+530|Top left
+531|Top right
+532|Trim fonts
+533|Try “Recommended” if the file has photos, or “Smallest” for scans.
+534|Try “Smallest” if the file is a scan.
+535|Two pages
+536|Two pages side by side
+537|Two pages side by side.
+538|Underline
+539|Underlined
+540|Undo
+541|Undo / redo
+542|Unlock
+543|Update available
+544|Use
+545|Used by every Compress option.
+546|View
+547|Watermark
+548|Watermark pages
+549|Which
+550|Which pages
+551|Word
+552|Word, Excel, PowerPoint, text
+553|Words that were added are marked green, removed ones red.
+554|Working…
+555|Works offline. Your files never leave this computer.
+556|Write a note
+557|Write the pages like 1-3, 5.
+558|Wrong password, try again.
+559|You can change the order first
+560|You have {0}. Open the downloaded file to install it.
+561|Your files never leave this device.
+562|Your files never leave this phone.
+563|Your own text, saved for next time
+564|Your saved signatures
+565|Your saved stamps
+566|Your stamp
+567|Zoom in
+568|Zoom in / out / fit
+569|Zoom out
+570|e.g. 1-3, 5
+571|e.g. 1-3, 7, 10-
+572|e.g. 1-3; 4-6; 7-
+573|e.g. Checked by Gabriele
+574|looking for differences…
+575|no differences in the text
+576|page(s) · {0} · {1} · Encryption:
+577|to mark it.
+578|{0}\nHighlights and notes, exported {1}\n\n{2}
+579|{0} - notes.txt
+580|{0} Add files
+581|{0} PDFs
+582|{0} area(s) removed for good. Save to keep the change.
+583|{0} file ready
+584|{0} file(s)
+585|{0} is required.
+586|{0} page(s) · {1} · {2} · Encryption: {3}
+587|{0} pages
+588|{0} pages copied to the end of “{1}”.
+589|{0} pages with differences
+590|{0} selected
+591|{0} → {1} (−{2}%). Save the document to keep the smaller file.
+592|· {0} added
+593|· {0} removed
+594|“Open with PdfEditor” in the right-click menu
+595|“{0}” is protected.

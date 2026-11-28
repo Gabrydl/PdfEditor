@@ -47,11 +47,12 @@ jobs:
           cp ../tools/set_exe_info.js .
           node set_exe_info.js "../out/$APP/$APP.exe" "../desktop/icon.ico" "$APP" "${{ steps.ver.outputs.v }}" "$APP"
 
-      - name: Installer
+      - name: Installer (NSIS: install / repair / uninstall, 21 languages)
         run: |
-          ISCC="/c/Program Files (x86)/Inno Setup 6/ISCC.exe"
-          [ -f "$ISCC" ] || choco install innosetup -y --no-progress
-          MSYS_NO_PATHCONV=1 "$ISCC" "/DMyAppVersion=${{ steps.ver.outputs.v }}" "installer/$APP.iss"
+          MAKENSIS="/c/Program Files (x86)/NSIS/makensis.exe"
+          [ -f "$MAKENSIS" ] || choco install nsis -y --no-progress
+          mkdir -p dist-installer
+          MSYS_NO_PATHCONV=1 "$MAKENSIS" -V2 "-DAPP=$APP" "-DVERSION=${{ steps.ver.outputs.v }}" "-DUNGUID={8A1E2C55-4B7D-4F0A-9C3E-6D2B1F7A9E41}_is1" "-DSRC=$(cygpath -w "$PWD/out/$APP")" "-DOUT=$(cygpath -w "$PWD/dist-installer/$APP-Setup.exe")" installer/App.nsi
           [ -f "dist-installer/$APP-Setup.exe" ] || exit 1
 
       - name: Publish release
